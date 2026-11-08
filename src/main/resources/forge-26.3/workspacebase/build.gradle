@@ -49,10 +49,42 @@ tasks.named('processResources', ProcessResources) {
             assetsRoot.eachDir { modDir ->
                 def humanoid = new File(modDir, 'textures/entity/equipment/humanoid')
                 def leggings = new File(modDir, 'textures/entity/equipment/humanoid_leggings')
+                def legacyArmor = new File(modDir, 'textures/models/armor')
+
+                if (legacyArmor.exists()) {
+                    copy {
+                        from legacyArmor
+                        into humanoid
+                    }
+                }
                 if (humanoid.exists()) {
                     copy {
                         from humanoid
                         into leggings
+                    }
+                }
+                // Dynamic fluid container models resolve their still texture from the item atlas.
+                fileTree(modDir) { include 'fluid_*_item_texture.txt' }.each { marker ->
+                    marker.eachLine { line ->
+                        def textureName = line.trim()
+                        if (textureName) {
+                            def source = new File(modDir, "textures/block/${textureName}.png")
+                            if (source.exists()) {
+                                def target = new File(modDir, "textures/item/${textureName}.png")
+                                target.parentFile.mkdirs()
+                                copy {
+                                    from source
+                                    into target.parentFile
+                                }
+                                def meta = new File(source.path + '.mcmeta')
+                                if (meta.exists()) {
+                                    copy {
+                                        from meta
+                                        into target.parentFile
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }

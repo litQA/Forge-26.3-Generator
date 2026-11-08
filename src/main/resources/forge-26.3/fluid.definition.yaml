@@ -16,6 +16,10 @@ templates:
     writer: json
     name: "@MODASSETSROOT/items/@registryname_bucket.json"
     condition: generateBucket
+  - template: json/fluid_item_texture.txt.ftl
+    writer: file
+    name: "@MODASSETSROOT/fluid_@registryname_item_texture.txt"
+    condition: generateBucket
   - template: json/fluid_states.json.ftl
     writer: json
     name: "@MODASSETSROOT/blockstates/@registryname.json"

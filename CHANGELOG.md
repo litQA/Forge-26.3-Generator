@@ -2,6 +2,22 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.9.10-beta
+
+### Changes
+
+- Fluid resource generation now writes an item-atlas texture marker for each generated bucket.
+- The workspace resource task copies the marked fluid still texture and its animation metadata into `textures/item`.
+- The workspace resource task migrates legacy `textures/models/armor` files into the equipment humanoid and leggings folders.
+- Plugin version raised to `2026.3-1.0.9.10-beta`.
+
+### Fixes
+
+Fixed 2 bug(s).
+
+- Fluid buckets now resolve their fluid still texture from the item atlas instead of rendering a missing purple/black texture.
+- Armor equipment assets now resolve generated layer textures even when the workspace still has legacy armor texture paths.
+
 ## 2026.3-1.0.8.9-beta
 
 ### Changes
