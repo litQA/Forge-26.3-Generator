@@ -1,4 +1,4 @@
-<img width="1000" alt="forge generator banner 26 3" src="https://github.com/user-attachments/assets/f708dca6-fa61-400f-a598-437c7f4c8a45" />
+<img width="1000" alt="forge generator banner 26 3" src="https://github.com/user-attachments/assets/187b4a72-4576-4b8a-89c3-154fee7666a1" />
 
 # Forge 26.3 Generator for MCreator 2026.3
 
