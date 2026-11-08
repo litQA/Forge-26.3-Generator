@@ -42,46 +42,48 @@ tasks.withType(JavaCompile).configureEach {
 
 // MCreator stores both armor layers in the humanoid folder. Copy them to the
 // leggings folder so the equipment asset can resolve both layer textures.
+def resourcesAssetsDir = layout.buildDirectory.dir('resources/main/assets').get().asFile
+
 tasks.named('processResources', ProcessResources) {
     doLast {
-        def assetsRoot = layout.buildDirectory.dir('resources/main/assets').get().asFile
-        if (assetsRoot.exists()) {
-            assetsRoot.eachDir { modDir ->
+        def copyTree = { File sourceDir, File targetDir ->
+            if (sourceDir.exists()) {
+                targetDir.mkdirs()
+                sourceDir.eachFileRecurse { File sourceFile ->
+                    if (sourceFile.isFile()) {
+                        def relative = sourceDir.toPath().relativize(sourceFile.toPath()).toString()
+                        def targetFile = new File(targetDir, relative)
+                        targetFile.parentFile.mkdirs()
+                        java.nio.file.Files.copy(sourceFile.toPath(), targetFile.toPath(), java.nio.file.StandardCopyOption.REPLACE_EXISTING)
+                    }
+                }
+            }
+        }
+
+        if (resourcesAssetsDir.exists()) {
+            resourcesAssetsDir.eachDir { File modDir ->
                 def humanoid = new File(modDir, 'textures/entity/equipment/humanoid')
                 def leggings = new File(modDir, 'textures/entity/equipment/humanoid_leggings')
                 def legacyArmor = new File(modDir, 'textures/models/armor')
 
-                if (legacyArmor.exists()) {
-                    copy {
-                        from legacyArmor
-                        into humanoid
-                    }
-                }
-                if (humanoid.exists()) {
-                    copy {
-                        from humanoid
-                        into leggings
-                    }
-                }
+                copyTree(legacyArmor, humanoid)
+                copyTree(humanoid, leggings)
+
                 // Dynamic fluid container models resolve their still texture from the item atlas.
-                fileTree(modDir) { include 'fluid_*_item_texture.txt' }.each { marker ->
-                    marker.eachLine { line ->
+                modDir.listFiles()?.findAll { it.isFile() && it.name.startsWith('fluid_') && it.name.endsWith('_item_texture.txt') }?.each { File marker ->
+                    marker.eachLine { String line ->
                         def textureName = line.trim()
                         if (textureName) {
                             def source = new File(modDir, "textures/block/${textureName}.png")
                             if (source.exists()) {
                                 def target = new File(modDir, "textures/item/${textureName}.png")
                                 target.parentFile.mkdirs()
-                                copy {
-                                    from source
-                                    into target.parentFile
-                                }
+                                java.nio.file.Files.copy(source.toPath(), target.toPath(), java.nio.file.StandardCopyOption.REPLACE_EXISTING)
+
                                 def meta = new File(source.path + '.mcmeta')
                                 if (meta.exists()) {
-                                    copy {
-                                        from meta
-                                        into target.parentFile
-                                    }
+                                    def metaTarget = new File(modDir, "textures/item/${textureName}.png.mcmeta")
+                                    java.nio.file.Files.copy(meta.toPath(), metaTarget.toPath(), java.nio.file.StandardCopyOption.REPLACE_EXISTING)
                                 }
                             }
                         }

@@ -2,6 +2,19 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.10.11-beta
+
+### Changes
+
+- The workspace `processResources` resource-copy logic captures the output directory at configuration time and uses file-system operations at execution time.
+- Plugin version raised to `2026.3-1.0.10.11-beta`.
+
+### Fixes
+
+Fixed 1 bug(s).
+
+- The resource-copy task is now compatible with Gradle configuration cache.
+
 ## 2026.3-1.0.9.10-beta
 
 ### Changes
