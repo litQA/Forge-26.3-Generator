@@ -1,3 +1,5 @@
+<img width="1000" alt="forge generator banner 26 3" src="https://github.com/user-attachments/assets/f708dca6-fa61-400f-a598-437c7f4c8a45" />
+
 # Forge 26.3 Generator for MCreator 2026.3
 
 MCreator generator plugin for Minecraft Forge `26.3-66.1.5`, targeting MCreator EAP
@@ -101,7 +103,12 @@ plugin-branch-2026.3/
   docs/
 ```
 
-## License
+# MCreator - Minecraft Mod Maker
 
-The project is distributed under CC BY-NC 4.0. MCreator-derived generator templates
-retain their original copyright and license headers.
+[![MCreator](https://mcreator.net/image/brand/mcreator300s.png)](https://mcreator.net/)
+
+MCreator is an open-source software used to make Minecraft Java Edition mods, Minecraft Bedrock Edition Add-Ons, resource packs, and data packs using an intuitive easy-to-learn interface or with an integrated code editor. It is used worldwide by Minecraft players, aspiring mod developers, for education, online classes, and STEM workshops. 
+
+NOT AN OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR MICROSOFT.
+
+NOT AN OFFICIAL MCREATOR PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH PYLO.
