@@ -57,7 +57,7 @@
 | Forge 66.1.5 MDK | `reference_resources/forge-26.3-66.1.5-mdk/` | 官方最小工作区 | 构建脚本、`mods.toml`、Forge 26.3 入口 API 的权威样例 |
 | Forge 26.3 源码 | `caches/reference/MinecraftForge-26.3/` | GitHub `MinecraftForge/MinecraftForge` 分支 `26.3` | 事件、注册、网络、Capability、客户端扩展的精确签名 |
 | NeoForge 26.3 源码 | `caches/reference/NeoForge-26.3.x/` | GitHub `neoforged/NeoForge` 分支 `26.3.x` | 与官方生成器实际调用的 API 对照 |
-| Forge 1.12.2 插件工程 | `../Forge_Generator_1.12.2/plugin-branch-2026.3/` | 完整插件工程 | 可复用的 build/validator/package/CHANGELOG/版本单源脚手架 |
+| MCreator generator validator pattern | `src/validator/java/` | 插件自带的静态校验器 | 可复用的 build/validator/package/CHANGELOG/版本单源脚手架 |
 | Forge Config API Port | `../Forge_Config_API_Port/` | 多版本 Forge/NeoForge 模板 | Forge 26.3 `configs.java.ftl` 的现成写法，以及 Gradle 补丁先例 |
 | Gradle 9.8.0 | `reference_resources/gradle-9.8.0-bin.zip` | 本地发行包 | 生成工作区 wrapper 的本地分发源 |
 
@@ -409,7 +409,7 @@ plugin-branch-2026.3/
     cmdargs/
     utils/
     workspacebase/
-  src/validator/java/...        # 复用 Forge 1.12.2 的校验器
+  src/validator/java/...        # 生成器静态校验器
   tools/lib/*.jar
 ```
 
@@ -789,7 +789,7 @@ Phase 0 的版本号从 `2026.3-1.0.1.2-beta` 开始（补丁号 +1、构建序�
 | Forge Mixin `MixinConfigs` | `caches/reference/MinecraftForge-26.3/.../fmlloader/src/main/java/net/minecraftforge/fml/loading/moddiscovery/JarInJarDependencyLocator.java` |
 | NeoForge 生成器规模 | `reference_resources/generator-26.3.x/neoforge-26.3/` |
 | Fabric 转换先例 | `reference_resources/Fabric-Generator-MCreator-26.3-2026.3-2.9-beta/src/main/resources/fabric-26.3/generator.yaml` |
-| 插件/校验器脚手架 | `../Forge_Generator_1.12.2/plugin-branch-2026.3/build.gradle`、`src/validator/` |
+| 插件/校验器脚手架 | `build.gradle`、`src/validator/` |
 | 补丁 Gradle | `../Forge_Config_API_Port/caches/gradle-patched-9.8.0/` |
 
 ## 附录 B：建议的 Phase 0 成功标准
