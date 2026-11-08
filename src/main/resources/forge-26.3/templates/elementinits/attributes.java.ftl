@@ -36,7 +36,7 @@
 
 package ${package}.init;
 
-@EventBusSubscriber
+@Mod.EventBusSubscriber(modid = "${modid}")
 public class ${JavaModName}Attributes {
 
 	public static final DeferredRegister<Attribute> REGISTRY = DeferredRegister.create(BuiltInRegistries.ATTRIBUTE, ${JavaModName}.MODID);

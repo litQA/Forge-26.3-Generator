@@ -42,7 +42,7 @@ import com.mojang.datafixers.util.Pair;
 <#assign spawn_overworld_caves = biomes?filter(biome -> biome.spawnInCaves)>
 <#assign spawn_nether = biomes?filter(biome -> biome.spawnBiomeNether)>
 
-@EventBusSubscriber public class ${JavaModName}Biomes {
+@Mod.EventBusSubscriber(modid = "${modid}") public class ${JavaModName}Biomes {
 
 	public static final Identifier OVERWORLD_BIOMESOURCE_PRESET_ID = Identifier.withDefaultNamespace("overworld");
 	public static final Identifier NETHER_BIOMESOURCE_PRESET_ID = Identifier.withDefaultNamespace("nether");

@@ -38,7 +38,7 @@
 package ${package}.init;
 
 <#assign effects_that_expire = potioneffects?filter(effect -> hasProcedure(effect.onExpired))>
-<#if effects_that_expire?size != 0>@EventBusSubscriber </#if>public class ${JavaModName}MobEffects {
+<#if effects_that_expire?size != 0>@Mod.EventBusSubscriber(modid = "${modid}") </#if>public class ${JavaModName}MobEffects {
 
 	public static final DeferredRegister<MobEffect> REGISTRY = DeferredRegister.create(Registries.MOB_EFFECT, ${JavaModName}.MODID);
 

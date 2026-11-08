@@ -31,7 +31,7 @@
 <#-- @formatter:off -->
 package ${package}.client.renderer.item;
 
-@EventBusSubscriber(Dist.CLIENT) public class LegacyOverrideSelectItemModel implements ItemModel {
+@Mod.EventBusSubscriber(modid = "${modid}", value = Dist.CLIENT) public class LegacyOverrideSelectItemModel implements ItemModel {
 
 	private final ModelOverride[] overrides;
 	private final ItemModel[] models;

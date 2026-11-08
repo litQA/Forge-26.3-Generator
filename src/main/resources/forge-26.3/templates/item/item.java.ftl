@@ -37,7 +37,7 @@ package ${package}.item;
 
 <@javacompress>
 <#if data.hasCustomEatResultItem()>
-@EventBusSubscriber
+@Mod.EventBusSubscriber(modid = "${modid}")
 </#if>
 public class ${name}Item extends Item {
 

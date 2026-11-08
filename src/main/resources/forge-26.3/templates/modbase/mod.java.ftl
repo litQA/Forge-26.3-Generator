@@ -18,8 +18,13 @@ import org.apache.logging.log4j.Logger;
 
 		<@javacompress>
 		<#if types.base_blocks?has_content>${JavaModName}Blocks.REGISTRY.register(modBusGroup);</#if>
+		<#if types.base_blockentities?has_content>${JavaModName}BlockEntities.REGISTRY.register(modBusGroup);</#if>
 		<#if types.base_items?has_content>${JavaModName}Items.REGISTRY.register(modBusGroup);</#if>
 		<#if w.hasItemsInTabs()>${JavaModName}Tabs.REGISTRY.register(modBusGroup);</#if>
+		<#if types.fluids?has_content>
+			${JavaModName}Fluids.REGISTRY.register(modBusGroup);
+			${JavaModName}FluidTypes.REGISTRY.register(modBusGroup);
+		</#if>
 		</@javacompress>
 
 		// Start of user code block mod init

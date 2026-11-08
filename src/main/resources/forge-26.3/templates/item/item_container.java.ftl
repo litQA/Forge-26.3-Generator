@@ -29,10 +29,11 @@
 -->
 
 <#-- @formatter:off -->
+<#stop "Item inventory capabilities are not supported by this generator build yet. Use a block entity inventory instead.">
 package ${package}.item.inventory;
 
 <@javacompress>
-@EventBusSubscriber public class ${name}InventoryCapability extends ItemAccessItemHandler {
+@Mod.EventBusSubscriber(modid = "${modid}") public class ${name}InventoryCapability extends ItemAccessItemHandler {
 
 	@SubscribeEvent public static void onItemDropped(ItemTossEvent event) {
 		if (event.getEntity().getItem().getItem() == ${JavaModName}Items.${REGISTRYNAME}.get()) {

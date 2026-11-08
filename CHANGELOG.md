@@ -2,6 +2,35 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.4.5-beta
+
+### New Content
+
+- Basic plant element support with plant block, block entity, configured/placed generation JSON and wood type templates.
+- Tool element support for pickaxes, axes, shovels, hoes and swords.
+- Armor element support for helmets, chestplates, leggings and boots with equipment assets.
+- Block entity support with Forge `IItemHandler` inventory capabilities.
+- Block entity energy support with Forge `EnergyStorage` and `IEnergyStorage`.
+- Block entity fluid tank support with Forge `FluidTank` and `IFluidHandler`.
+- Fluid element support with source/flowing registration, fluid block and bucket.
+- Generated access transformer support for fluid movement hooks.
+
+### Changes
+
+- Block entity registration now uses `ForgeRegistries.BLOCK_ENTITY_TYPES` and `BlockEntityType` with a block set.
+- Fluid registration now uses `ForgeRegistries.FLUIDS` and `ForgeRegistries.FLUID_TYPES`.
+- Fluid types now register client extensions through Forge `FluidType#initializeClient`.
+- Fluid bucket item models use standard vanilla item models; dynamic fluid-container rendering is deferred.
+- Plugin version raised to `2026.3-1.0.4.5-beta`.
+
+### Known Limitations
+
+- Item inventories stop generation with an explicit message; block entity inventories are supported.
+- Custom armor models, animations and dynamic fluid bucket rendering are not ported yet.
+- Custom block and plant sound types are not ported yet.
+- Energy and fluid transfer procedures are not ported yet; the block entity storage APIs are available for later batches.
+- Advanced block bases and world generation elements remain pending.
+
 ## 2026.3-1.0.3.4-beta
 
 ### New Content

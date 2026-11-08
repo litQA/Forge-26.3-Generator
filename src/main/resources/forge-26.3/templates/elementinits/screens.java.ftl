@@ -38,7 +38,7 @@ package ${package}.init;
 
 <#assign hasEntityModels = false>
 
-@EventBusSubscriber(Dist.CLIENT) public class ${JavaModName}Screens {
+@Mod.EventBusSubscriber(modid = "${modid}", value = Dist.CLIENT) public class ${JavaModName}Screens {
 
 	@SubscribeEvent public static void clientLoad(RegisterMenuScreensEvent event) {
 		<#list guis as gui>

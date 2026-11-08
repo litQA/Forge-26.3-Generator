@@ -732,7 +732,7 @@ public class ${getClassName()}Block extends ${getBlockClass(data.blockBase)}
 	</#if>
 
 	<#if data.tintType != "No tint">
-		public static void blockColorLoad(RegisterColorHandlersEvent.BlockTintSources event) {
+		public static void blockColorLoad(RegisterColorHandlersEvent.Block event) {
 			event.getBlockColors().register(
 				<#if data.tintType == "Default foliage">
 					List.of(BlockTintSources.constant(FoliageColor.FOLIAGE_DEFAULT))

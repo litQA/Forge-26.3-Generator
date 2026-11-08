@@ -19,6 +19,26 @@ public class ${JavaModName}Items {
 			public static final RegistryObject<Item> ${item.getModElement().getRegistryNameUpper()} =
 				blockItem("${item.getModElement().getRegistryName()}", ${JavaModName}Blocks.${item.getModElement().getRegistryNameUpper()});
 			</#if>
+		<#elseif item.getModElement().getTypeString() == "armor">
+			<#if item.enableHelmet>
+			public static final RegistryObject<Item> ${item.getModElement().getRegistryNameUpper()}_HELMET =
+				register("${item.getModElement().getRegistryName()}_helmet", ${item.getModElement().getName()}Item.Helmet::new);
+			</#if>
+			<#if item.enableBody>
+			public static final RegistryObject<Item> ${item.getModElement().getRegistryNameUpper()}_CHESTPLATE =
+				register("${item.getModElement().getRegistryName()}_chestplate", ${item.getModElement().getName()}Item.Chestplate::new);
+			</#if>
+			<#if item.enableLeggings>
+			public static final RegistryObject<Item> ${item.getModElement().getRegistryNameUpper()}_LEGGINGS =
+				register("${item.getModElement().getRegistryName()}_leggings", ${item.getModElement().getName()}Item.Leggings::new);
+			</#if>
+			<#if item.enableBoots>
+			public static final RegistryObject<Item> ${item.getModElement().getRegistryNameUpper()}_BOOTS =
+				register("${item.getModElement().getRegistryName()}_boots", ${item.getModElement().getName()}Item.Boots::new);
+			</#if>
+		<#elseif item.getModElement().getTypeString() == "fluid" && item.generateBucket>
+			public static final RegistryObject<Item> ${item.getModElement().getRegistryNameUpper()}_BUCKET =
+				register("${item.getModElement().getRegistryName()}_bucket", ${item.getModElement().getName()}Item::new);
 		<#else>
 			public static final RegistryObject<Item> ${item.getModElement().getRegistryNameUpper()} =
 				register("${item.getModElement().getRegistryName()}", ${item.getModElement().getName()}Item::new);

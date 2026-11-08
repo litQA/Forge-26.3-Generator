@@ -39,6 +39,8 @@ public class ${name}BlockEntity extends RandomizableContainerBlockEntity impleme
 
 	private NonNullList<ItemStack> stacks = NonNullList.withSize(${data.inventorySize}, ItemStack.EMPTY);
 
+	private final LazyOptional<IItemHandler> itemHandler = LazyOptional.of(() -> new InvWrapper(this));
+
 	<#if data.sensitiveToVibration>
 	private final VibrationSystem.Listener vibrationListener = new VibrationSystem.Listener(this);
 	private final VibrationSystem.User vibrationUser = new VibrationUser(this.getBlockPos());
@@ -55,6 +57,27 @@ public class ${name}BlockEntity extends RandomizableContainerBlockEntity impleme
 
 	public ${name}BlockEntity(BlockPos position, BlockState state) {
 		super(${JavaModName}BlockEntities.${REGISTRYNAME}.get(), position, state);
+	}
+
+	@Override public <T> LazyOptional<T> getCapability(Capability<T> capability, @Nullable Direction side) {
+		if (capability == ForgeCapabilities.ITEM_HANDLER)
+			return itemHandler.cast();
+		<#if data.hasEnergyStorage>
+		if (capability == ForgeCapabilities.ENERGY)
+			return energyStorageOptional.cast();
+		</#if>
+		<#if data.isFluidTank>
+		if (capability == ForgeCapabilities.FLUID_HANDLER)
+			return fluidTankOptional.cast();
+		</#if>
+		return super.getCapability(capability, side);
+	}
+
+	@Override public void invalidateCaps() {
+		super.invalidateCaps();
+		itemHandler.invalidate();
+		<#if data.hasEnergyStorage>energyStorageOptional.invalidate();</#if>
+		<#if data.isFluidTank>fluidTankOptional.invalidate();</#if>
 	}
 
 	<#if data.renderType() == 4>
@@ -80,11 +103,11 @@ public class ${name}BlockEntity extends RandomizableContainerBlockEntity impleme
 		ContainerHelper.loadAllItems(valueInput, this.stacks);
 
 		<#if data.hasEnergyStorage>
-		valueInput.child("energyStorage").ifPresent(input -> energyStorage.deserialize(input));
+		energyStorage.deserializeNBT(valueInput.lookup(), IntTag.valueOf(valueInput.getIntOr("energyStorage", 0)));
 		</#if>
 
 		<#if data.isFluidTank>
-		valueInput.child("fluidTank").ifPresent(input -> fluidTank.deserialize(input));
+		valueInput.child("fluidTank").ifPresent(input -> fluidTank.readFrom(input));
 		</#if>
 
 		<#if data.sensitiveToVibration>
@@ -99,11 +122,11 @@ public class ${name}BlockEntity extends RandomizableContainerBlockEntity impleme
 			ContainerHelper.saveAllItems(valueOutput, this.stacks);
 
 		<#if data.hasEnergyStorage>
-		energyStorage.serialize(valueOutput.child("energyStorage"));
+		valueOutput.putInt("energyStorage", energyStorage.getEnergyStored());
 		</#if>
 
 		<#if data.isFluidTank>
-		fluidTank.serialize(valueOutput.child("fluidTank"));
+		fluidTank.writeTo(valueOutput.child("fluidTank"));
 		</#if>
 
 		<#if data.sensitiveToVibration>
@@ -205,38 +228,49 @@ public class ${name}BlockEntity extends RandomizableContainerBlockEntity impleme
 	<#-- END: WorldlyContainer -->
 
 	<#if data.hasEnergyStorage>
-	private final SimpleEnergyHandler energyStorage = new SimpleEnergyHandler(${data.energyCapacity}, ${data.energyMaxReceive}, ${data.energyMaxExtract}, ${data.energyInitial}) {
+	private final EnergyStorage energyStorage = new EnergyStorage(${data.energyCapacity}, ${data.energyMaxReceive}, ${data.energyMaxExtract}, ${data.energyInitial}) {
 
-		@Override protected void onEnergyChanged(int previousAmount) {
-			setChanged();
-			level.sendBlockUpdated(worldPosition, level.getBlockState(worldPosition), level.getBlockState(worldPosition), 2);
+		@Override public int receiveEnergy(int maxReceive, boolean simulate) {
+			int received = super.receiveEnergy(maxReceive, simulate);
+			if (!simulate && received > 0)
+				onEnergyChanged();
+			return received;
+		}
+
+		@Override public int extractEnergy(int maxExtract, boolean simulate) {
+			int extracted = super.extractEnergy(maxExtract, simulate);
+			if (!simulate && extracted > 0)
+				onEnergyChanged();
+			return extracted;
 		}
 
 	};
 
-	public SimpleEnergyHandler getEnergyStorage() {
+	private final LazyOptional<IEnergyStorage> energyStorageOptional = LazyOptional.of(() -> energyStorage);
+
+	private void onEnergyChanged() {
+		setChanged();
+		if (level != null)
+			level.sendBlockUpdated(worldPosition, level.getBlockState(worldPosition), level.getBlockState(worldPosition), 2);
+	}
+
+	public EnergyStorage getEnergyStorage() {
 		return energyStorage;
 	}
 	</#if>
 
 	<#if data.isFluidTank>
-	private final FluidStacksResourceHandler fluidTank = new FluidStacksResourceHandler(1, ${data.fluidCapacity}) {
-		@Override public void onContentsChanged(int index, FluidStack previousStack) {
+	private final FluidTank fluidTank = new FluidTank(${data.fluidCapacity}) {
+		@Override protected void onContentsChanged() {
 			setChanged();
-			level.sendBlockUpdated(worldPosition, level.getBlockState(worldPosition), level.getBlockState(worldPosition), 2);
+			if (level != null)
+				level.sendBlockUpdated(worldPosition, level.getBlockState(worldPosition), level.getBlockState(worldPosition), 2);
 		}
-
-		<#if data.fluidRestrictions?has_content>
-		@Override public boolean isValid(int index, FluidResource resource) {
-			<#list data.fluidRestrictions as fluidRestriction>
-			if (resource.getFluid() == ${fluidRestriction}) return true;
-			</#list>
-			return false;
-		}
-		</#if>
 	};
 
-	public FluidStacksResourceHandler getFluidTank() {
+	private final LazyOptional<IFluidHandler> fluidTankOptional = LazyOptional.of(() -> fluidTank);
+
+	public FluidTank getFluidTank() {
 		return fluidTank;
 	}
 	</#if>

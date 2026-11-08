@@ -42,7 +42,7 @@ package ${package}.init;
 <#assign itemextensions = dispensebehaviors?filter(e -> e.getModElement().getTypeString() == "itemextension")>
 <#assign specialentities = dispensebehaviors?filter(e -> e.getModElement().getTypeString() == "specialentity")>
 <@javacompress>
-@EventBusSubscriber public class ${JavaModName}DispenseBehaviors {
+@Mod.EventBusSubscriber(modid = "${modid}") public class ${JavaModName}DispenseBehaviors {
 
 	@SubscribeEvent public static void init(FMLCommonSetupEvent event) {
 		event.enqueueWork(() -> {

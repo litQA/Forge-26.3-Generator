@@ -38,7 +38,7 @@
 
 package ${package}.init;
 
-@EventBusSubscriber public class ${JavaModName}VillagerProfessions {
+@Mod.EventBusSubscriber(modid = "${modid}") public class ${JavaModName}VillagerProfessions {
 
 	private static final Map<String, ProfessionPoiType> POI_TYPES = new HashMap<>();
 

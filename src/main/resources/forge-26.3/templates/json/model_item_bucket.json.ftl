@@ -1,15 +1,6 @@
 {
   "model": {
-	<#if data.hasCustomBucketTexture()>
     "type": "minecraft:model",
-	"model": "${modid}:item/${registryname}_bucket"
-	<#else>
-	"type": "neoforge:fluid_container",
-    "fluid": "${modid}:${registryname}",
-    "textures": {
-      "base": "item/bucket",
-      "fluid": "neoforge:item/mask/bucket_fluid"
-    }
-	</#if>
+    "model": "<#if data.hasCustomBucketTexture()>${modid}:item/${registryname}_bucket<#else>minecraft:item/bucket</#if>"
   }
 }

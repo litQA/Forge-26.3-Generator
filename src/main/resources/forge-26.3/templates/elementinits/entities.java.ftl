@@ -40,7 +40,7 @@ package ${package}.init;
 <#assign entitiesWithInventory = types.livingentities?filter(e -> e.guiBoundTo?has_content)>
 
 <#if hasLivingEntities || entitiesWithInventory?size != 0>
-@EventBusSubscriber
+@Mod.EventBusSubscriber(modid = "${modid}")
 </#if>
 public class ${JavaModName}Entities {
 

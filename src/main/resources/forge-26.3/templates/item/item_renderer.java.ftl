@@ -52,7 +52,7 @@ package ${package}.client.renderer.item;
 </#list>
 
 <@javacompress>
-@EventBusSubscriber(Dist.CLIENT) public class ${name}ItemRenderer implements SpecialModelRenderer<ItemStack> {
+@Mod.EventBusSubscriber(modid = "${modid}", value = Dist.CLIENT) public class ${name}ItemRenderer implements SpecialModelRenderer<ItemStack> {
 
 	@SubscribeEvent public static void registerItemRenderers(RegisterSpecialModelRendererEvent event) {
 		event.register(Identifier.parse("${modid}:${registryname}"), ${name}ItemRenderer.Unbaked.MAP_CODEC);
