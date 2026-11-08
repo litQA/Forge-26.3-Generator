@@ -1,0 +1,77 @@
+plugins {
+    id 'java'
+}
+
+group = 'net.litqa.mcreator.generator'
+version = pluginVersion
+
+// MCreator version numbers use the <major><minor padded to three digits> form for
+// releases (2026.3 -> 2026003). EAP builds additionally encode the build number
+// (2026.3.44621 -> 202600344621), because snapshot builds only accept an exact match.
+def versionParts = mcreatorVersion.split('\\.')
+def majorVersion = (versionParts[0] + versionParts[1].padLeft(3, '0')).toLong()
+def supportedVersion = versionParts.length > 2
+        ? (majorVersion.toString() + versionParts[2].padLeft(5, '0')).toLong()
+        : majorVersion
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(25)
+    }
+}
+
+sourceSets {
+    validator {
+        java {
+            srcDir 'src/validator/java'
+        }
+    }
+}
+
+dependencies {
+    // Bundled validation libraries keep the project buildable without network access.
+    validatorImplementation files(
+            'tools/lib/freemarker-2.3.35.jar',
+            'tools/lib/snakeyaml-engine-3.2.jar'
+    )
+}
+
+// Expands the ${...} placeholders in plugin.json at build time.
+tasks.named('processResources') {
+    filesMatching('plugin.json') {
+        expand(
+                mcVersion: mcVersion,
+                forgeVersion: forgeVersion,
+                mcreatorVersion: mcreatorVersion,
+                pluginVersion: pluginVersion,
+                supportedVersion: supportedVersion,
+                majorVersion: majorVersion
+        )
+    }
+}
+
+// The plugin archive is a zip that holds plugin.json and the generator folders.
+// The export name is intentionally fixed so that released builds always replace
+// the same file in the MCreator plugins folder.
+tasks.named('jar', Jar) {
+    archiveFileName = "generator-forge-${mcVersion}.zip"
+    destinationDirectory = layout.buildDirectory.dir('dist')
+    includeEmptyDirs = false
+    preserveFileTimestamps = false
+    reproducibleFileOrder = true
+}
+
+tasks.register('validateGenerator', JavaExec) {
+    group = 'verification'
+    description = 'Validates generator YAML, mappings and FreeMarker templates without launching MCreator.'
+    dependsOn tasks.named('validatorClasses'), tasks.named('processResources')
+    classpath = sourceSets.validator.runtimeClasspath
+    mainClass = 'net.litqa.generator.forge263.validator.GeneratorValidator'
+    // Validate the expanded resources that are packaged into the plugin archive.
+    args layout.buildDirectory.dir('resources/main').get().asFile.absolutePath
+    jvmArgs '-Dfile.encoding=UTF-8'
+}
+
+tasks.named('check') {
+    dependsOn 'validateGenerator'
+}

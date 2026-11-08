@@ -1,0 +1,13 @@
+{
+  "id": "generator-forge-26.3",
+  "weight": 100,
+  "supportedversions": [${supportedVersion}, ${majorVersion}],
+  "info": {
+    "name": "Forge ${mcVersion} Generator",
+    "version": "${pluginVersion}",
+    "description": "Minecraft Forge ${forgeVersion} generator for MCreator ${mcreatorVersion}.",
+    "author": "LitQA",
+    "credits": "Built on the MCreator NeoForge 26.3 generator architecture and aligned with the Forge 66.1.5 MDK.",
+    "dependencies": []
+  }
+}

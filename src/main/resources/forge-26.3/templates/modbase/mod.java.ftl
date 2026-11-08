@@ -1,0 +1,33 @@
+<#-- @formatter:off -->
+package ${package};
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+@Mod("${modid}") public class ${JavaModName} {
+
+	public static final Logger LOGGER = LogManager.getLogger(${JavaModName}.class);
+
+	public static final String MODID = "${modid}";
+
+	public ${JavaModName}(FMLJavaModLoadingContext context) {
+		// Start of user code block mod constructor
+		// End of user code block mod constructor
+
+		var modBusGroup = context.getModBusGroup();
+
+		<@javacompress>
+		<#if types.base_blocks?has_content>${JavaModName}Blocks.REGISTRY.register(modBusGroup);</#if>
+		<#if types.base_items?has_content>${JavaModName}Items.REGISTRY.register(modBusGroup);</#if>
+		<#if w.hasItemsInTabs()>${JavaModName}Tabs.REGISTRY.register(modBusGroup);</#if>
+		</@javacompress>
+
+		// Start of user code block mod init
+		// End of user code block mod init
+	}
+
+	// Start of user code block mod methods
+	// End of user code block mod methods
+
+}
+<#-- @formatter:on -->
