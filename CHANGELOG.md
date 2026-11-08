@@ -2,6 +2,19 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.11.12-beta
+
+### Changes
+
+- The workspace resource-copy task now resolves the processed resource directory through the main source set output instead of assuming `build/resources/main`.
+- Plugin version raised to `2026.3-1.0.11.12-beta`.
+
+### Fixes
+
+Fixed 1 bug(s).
+
+- Fluid item textures and equipment armor textures are now copied into the ForgeGradle `build/sourceSets/main` resource output used by the client.
+
 ## 2026.3-1.0.10.11-beta
 
 ### Changes

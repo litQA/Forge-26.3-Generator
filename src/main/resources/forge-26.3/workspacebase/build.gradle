@@ -42,7 +42,7 @@ tasks.withType(JavaCompile).configureEach {
 
 // MCreator stores both armor layers in the humanoid folder. Copy them to the
 // leggings folder so the equipment asset can resolve both layer textures.
-def resourcesAssetsDir = layout.buildDirectory.dir('resources/main/assets').get().asFile
+def resourcesAssetsDir = new File(sourceSets.main.output.resourcesDir, 'assets')
 
 tasks.named('processResources', ProcessResources) {
     doLast {
