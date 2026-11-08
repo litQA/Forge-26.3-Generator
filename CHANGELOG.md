@@ -2,6 +2,13 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.12.13-beta
+
+### Changes
+
+- The workspace `processResources` task now always runs so its generated texture copies are refreshed even when the regular resource inputs are unchanged.
+- Plugin version raised to `2026.3-1.0.12.13-beta`.
+
 ## 2026.3-1.0.11.12-beta
 
 ### Changes

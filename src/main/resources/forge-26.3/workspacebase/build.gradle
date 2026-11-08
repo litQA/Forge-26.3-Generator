@@ -45,6 +45,8 @@ tasks.withType(JavaCompile).configureEach {
 def resourcesAssetsDir = new File(sourceSets.main.output.resourcesDir, 'assets')
 
 tasks.named('processResources', ProcessResources) {
+    outputs.upToDateWhen { false }
+
     doLast {
         def copyTree = { File sourceDir, File targetDir ->
             if (sourceDir.exists()) {
