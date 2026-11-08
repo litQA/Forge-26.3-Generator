@@ -2,6 +2,26 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.5.6-beta
+
+### Changes
+
+- Fluid types no longer override `FluidType#move`; fluid movement uses Forge defaults in this batch.
+- Access transformer fragments and generated AT files were removed from the Phase 1A build.
+- The Forge workspace base no longer enables default access-transformer processing.
+- Plugin version raised to `2026.3-1.0.5.6-beta`.
+
+### Fixes
+
+Fixed 1 bug(s).
+
+- Generated fluid types no longer call the protected `LivingEntity#travelInWater` method, fixing the Phase 1A compile failure.
+
+### Known Limitations
+
+- Custom fluid movement behavior is deferred until access-transformer support is reintroduced.
+- Item inventories, custom armor models and dynamic fluid bucket rendering remain deferred.
+
 ## 2026.3-1.0.4.5-beta
 
 ### New Content

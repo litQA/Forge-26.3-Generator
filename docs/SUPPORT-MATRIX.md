@@ -7,7 +7,7 @@ final feature matrix.
 
 | Area | Status | Notes |
 | --- | --- | --- |
-| Generator plugin metadata | Supported | `plugin.json` version `2026.3-1.0.4.5-beta` |
+| Generator plugin metadata | Supported | `plugin.json` version `2026.3-1.0.5.6-beta` |
 | Forge workspace base | Supported | ForgeGradle 7, Gradle 9.8.0, Java 25 |
 | `mods.toml` | Supported | Forge `loaderVersion="[66,)"`, Forge/Minecraft dependencies |
 | Basic block | Supported | Basic cube geometry, registration and special information tooltips |
@@ -20,8 +20,7 @@ final feature matrix.
 | Block entity inventory | Supported | Forge `IItemHandler` backed by `InvWrapper` |
 | Block entity energy | Supported | Forge `EnergyStorage` / `IEnergyStorage` |
 | Block entity fluid tank | Supported | Forge `FluidTank` / `IFluidHandler` |
-| Fluids | Supported | Source and flowing fluids, fluid block and bucket |
-| Access transformers | Supported | Generated `META-INF/accesstransformer.cfg` for fluid movement |
+| Fluids | Supported | Source and flowing fluids, fluid block and bucket; Forge default movement |
 | Procedure element | Supported | Java generation with event parameter and chat output templates |
 | `player_right_click_block` trigger | Supported | Forge `PlayerInteractEvent.RightClickBlock` |
 | Static validation | Supported | YAML, FreeMarker, template references, mappings |
@@ -50,6 +49,7 @@ final feature matrix.
 - Block entity inventory exposes the full container; side-specific slot restrictions are not applied yet.
 - Energy and fluid block entity storage use Forge capability wrappers; transfer procedures are not ported yet.
 - Fluid buckets use a static bucket model rather than a dynamic fluid-container model.
+- Custom fluid movement hooks and access-transformer-based extensions are deferred to a later batch; fluid movement uses Forge defaults.
 - Item inventories stop generation with an explicit message instead of emitting unsupported code.
 - Advanced block bases and element types are not silently generated yet; they are outside this batch.
 - `enumextensions`, NeoForge data maps and item model property events are not ported.
