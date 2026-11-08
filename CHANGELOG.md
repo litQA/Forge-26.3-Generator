@@ -2,6 +2,18 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.8.9-beta
+
+### Changes
+
+- Plugin version raised to `2026.3-1.0.8.9-beta`.
+
+### Fixes
+
+Fixed 1 bug(s).
+
+- The generated fluid model registry now uses the fully qualified `ModelEvent.BakeFluidModels` type, so the import formatter no longer emits an unresolved nested-class import.
+
 ## 2026.3-1.0.7.8-beta
 
 ### New Content

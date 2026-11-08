@@ -7,10 +7,10 @@ public final class ${JavaModName}FluidModels {
 	}
 
 	public static void register() {
-		BakeFluidModels.BUS.addListener(${JavaModName}FluidModels::registerModels);
+		net.minecraftforge.client.event.ModelEvent.BakeFluidModels.BUS.addListener(${JavaModName}FluidModels::registerModels);
 	}
 
-	private static void registerModels(BakeFluidModels event) {
+	private static void registerModels(net.minecraftforge.client.event.ModelEvent.BakeFluidModels event) {
 		<#list types.fluids as fluid>
 		var still${fluid?index} = new FluidModel.Unbaked(
 			new Material(Identifier.parse("${fluid.textureStill.format("%s:block/%s")}")),
