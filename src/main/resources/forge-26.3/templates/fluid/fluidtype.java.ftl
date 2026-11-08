@@ -82,4 +82,5 @@ public class ${name}FluidType extends FluidType {
 		});
 	}
 
+}
 </@javacompress>

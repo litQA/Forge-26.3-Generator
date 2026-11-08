@@ -2,6 +2,18 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.6.7-beta
+
+### Changes
+
+- Plugin version raised to `2026.3-1.0.6.7-beta`.
+
+### Fixes
+
+Fixed 1 bug(s).
+
+- The fluid type template now closes the generated class after the protected `move` override was removed.
+
 ## 2026.3-1.0.5.6-beta
 
 ### Changes
