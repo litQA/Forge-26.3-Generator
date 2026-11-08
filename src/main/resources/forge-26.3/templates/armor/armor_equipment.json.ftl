@@ -2,12 +2,12 @@
   "layers": {
     "humanoid": [
       {
-        "texture": "${modid}:${registryname}"
+        "texture": "${modid}:${data.armorTextureFile}_layer_1"
       }
     ],
     "humanoid_leggings": [
       {
-        "texture": "${modid}:${registryname}"
+        "texture": "${modid}:${data.armorTextureFile}_layer_2"
       }
     ]
   }

@@ -40,4 +40,24 @@ tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
 }
 
+// MCreator stores both armor layers in the humanoid folder. Copy them to the
+// leggings folder so the equipment asset can resolve both layer textures.
+tasks.named('processResources', ProcessResources) {
+    doLast {
+        def assetsRoot = layout.buildDirectory.dir('resources/main/assets').get().asFile
+        if (assetsRoot.exists()) {
+            assetsRoot.eachDir { modDir ->
+                def humanoid = new File(modDir, 'textures/entity/equipment/humanoid')
+                def leggings = new File(modDir, 'textures/entity/equipment/humanoid_leggings')
+                if (humanoid.exists()) {
+                    copy {
+                        from humanoid
+                        into leggings
+                    }
+                }
+            }
+        }
+    }
+}
+
 apply from: 'mcreator.gradle'

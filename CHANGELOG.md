@@ -2,6 +2,35 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.7.8-beta
+
+### New Content
+
+- Forge fluid model registration through `BakeFluidModels`, with still and flowing materials for custom fluids.
+- Dynamic Forge fluid-container item models for fluid buckets.
+- Equipment asset armor textures using `humanoid` and `humanoid_leggings` layer files.
+- Shears attack speed attributes when a non-default attack speed is configured.
+
+### Changes
+
+- Armor textures are now written to `textures/entity/equipment/humanoid`; the workspace copies them into `humanoid_leggings` during resource processing.
+- Fluid bucket item models now point to the generated dynamic fluid-container model.
+- Plugin version raised to `2026.3-1.0.7.8-beta`.
+
+### Fixes
+
+Fixed 3 bug(s).
+
+- Custom fluid blocks no longer render with missing purple/black textures.
+- Fluid buckets now use the fluid-container model instead of the empty bucket model.
+- Armor equipment assets now resolve the generated layer textures instead of missing texture paths.
+
+### Known Limitations
+
+- Custom armor models and animations remain deferred.
+- Custom fluid movement hooks remain deferred; Forge default movement is used.
+- Tool attack speed follows the MCreator attack-speed value; non-melee tool types such as shields and fishing rods do not apply an attack-speed modifier.
+
 ## 2026.3-1.0.6.7-beta
 
 ### Changes

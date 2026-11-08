@@ -24,6 +24,8 @@ import org.apache.logging.log4j.Logger;
 		<#if types.fluids?has_content>
 			${JavaModName}Fluids.REGISTRY.register(modBusGroup);
 			${JavaModName}FluidTypes.REGISTRY.register(modBusGroup);
+			if (FMLEnvironment.dist == Dist.CLIENT)
+				${JavaModName}FluidModels.register();
 		</#if>
 		</@javacompress>
 

@@ -56,7 +56,7 @@ entity_textures_dir: "@MODASSETSROOT/textures/entities"
 effect_textures_dir: "@MODASSETSROOT/textures/mob_effect"
 particle_textures_dir: "@MODASSETSROOT/textures/particle"
 screen_textures_dir: "@MODASSETSROOT/textures/screens"
-armor_textures_dir: "@MODASSETSROOT/textures/models/armor"
+armor_textures_dir: "@MODASSETSROOT/textures/entity/equipment/humanoid"
 other_textures_dir: "@MODASSETSROOT/textures"
 
 # Vanilla resources for the texture picker.
@@ -77,6 +77,9 @@ base_templates:
   - template: elementinits/tabs.java.ftl
     name: "@SRCROOT/@BASEPACKAGEPATH/init/@JavaModNameTabs.java"
     condition: hasItemsInTabs()
+  - template: modbase/clientfluidmodels.java.ftl
+    name: "@SRCROOT/@BASEPACKAGEPATH/client/@JavaModNameFluidModels.java"
+    condition: "${types.fluids?has_content}"
 
 tags:
   template: tags.json.ftl

@@ -1,8 +1,11 @@
-<#if data.textureBucket?has_content>
 {
-  "parent": "minecraft:item/generated",
+  "parent": "forge:item/bucket",
+  "loader": "forge:fluid_container",
+  "fluid": "${modid}:${registryname}",
   "textures": {
-    "layer0": "${data.textureBucket.format("%s:item/%s")}"
+    "particle": "${data.textureStill.format("%s:block/%s")}"
+    <#if data.textureBucket?has_content>,
+    "base": "${data.textureBucket.format("%s:item/%s")}"
+    </#if>
   }
 }
-</#if>

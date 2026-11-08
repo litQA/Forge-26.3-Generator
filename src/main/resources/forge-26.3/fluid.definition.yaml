@@ -11,7 +11,7 @@ templates:
   - template: json/bucket.json.ftl
     writer: json
     name: "@MODASSETSROOT/models/item/@registryname_bucket.json"
-    condition: hasCustomBucketTexture()
+    condition: generateBucket
   - template: json/model_item_bucket.json.ftl
     writer: json
     name: "@MODASSETSROOT/items/@registryname_bucket.json"

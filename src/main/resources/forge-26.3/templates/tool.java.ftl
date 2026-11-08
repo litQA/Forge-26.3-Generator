@@ -97,6 +97,9 @@ public class ${name}Item extends <#if data.toolType == "Shears" || data.toolType
 				<#if data.repairItems?has_content>
 				.repairable(TagKey.create(Registries.ITEM, Identifier.parse("${modid}:${registryname}_repair_items")))
 				</#if>
+				<#if data.attackSpeed != 4>
+				.attributes(<@itemAttributeModifiers true/>)
+				</#if>
 			</#if>
 			<#if data.toolType == "Shears" || data.toolType == "Shield">
 				<#if data.usageCount != 0>
