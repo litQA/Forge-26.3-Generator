@@ -2,6 +2,25 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.2.3-beta
+
+### Changes
+
+- The Forge workspace base now applies the `java` plugin before `base.archivesName` is configured.
+- The NeoForge-specific `MCREATOR_JVM_OPTIONS` run configuration was removed because ForgeGradle 7 does not expose the `jvmArgument` DSL.
+
+### Fixes
+
+Fixed 2 bug(s).
+
+- Workspace creation no longer fails with `Could not get unknown property 'base'`.
+- Workspace creation no longer fails with `Could not get unknown property 'java'` or a missing `JavaPluginExtension`.
+
+### Known Limitations
+
+- Phase 0 scope is unchanged: basic blocks, basic items, block items, creative tabs, procedures and the `player_right_click_block` trigger only.
+- Generated workspace compilation still requires a real MCreator/ForgeGradle environment; the local access-transformer cache remains environment-dependent.
+
 ## 2026.3-1.0.1.2-beta
 
 ### New Content

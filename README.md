@@ -7,7 +7,7 @@ MCreator generator plugin for Minecraft Forge `26.3-66.1.5`, targeting MCreator 
 | --- | --- |
 | Plugin id | `generator-forge-26.3` |
 | Generator id | `forge-26.3` |
-| Plugin version | `2026.3-1.0.1.2-beta` |
+| Plugin version | `2026.3-1.0.2.3-beta` |
 | Minecraft / Forge | `26.3` / `66.1.5` |
 | Gradle for generated mods | Gradle 9.8.0 + ForgeGradle 7 |
 | Java for Gradle / MCreator | 25 |
