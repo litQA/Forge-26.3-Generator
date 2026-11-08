@@ -2,6 +2,30 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.3.4-beta
+
+### New Content
+
+- `world_send_chat` and `entity_send_chat` procedure templates, so chat output procedures generate real code.
+
+### Changes
+
+- README no longer tracks development batch progress; the banner and MCreator information sections are reserved for project-owner maintenance.
+- Plugin metadata description now identifies the plugin only as a Forge 26.3 generator for MCreator; credits list MCreator, Pylo and Forge.
+- Plugin version raised to `2026.3-1.0.3.4-beta`.
+
+### Fixes
+
+Fixed 2 bug(s).
+
+- Block items with special information now use the generated block item class, so tooltip text is displayed.
+- The `player_right_click_block` trigger can now produce an observable chat message through the `world_send_chat` procedure template.
+
+### Known Limitations
+
+- Advanced procedures, block bases, entities, fluids, GUIs, dimensions, biomes, networking and capabilities remain pending.
+- Generated workspace compilation still requires a real MCreator/ForgeGradle environment; the local access-transformer cache remains environment-dependent.
+
 ## 2026.3-1.0.2.3-beta
 
 ### Changes

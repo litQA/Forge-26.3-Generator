@@ -7,13 +7,13 @@ It is not the final feature matrix.
 
 | Area | Status | Notes |
 | --- | --- | --- |
-| Generator plugin metadata | Supported | `plugin.json` version `2026.3-1.0.2.3-beta` |
+| Generator plugin metadata | Supported | `plugin.json` version `2026.3-1.0.3.4-beta` |
 | Forge workspace base | Supported | ForgeGradle 7, Gradle 9.8.0, Java 25 |
 | `mods.toml` | Supported | Forge `loaderVersion="[66,)"`, Forge/Minecraft dependencies |
-| Basic block | Supported | Basic cube geometry and registration |
-| Basic item | Supported | Generic item and block item registration |
+| Basic block | Supported | Basic cube geometry, registration and special information tooltips |
+| Basic item | Supported | Generic item and block item registration, special information tooltips |
 | Creative tab | Supported | Custom tabs and vanilla tab contents |
-| Procedure element | Supported | Java generation, no event-type dependency |
+| Procedure element | Supported | Java generation with event parameter and chat output templates |
 | `player_right_click_block` trigger | Supported | Forge `PlayerInteractEvent.RightClickBlock` |
 | Static validation | Supported | YAML, FreeMarker, template references, mappings |
 

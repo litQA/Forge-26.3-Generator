@@ -12,8 +12,13 @@ public class ${JavaModName}Items {
 	<@javacompress>
 	<#list items as item>
 		<#if item.getModElement().getTypeString() == "block" || item.getModElement().getTypeString() == "plant">
+			<#if item.hasSpecialInformation(w)>
+			public static final RegistryObject<Item> ${item.getModElement().getRegistryNameUpper()} =
+				register("${item.getModElement().getRegistryName()}", ${item.getModElement().getName()}Block.Item::new);
+			<#else>
 			public static final RegistryObject<Item> ${item.getModElement().getRegistryNameUpper()} =
 				blockItem("${item.getModElement().getRegistryName()}", ${JavaModName}Blocks.${item.getModElement().getRegistryNameUpper()});
+			</#if>
 		<#else>
 			public static final RegistryObject<Item> ${item.getModElement().getRegistryNameUpper()} =
 				register("${item.getModElement().getRegistryName()}", ${item.getModElement().getName()}Item::new);

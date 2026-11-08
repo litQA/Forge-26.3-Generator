@@ -5,9 +5,9 @@
   "info": {
     "name": "Forge ${mcVersion} Generator",
     "version": "${pluginVersion}",
-    "description": "Minecraft Forge ${forgeVersion} generator for MCreator ${mcreatorVersion}.",
+    "description": "A Forge 26.3 generator designed for MCreator.",
     "author": "LitQA",
-    "credits": "Built on the MCreator NeoForge 26.3 generator architecture and aligned with the Forge 66.1.5 MDK.",
+    "credits": "MCreator, Pylo, Forge",
     "dependencies": []
   }
 }

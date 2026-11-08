@@ -2,34 +2,27 @@
 
 # Forge 26.3 Generator for MCreator 2026.3
 
-MCreator generator plugin for Minecraft Forge `26.3-66.1.5`, targeting MCreator EAP
-`2026.3.44621` (`EAP2026344621`).
+MCreator generator plugin for Minecraft Forge 26.3.
 
 | Property | Value |
 | --- | --- |
 | Plugin id | `generator-forge-26.3` |
 | Generator id | `forge-26.3` |
-| Plugin version | `2026.3-1.0.2.3-beta` |
+| Plugin version | `2026.3-1.0.3.4-beta` |
 | Minecraft / Forge | `26.3` / `66.1.5` |
 | Gradle for generated mods | Gradle 9.8.0 + ForgeGradle 7 |
 | Java for Gradle / MCreator | 25 |
 | License | CC BY-NC 4.0 |
 
-## Phase 0 scope
+## Features
 
-This is the first development batch. It delivers the generator plugin skeleton, the
-Forge 26.3 workspace base, and the smallest end-to-end path:
-
-- basic block registration;
-- basic item registration and block items;
-- custom creative tab registration;
-- procedure element;
+- Basic block registration with special information tooltips.
+- Basic item registration, block items and special information tooltips.
+- Custom creative tabs.
+- Procedure elements with chat output.
 - `player_right_click_block` trigger.
 
-Advanced element features (entities, fluids, GUIs, dimensions, biomes, capabilities,
-networking, variables and most triggers) are intentionally not part of this batch.
-They are listed in [docs/SUPPORT-MATRIX.md](docs/SUPPORT-MATRIX.md) and will be added
-in later batches after the Phase 0 gate passes.
+The detailed support matrix is in [docs/SUPPORT-MATRIX.md](docs/SUPPORT-MATRIX.md).
 
 ## Build the plugin
 
@@ -64,21 +57,6 @@ The Gradle wrapper is pinned to the local
 3. Start MCreator.
 4. Create a workspace with generator `Forge for 26.3 (66.1.5)`.
 
-## Phase 0 test checklist
-
-1. Create a basic block with a custom texture.
-2. Create a basic item with a custom texture.
-3. Add both to a custom creative tab.
-4. Create a procedure that sends a chat message and attach it to the
-   `player_right_click_block` trigger.
-5. Generate the workspace and run `gradlew build`.
-6. Start the client, verify the block/item/tab appear and the trigger executes.
-
-The Phase 0 gate is passed only when the generated workspace builds and the trigger
-runs in game. A generated code compile has not yet been verified in the current
-environment because the local ForgeGradle access-transformer step is blocked; see
-`docs/PROJECT-ASSESSMENT.md` section 11.
-
 ## Layout
 
 ```text
@@ -107,7 +85,7 @@ plugin-branch-2026.3/
 
 [![MCreator](https://mcreator.net/image/brand/mcreator300s.png)](https://mcreator.net/)
 
-MCreator is an open-source software used to make Minecraft Java Edition mods, Minecraft Bedrock Edition Add-Ons, resource packs, and data packs using an intuitive easy-to-learn interface or with an integrated code editor. It is used worldwide by Minecraft players, aspiring mod developers, for education, online classes, and STEM workshops. 
+MCreator is an open-source software used to make Minecraft Java Edition mods, Minecraft Bedrock Edition Add-Ons, resource packs, and data packs using an intuitive easy-to-learn interface or with an integrated code editor. It is used worldwide by Minecraft players, aspiring mod developers, for education, online classes, and STEM workshops.
 
 NOT AN OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR MICROSOFT.
 
