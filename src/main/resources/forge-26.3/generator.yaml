@@ -91,6 +91,9 @@ base_templates:
   - template: elementinits/javamodels.java.ftl
     name: "@SRCROOT/@BASEPACKAGEPATH/init/@JavaModNameModels.java"
     condition: "${javamodels?has_content || types.specialentities?has_content}"
+  - template: keybind_network.java.ftl
+    name: "@SRCROOT/@BASEPACKAGEPATH/network/@JavaModNameNetwork.java"
+    condition: "${keybinds?has_content}"
 
 tags:
   template: tags.json.ftl

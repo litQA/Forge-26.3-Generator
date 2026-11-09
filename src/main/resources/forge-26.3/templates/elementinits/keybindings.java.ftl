@@ -91,7 +91,7 @@ package ${package}.init;
 
 						if (isDownOld != isDown && isDown) {
 							<#if hasProcedure(keybind.onKeyPressed)>
-								ClientPacketDistributor.sendToServer(new ${keybind.getModElement().getName()}Message(0, 0));
+								${JavaModName}Network.CHANNEL.send(new ${keybind.getModElement().getName()}Message(0, 0), net.minecraftforge.network.PacketDistributor.SERVER.noArg());
 								${keybind.getModElement().getName()}Message.pressAction(Minecraft.getInstance().player, 0, 0);
 							</#if>
 
@@ -102,7 +102,7 @@ package ${package}.init;
 						<#if hasProcedure(keybind.onKeyReleased)>
 						else if (isDownOld != isDown && !isDown) {
 							int dt = (int) (System.currentTimeMillis() - ${keybind.getModElement().getRegistryNameUpper()}_LASTPRESS);
-							ClientPacketDistributor.sendToServer(new ${keybind.getModElement().getName()}Message(1, dt));
+							${JavaModName}Network.CHANNEL.send(new ${keybind.getModElement().getName()}Message(1, dt), net.minecraftforge.network.PacketDistributor.SERVER.noArg());
 							${keybind.getModElement().getName()}Message.pressAction(Minecraft.getInstance().player, 1, dt);
 						}
 						</#if>
@@ -120,7 +120,7 @@ package ${package}.init;
 		</#if>
 	</#list>
 
-	@SubscribeEvent public static void registerKeyMappings(RegisterKeyMappingsEvent event) {
+	@SubscribeEvent public static void registerKeyMappings(net.minecraftforge.client.event.RegisterKeyMappingsEvent event) {
 		<#list customCategories as customCategory>
 		event.registerCategory(CATEGORY_${customCategory?upper_case});
 		</#list>
@@ -132,7 +132,7 @@ package ${package}.init;
 
 	@Mod.EventBusSubscriber(modid = "${modid}", value = Dist.CLIENT) public static class KeyEventListener {
 
-		@SubscribeEvent public static void onClientTick(ClientTickEvent.Post event) {
+		@SubscribeEvent public static void onClientTick(net.minecraftforge.event.TickEvent.ClientTickEvent.Post event) {
 			if (Minecraft.getInstance().gui.screen() == null) {
 			<#list keybinds as keybind>
 				<#if hasProcedure(keybind.onKeyPressed) || hasProcedure(keybind.onKeyReleased)>

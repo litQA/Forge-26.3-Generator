@@ -2,6 +2,23 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.22.23-beta
+
+### New Content
+
+- Forge `RegisterKeyMappingsEvent` keybind registration.
+- Keybind press/release procedures synchronized through a Forge `SimpleChannel`.
+- Keybind category support and client tick handling.
+
+### Changes
+
+- Plugin version raised to `2026.3-1.0.22.23-beta`.
+
+### Known Limitations
+
+- Custom GUI slot item handlers and server-side GUI button/slider procedures remain incomplete.
+- Custom armor animations/translucent layers remain pending.
+
 ## 2026.3-1.0.21.22-beta
 
 ### Fixes
