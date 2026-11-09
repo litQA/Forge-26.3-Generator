@@ -36,7 +36,7 @@
 
 package ${package}.init;
 
-@Mod.EventBusSubscriber(modid = "${modid}", value = Dist.CLIENT) public class ${JavaModName}Particles {
+@Mod.EventBusSubscriber(modid = "${modid}", bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT) public class ${JavaModName}Particles {
 
 	@SubscribeEvent public static void registerParticles(RegisterParticleProvidersEvent event) {
 		<#list particles as particle>

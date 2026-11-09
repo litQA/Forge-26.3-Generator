@@ -2,6 +2,14 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.62.63-beta
+
+### Fixes
+
+Fixed 1 bug(s).
+
+- Phase 1C deferred registries are now registered from the mod constructor: attributes, gamerules, potions, mob effects, particle types and feature types. This prevents unbound `Holder` access during Forge attribute registration.
+
 ## 2026.3-1.0.61.62-beta
 
 ### Fixes
