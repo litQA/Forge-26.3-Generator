@@ -2,6 +2,14 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.54.55-beta
+
+### Fixes
+
+Fixed 1 bug(s).
+
+- Restored the exact pre-custom-texture armor definition and equipment template that previously generated armor Java classes successfully. This isolates the missing-armor generation regression.
+
 ## 2026.3-1.0.53.54-beta
 
 ### Fixes
