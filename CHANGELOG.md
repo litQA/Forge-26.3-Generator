@@ -2,6 +2,27 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.15.16-beta
+
+### New Content
+
+- Basic living entity generation with Forge `EntityType`, attributes, spawn placement and renderers.
+- Entity registration and client renderer registration for living entities.
+- Living entity spawn eggs and Forge `forge:add_spawns` biome modifiers.
+- Living entity sound, animation, AI base and attribute generation inherited from the 26.3 template set.
+
+### Changes
+
+- Living entity water behavior uses `ForgeMod.WATER_TYPE` / `ForgeMod.SWIM_SPEED`.
+- Poison immunity uses the vanilla `DamageTypes.MAGIC` damage type.
+- Plugin version raised to `2026.3-1.0.15.16-beta`.
+
+### Known Limitations
+
+- Living entity inventory capabilities are not registered yet.
+- Projectile and special entity templates are staged but not yet validated in this batch.
+- Villager/raider enum extensions and NeoForge data maps remain unsupported.
+
 ## 2026.3-1.0.14.15-beta
 
 ### New Content

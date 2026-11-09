@@ -48,12 +48,12 @@ public class ${JavaModName}Entities {
 
 	<#list entities as entity>
 		<#if entity.getModElement().getTypeString() == "projectile">
-			public static final DeferredHolder<EntityType<?>, EntityType<${entity.getModElement().getName()}Entity>> ${entity.getModElement().getRegistryNameUpper()} =
+			public static final RegistryObject<EntityType<${entity.getModElement().getName()}Entity>> ${entity.getModElement().getRegistryNameUpper()} =
 				register("${entity.getModElement().getRegistryName()}", EntityType.Builder.<${entity.getModElement().getName()}Entity>
 						of(${entity.getModElement().getName()}Entity::new, MobCategory.MISC)
 						.setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(1).sized(${entity.modelWidth}f, ${entity.modelHeight}f));
 		<#elseif entity.getModElement().getTypeString() == "livingentity">
-			public static final DeferredHolder<EntityType<?>, EntityType<${entity.getModElement().getName()}Entity>> ${entity.getModElement().getRegistryNameUpper()} =
+			public static final RegistryObject<EntityType<${entity.getModElement().getName()}Entity>> ${entity.getModElement().getRegistryNameUpper()} =
 				register("${entity.getModElement().getRegistryName()}", EntityType.Builder.<${entity.getModElement().getName()}Entity>
 						of(${entity.getModElement().getName()}Entity::new, ${entity.mobSpawningType})
 							.setShouldReceiveVelocityUpdates(true).setTrackingRange(${entity.trackingRange}).setUpdateInterval(3)
@@ -63,13 +63,13 @@ public class ${JavaModName}Entities {
 							.sized(${entity.modelWidth}f, ${entity.modelHeight}f)
 						);
 			<#if entity.hasCustomProjectile()>
-			public static final DeferredHolder<EntityType<?>, EntityType<${entity.getModElement().getName()}EntityProjectile>> ${entity.getModElement().getRegistryNameUpper()}_PROJECTILE =
+			public static final RegistryObject<EntityType<${entity.getModElement().getName()}EntityProjectile>> ${entity.getModElement().getRegistryNameUpper()}_PROJECTILE =
 				register("projectile_${entity.getModElement().getRegistryName()}", EntityType.Builder.<${entity.getModElement().getName()}EntityProjectile>
 					of(${entity.getModElement().getName()}EntityProjectile::new, MobCategory.MISC).setShouldReceiveVelocityUpdates(true).setTrackingRange(64)
 						.setUpdateInterval(1).sized(0.5f, 0.5f));
 			</#if>
 		<#elseif entity.getModElement().getTypeString() == "specialentity">
-			public static final DeferredHolder<EntityType<?>, EntityType<${entity.getModElement().getName()}Entity>> ${entity.getModElement().getRegistryNameUpper()} =
+			public static final RegistryObject<EntityType<${entity.getModElement().getName()}Entity>> ${entity.getModElement().getRegistryNameUpper()} =
 				register("${entity.getModElement().getRegistryName()}",
 				EntityType.Builder.<${entity.getModElement().getName()}Entity>of(${entity.getModElement().getName()}Entity::new, MobCategory.MISC)
 					.noLootTable().sized(1.375F, 0.5625F).eyeHeight(0.5625F).clientTrackingRange(10));
@@ -79,25 +79,13 @@ public class ${JavaModName}Entities {
 	// Start of user code block custom entities
 	// End of user code block custom entities
 
-	private static <T extends Entity> DeferredHolder<EntityType<?>, EntityType<T>> register(String registryname, EntityType.Builder<T> entityTypeBuilder) {
+	private static <T extends Entity> RegistryObject<EntityType<T>> register(String registryname, EntityType.Builder<T> entityTypeBuilder) {
 		return REGISTRY.register(registryname, () -> (EntityType<T>) entityTypeBuilder.build(
 				ResourceKey.create(Registries.ENTITY_TYPE, Identifier.fromNamespaceAndPath(${JavaModName}.MODID, registryname))
 		));
 	}
-
-	<#if entitiesWithInventory?size != 0>
-	<@javacompress>
-	<#-- #4780: entities have equipment inventory capability registered before custom ones without priority set -->
-	@SubscribeEvent(priority = EventPriority.HIGHEST) public static void registerCapabilities(RegisterCapabilitiesEvent event) {
-		<#list entitiesWithInventory as entity>
-			event.registerEntity(Capabilities.Item.ENTITY, ${entity.getModElement().getRegistryNameUpper()}.get(), (living, context) -> living.getCombinedInventory());
-		</#list>
-	}
-	</@javacompress>
-	</#if>
-
-	<#if hasLivingEntities>
-	@SubscribeEvent public static void init(RegisterSpawnPlacementsEvent event) {
+<#if hasLivingEntities>
+	@SubscribeEvent public static void init(net.minecraftforge.event.entity.SpawnPlacementRegisterEvent event) {
 		<#list entities as entity>
 			<#if entity.getModElement().getTypeString() == "livingentity">
 				${entity.getModElement().getName()}Entity.init(event);
@@ -105,7 +93,7 @@ public class ${JavaModName}Entities {
 		</#list>
 	}
 
-	@SubscribeEvent public static void registerAttributes(EntityAttributeCreationEvent event) {
+	@SubscribeEvent public static void registerAttributes(net.minecraftforge.event.entity.EntityAttributeCreationEvent event) {
 		<#list entities as entity>
 			<#if entity.getModElement().getTypeString() == "livingentity">
 				event.put(${entity.getModElement().getRegistryNameUpper()}.get(), ${entity.getModElement().getName()}Entity.createAttributes().build());

@@ -7,7 +7,7 @@ final feature matrix.
 
 | Area | Status | Notes |
 | --- | --- | --- |
-| Generator plugin metadata | Supported | `plugin.json` version `2026.3-1.0.14.15-beta` |
+| Generator plugin metadata | Supported | `plugin.json` version `2026.3-1.0.15.16-beta` |
 | Forge workspace base | Supported | ForgeGradle 7, Gradle 9.8.0, Java 25 |
 | `mods.toml` | Supported | Forge `loaderVersion="[66,)"`, Forge/Minecraft dependencies |
 | Basic block | Supported | Basic cube geometry, registration and special information tooltips |
@@ -20,11 +20,14 @@ final feature matrix.
 | Tools | Supported | Pickaxe, axe, shovel, hoe and sword |
 | Armor | Supported | Helmet, chestplate, leggings and boots with equipment assets |
 | Custom armor models | Supported | Basic `HumanoidModel` part mapping through Forge `IClientItemExtensions` |
+| Living entities | Supported | Basic entity type, attributes, spawn placement, renderer and spawn egg |
+| Living entity biome spawning | Supported | Forge `forge:add_spawns` biome modifiers |
 | Block entity | Supported | Inventory, energy storage and single-tank fluid storage |
 | Block entity inventory | Supported | Forge `IItemHandler` backed by `InvWrapper` |
 | Block entity energy | Supported | Forge `EnergyStorage` / `IEnergyStorage` |
 | Block entity fluid tank | Supported | Forge `FluidTank` / `IFluidHandler` |
-| Fluids | Supported | Source and flowing fluids, fluid block, dynamic bucket model; Forge default movement || Procedure element | Supported | Java generation with event parameter and chat output templates |
+| Fluids | Supported | Source and flowing fluids, fluid block, dynamic bucket model; Forge default movement |
+| Procedure element | Supported | Java generation with event parameter and chat output templates |
 | `player_right_click_block` trigger | Supported | Forge `PlayerInteractEvent.RightClickBlock` |
 | Static validation | Supported | YAML, FreeMarker, template references, mappings |
 
@@ -34,7 +37,7 @@ final feature matrix.
 | --- | --- | --- |
 | Item inventories | Pending | Phase 2 |
 | Custom armor animations and translucent layers | Pending | Phase 1B |
-| Living entities, projectiles, special entities | Pending | Phase 1B |
+| Projectiles and special entities | Pending | Phase 1B |
 | GUIs, menus, screens, keybinds, overlays | Pending | Phase 1B |
 | Biomes, dimensions, features, structures | Pending | Phase 1C |
 | Potions, effects, particles, attributes, gamerules | Pending | Phase 1C |

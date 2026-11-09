@@ -47,6 +47,11 @@ public class ${JavaModName}Items {
 			public static final RegistryObject<Item> ${item.getModElement().getRegistryNameUpper()}_BOOTS =
 				register("${item.getModElement().getRegistryName()}_boots", ${item.getModElement().getName()}Item.Boots::new);
 			</#if>
+		<#elseif item.getModElement().getTypeString() == "livingentity">
+			<#if item.hasSpawnEgg>
+			public static final RegistryObject<Item> ${item.getModElement().getRegistryNameUpper()}_SPAWN_EGG =
+				register("${item.getModElement().getRegistryName()}_spawn_egg", properties -> new SpawnEggItem(properties.spawnEgg(${JavaModName}Entities.${item.getModElement().getRegistryNameUpper()}.get())));
+			</#if>
 		<#elseif item.getModElement().getTypeString() == "fluid" && item.generateBucket>
 			public static final RegistryObject<Item> ${item.getModElement().getRegistryNameUpper()}_BUCKET =
 				register("${item.getModElement().getRegistryName()}_bucket", ${item.getModElement().getName()}Item::new);

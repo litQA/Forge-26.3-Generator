@@ -19,6 +19,7 @@ import org.apache.logging.log4j.Logger;
 		<@javacompress>
 		<#if types.base_blocks?has_content>${JavaModName}Blocks.REGISTRY.register(modBusGroup);</#if>
 		<#if types.base_blockentities?has_content>${JavaModName}BlockEntities.REGISTRY.register(modBusGroup);</#if>
+		<#if types.base_entities?has_content>${JavaModName}Entities.REGISTRY.register(modBusGroup);</#if>
 		<#if types.blocks?filter(e -> e.isSign())?size != 0>${JavaModName}SignBlockEntities.REGISTRY.register(modBusGroup);</#if>
 		<#if types.base_items?has_content>${JavaModName}Items.REGISTRY.register(modBusGroup);</#if>
 		<#if w.hasItemsInTabs()>${JavaModName}Tabs.REGISTRY.register(modBusGroup);</#if>

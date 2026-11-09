@@ -8,7 +8,7 @@ MCreator generator plugin for Minecraft Forge 26.3.
 | --- | --- |
 | Plugin id | `generator-forge-26.3` |
 | Generator id | `forge-26.3` |
-| Plugin version | `2026.3-1.0.14.15-beta` |
+| Plugin version | `2026.3-1.0.15.16-beta` |
 | Minecraft / Forge | `26.3` / `66.1.5` |
 | Gradle for generated mods | Gradle 9.8.0 + ForgeGradle 7 |
 | Java for Gradle / MCreator | 25 |
@@ -24,6 +24,7 @@ MCreator generator plugin for Minecraft Forge 26.3.
 - Custom creative tabs.
 - Basic plants, tools and armor.
 - Basic custom armor model part mapping through Forge client item extensions.
+- Basic living entities with attributes, spawn eggs, renderers and biome spawn modifiers.
 - Block entity inventories, energy storage and fluid tanks.
 - Source and flowing fluids with fluid blocks and buckets.
 - Procedure elements with chat output.
