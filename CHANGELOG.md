@@ -2,6 +2,17 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.33.34-beta
+
+### New Content
+
+- Forge `MenuStateUpdateMessage` over the shared `SimpleChannel`.
+- GUI text field, checkbox and slider state synchronization between client and server menus.
+
+### Changes
+
+- Plugin version raised to `2026.3-1.0.33.34-beta`.
+
 ## 2026.3-1.0.32.33-beta
 
 ### Fixes

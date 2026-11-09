@@ -20,6 +20,9 @@ public final class ${JavaModName}Network {
 					.addMain(${gui.getModElement().getName()}SlotMessage.class, ${gui.getModElement().getName()}SlotMessage.STREAM_CODEC, ${gui.getModElement().getName()}SlotMessage::handle)
 					</#if>
 					</#list>
+					<#if guis?has_content>
+					.addMain(MenuStateUpdateMessage.class, MenuStateUpdateMessage.STREAM_CODEC, MenuStateUpdateMessage::handle)
+					</#if>
 					<#list keybinds as keybind>
 					<#if hasProcedure(keybind.onKeyPressed) || hasProcedure(keybind.onKeyReleased)>
 					.addMain(${keybind.getModElement().getName()}Message.class, ${keybind.getModElement().getName()}Message.STREAM_CODEC, ${keybind.getModElement().getName()}Message::handle)

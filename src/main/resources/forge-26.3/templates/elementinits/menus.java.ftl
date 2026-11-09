@@ -17,6 +17,13 @@ public class ${JavaModName}Menus {
 
 		default void sendMenuStateUpdate(Player player, int elementType, String name, Object elementState, boolean needClientUpdate) {
 			getMenuState().put(elementType + ":" + name, elementState);
+			if (player instanceof ServerPlayer serverPlayer) {
+				${JavaModName}Network.CHANNEL.send(new MenuStateUpdateMessage(elementType, name, elementState),
+					net.minecraftforge.network.PacketDistributor.PLAYER.with(() -> serverPlayer));
+			} else if (player.level().isClientSide()) {
+				${JavaModName}Network.CHANNEL.send(new MenuStateUpdateMessage(elementType, name, elementState),
+					net.minecraftforge.network.PacketDistributor.SERVER.noArg());
+			}
 		}
 
 		default <T> T getMenuState(int elementType, String name, T defaultValue) {
