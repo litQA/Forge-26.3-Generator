@@ -15,7 +15,6 @@ import net.minecraftforge.event.server.ServerAboutToStartEvent;
 import net.minecraftforge.eventbus.api.listener.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-import ${package}.biome.${JavaModName}BiomeSourceAccess;
 import ${package}.biome.${JavaModName}OverworldBiomeSource;
 
 import java.util.ArrayList;
@@ -45,10 +44,8 @@ public final class ${JavaModName}Biomes {
 			if (!stem.type().is(BuiltinDimensionTypes.OVERWORLD))
 				continue;
 			ChunkGenerator generator = stem.generator();
-			if (generator instanceof ${JavaModName}BiomeSourceAccess access) {
-				access.setBiomeSource(new ${JavaModName}OverworldBiomeSource(generator.getBiomeSource(), customBiomes));
-				generator.refreshFeaturesPerStep();
-			}
+			generator.biomeSource = new ${JavaModName}OverworldBiomeSource(generator.getBiomeSource(), customBiomes);
+			generator.refreshFeaturesPerStep();
 		}
 	}
 }
