@@ -36,6 +36,8 @@ public final class GeneratorValidator {
             Pattern.compile("<#include\\s+(?:\"([^\"]+)\"|'([^']+)')");
     private static final Pattern NEOFORGE_PATTERN =
             Pattern.compile("net\\.neoforged|neoforge:|NeoForgeMod|CommonHooks");
+    private static final Pattern REMOVED_PATTERN =
+            Pattern.compile("RenderGuiEvent|EventPriority|ItemStacksResourceHandler|getEnchantmentLevel");
 
     private final Path resourcesRoot;
     private final List<String> errors = new ArrayList<>();
@@ -404,6 +406,11 @@ public final class GeneratorValidator {
                 if (matcher.find()) {
                     error(resourcesRoot.relativize(resource) + ":" + (i + 1)
                             + ": forbidden NeoForge reference '" + matcher.group() + "'");
+                }
+                Matcher removed = REMOVED_PATTERN.matcher(lines.get(i));
+                if (removed.find()) {
+                    error(resourcesRoot.relativize(resource) + ":" + (i + 1)
+                            + ": removed Forge API '" + removed.group() + "'");
                 }
             }
         }

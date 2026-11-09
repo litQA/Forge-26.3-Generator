@@ -2,6 +2,13 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.35.36-beta
+
+### Changes
+
+- The validator now rejects removed Forge APIs (`RenderGuiEvent`, `EventPriority`, `ItemStacksResourceHandler`, `getEnchantmentLevel`) in generator resources.
+- Plugin version raised to `2026.3-1.0.35.36-beta`.
+
 ## 2026.3-1.0.34.35-beta
 
 ### Changes
