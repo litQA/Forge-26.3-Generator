@@ -2,6 +2,17 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.29.30-beta
+
+### New Content
+
+- Screen-target overlays now register through Forge `ScreenEvent.Render.Post` instead of rendering as HUD overlays.
+- HUD overlays continue to use `AddGuiOverlayLayersEvent` and `ForgeLayer`.
+
+### Changes
+
+- Plugin version raised to `2026.3-1.0.29.30-beta`.
+
 ## 2026.3-1.0.28.29-beta
 
 ### Fixes

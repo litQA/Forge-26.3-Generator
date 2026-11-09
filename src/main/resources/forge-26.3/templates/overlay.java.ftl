@@ -47,9 +47,16 @@ package ${package}.client.screens;
 	</#list>
 
 	static {
+		<#if data.overlayTarget == "Ingame">
 		AddGuiOverlayLayersEvent.BUS.addListener(event -> event.getLayeredDraw().add(
 			Identifier.parse("${modid}:${registryname}_overlay"),
 			(guiGraphics, deltaTracker) -> eventHandler(guiGraphics)));
+		<#else>
+		ScreenEvent.Render.Post.BUS.addListener(event -> {
+			if (event.getScreen() instanceof ${data.overlayTarget})
+				eventHandler(event.getGuiGraphics());
+		});
+		</#if>
 	}
 
 	public static void eventHandler(GuiGraphicsExtractor guiGraphics) {
