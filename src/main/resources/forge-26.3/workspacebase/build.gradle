@@ -264,4 +264,7 @@ if (!generatedMixinConfigs.isEmpty()) {
             attributes['MixinConfigs'] = generatedMixinConfigs.join(',')
         }
     }
+    tasks.matching { it.name == 'runClient' || it.name == 'runServer' }.configureEach {
+        jvmArgs "-Dmixin.config=${generatedMixinConfigs.join(',')}"
+    }
 }
