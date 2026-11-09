@@ -1,3 +1,4 @@
+<#noparse>
 plugins {
     id 'java'
     id 'eclipse'
@@ -338,3 +339,5 @@ tasks.register('copyTreePlacement') {
     }
 }
 tasks.named('processResources') { finalizedBy 'copyTreePlacement' }
+
+</#noparse>
