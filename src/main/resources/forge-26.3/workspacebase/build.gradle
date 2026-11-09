@@ -106,3 +106,33 @@ tasks.named('processResources', ProcessResources) {
 }
 
 apply from: 'mcreator.gradle'
+
+// Sign editors resolve their GUI textures from the minecraft namespace.
+// Copy mod sign textures again after resource processing, using the actual
+// ForgeGradle output directory.
+tasks.register('copySignGuiTextures') {
+    doLast {
+        def sourceRoot = file('src/main/resources/assets')
+        def targetRoot = layout.buildDirectory.dir('sourceSets/main/assets').get().asFile
+        if (!sourceRoot.exists())
+            return
+        sourceRoot.eachDir { File modDir ->
+            if (modDir.name == 'minecraft')
+                return
+            ['signs', 'hanging_signs'].each { String kind ->
+                File sourceDir = new File(modDir, "textures/gui/${kind}")
+                File targetDir = new File(targetRoot, "minecraft/textures/gui/${kind}")
+                if (!sourceDir.exists())
+                    return
+                targetDir.mkdirs()
+                sourceDir.eachFileRecurse { File sourceFile ->
+                    if (sourceFile.isFile()) {
+                        File targetFile = new File(targetDir, sourceFile.name)
+                        java.nio.file.Files.copy(sourceFile.toPath(), targetFile.toPath(), java.nio.file.StandardCopyOption.REPLACE_EXISTING)
+                    }
+                }
+            }
+        }
+    }
+}
+tasks.named('processResources') { finalizedBy 'copySignGuiTextures' }

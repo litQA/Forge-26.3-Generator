@@ -2,6 +2,14 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.46.47-beta
+
+### Fixes
+
+Fixed 1 bug(s).
+
+- Added a post-`processResources` sign texture copy task targeting the actual ForgeGradle `build/sourceSets/main/assets` output. Both `textures/gui/signs` and `textures/gui/hanging_signs` are mirrored into `assets/minecraft`, which `SignEditScreen` and `HangingSignEditScreen` require.
+
 ## 2026.3-1.0.45.46-beta
 
 ### Fixes
