@@ -2,6 +2,14 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.52.53-beta
+
+### Fixes
+
+Fixed 1 bug(s).
+
+- Restored the stable armor Java template and removed per-piece template variables that caused armor elements to fail code generation. Custom helmet model textures are applied through the single equipment asset; custom model textures are copied into the equipment texture folder.
+
 ## 2026.3-1.0.51.52-beta
 
 ### Fixes

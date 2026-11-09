@@ -4,24 +4,7 @@ templates:
 
   - template: armor/armor_equipment.json.ftl
     writer: json
-    variables: "part=helmet"
-    condition: enableHelmet
-    name: "@MODASSETSROOT/equipment/@registryname_helmet.json"
-  - template: armor/armor_equipment.json.ftl
-    writer: json
-    variables: "part=chestplate"
-    condition: enableBody
-    name: "@MODASSETSROOT/equipment/@registryname_chestplate.json"
-  - template: armor/armor_equipment.json.ftl
-    writer: json
-    variables: "part=leggings"
-    condition: enableLeggings
-    name: "@MODASSETSROOT/equipment/@registryname_leggings.json"
-  - template: armor/armor_equipment.json.ftl
-    writer: json
-    variables: "part=boots"
-    condition: enableBoots
-    name: "@MODASSETSROOT/equipment/@registryname_boots.json"
+    name: "@MODASSETSROOT/equipment/@registryname.json"
 
   - template: json/model_item.json.ftl
     writer: json
