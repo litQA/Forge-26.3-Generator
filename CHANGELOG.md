@@ -2,6 +2,16 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.94.95-beta
+
+### Fixes
+
+- Added workspace build/settings templates so regenerating a workspace after switching generators replaces a stale NeoForge `build.gradle`.
+- Fixed the generated Minecraft dependency range to `[26.3,)`.
+- Added the missing `cmdargs` template directory, including `_call_procedure.java.ftl`, used by command procedure arguments.
+- Added villager trade/profession, enchantment and function elements.
+- Adapted villager professions from `DeferredHolder` to Forge `RegistryObject`.
+
 ## 2026.3-1.0.93.94-beta
 
 ### Features

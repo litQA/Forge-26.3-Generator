@@ -38,7 +38,7 @@ displayTest="IGNORE_SERVER_VERSION"
 [[dependencies.${settings.getModID()}]]
     modId="minecraft"
     mandatory=true
-    versionRange="[26.3,26.4,)"
+    versionRange="[26.3,)"
     ordering="NONE"
     side="BOTH"
 
