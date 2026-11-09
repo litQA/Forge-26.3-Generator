@@ -35,32 +35,24 @@ These compatibility triggers were completed with Forge event substitutions:
 - `entity_pre_hurt` — `LivingDamageEvent`
 - `player_in_bed` — `PlayerSleepInBedEvent`
 
-Remaining complex trigger:
+Remaining complex / Mixin trigger:
 
-- `player_use_hoe` — Forge 26.3 does not expose the same dedicated use-on-block event
-
-## Complex / Mixin
-
-These need a client-side hook or a Mixin because Forge does not expose the
-equivalent event:
-
-- `player_left_click_air` — client-only interaction event; needs a packet bridge
-- `player_right_click_empty_hand` — client-only interaction event; needs a packet bridge
 - `sapling_glow` — no matching Forge event; requires a Mixin into the sapling growth path
+
+`player_left_click_air`, `player_right_click_empty_hand`, and `player_use_hoe`
+are now ported as client-side Forge event triggers. They do not yet forward the
+client event through a server packet, so their server-side procedure effects
+remain a known limitation.
 
 ## Dangerous / Very Hard
 
-- Client events forwarded through custom packets (`player_left_click_air`,
-  `player_right_click_empty_hand`) are desync/duplication sensitive.
+- Client events (`player_left_click_air`, `player_right_click_empty_hand`) are
+  currently client-side only; adding a packet bridge is desync-sensitive.
 - `sapling_glow` Mixin is version-sensitive and should not be enabled until a
   controlled runtime test exists.
-- `player_in_bed` and `entity_pre_hurt` are ported with Forge events; their
-  cancellation/result semantics still need runtime verification.
 
 ## Implementation status
 
-- 61 of 65 trigger templates are ported.
-- The four remaining templates are intentionally not enabled yet:
-  `player_left_click_air`, `player_right_click_empty_hand`, `player_use_hoe`,
-  and `sapling_glow`.
+- 64 of 65 trigger templates are ported.
+- The remaining template is intentionally not enabled yet: `sapling_glow`.
 - Plugin validation passes with the ported trigger set.
