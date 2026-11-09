@@ -43,6 +43,10 @@ global_templates:
     writer: java
     condition: "${biomes?filter(e -> e.spawnBiome)?size != 0}"
     name: "@SRCROOT/@BASEPACKAGEPATH/biome/@JavaModNameOverworldBiomeSource.java"
+  - template: biome/biome_source_codec.java.ftl
+    writer: java
+    condition: "${biomes?filter(e -> e.spawnBiome)?size != 0}"
+    name: "@SRCROOT/@BASEPACKAGEPATH/init/@JavaModNameBiomeSources.java"
 
 tags:
   - tag: BIOMES:minecraft:has_structure/mineshaft

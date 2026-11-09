@@ -48,6 +48,8 @@ public final class ${JavaModName}Biomes {
 			if (!stem.type().is(BuiltinDimensionTypes.OVERWORLD))
 				continue;
 			ChunkGenerator generator = stem.generator();
+			if (generator.getBiomeSource() instanceof ${JavaModName}OverworldBiomeSource)
+				continue;
 			${JavaModName}OverworldBiomeSource wrapper = new ${JavaModName}OverworldBiomeSource(generator.getBiomeSource(), customBiomes);
 			setField(generator, "biomeSource", wrapper);
 			ClearableLazy<List<FeatureSorter.StepFeatureData>> features = ClearableLazy.concurrentOf(

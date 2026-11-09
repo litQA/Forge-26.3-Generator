@@ -2,6 +2,12 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.91.92-beta
+
+### Fixes
+
+- Added a registered `BiomeSource` codec for the overworld wrapper, including its original source and custom biome list. This removes the unregistered direct-holder save crash while preserving runtime injection.
+
 ## 2026.3-1.0.90.91-beta
 
 ### Fixes
