@@ -2,6 +2,26 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.20.21-beta
+
+### New Content
+
+- Basic GUI menu and screen generation for Forge 26.3.
+- Forge `IForgeMenuType` menu registration and `MenuScreens` client registration.
+- Basic background, image, label, button, checkbox, text field and slider screen rendering.
+- Client-local menu state updates without NeoForge payload networking.
+
+### Changes
+
+- GUI container generation now uses a minimal Forge `AbstractContainerMenu` without custom slot item handlers.
+- Plugin version raised to `2026.3-1.0.20.21-beta`.
+
+### Known Limitations
+
+- Custom GUI slot item handling and server-bound button/slider procedures are not complete.
+- Keybind networking remains pending.
+- GUI components such as custom slots should be treated as display-only until the networking/slot batch.
+
 ## 2026.3-1.0.19.20-beta
 
 ### New Content

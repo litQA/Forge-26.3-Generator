@@ -7,7 +7,7 @@ final feature matrix.
 
 | Area | Status | Notes |
 | --- | --- | --- |
-| Generator plugin metadata | Supported | `plugin.json` version `2026.3-1.0.19.20-beta` |
+| Generator plugin metadata | Supported | `plugin.json` version `2026.3-1.0.20.21-beta` |
 | Forge workspace base | Supported | ForgeGradle 7, Gradle 9.8.0, Java 25 |
 | `mods.toml` | Supported | Forge `loaderVersion="[66,)"`, Forge/Minecraft dependencies |
 | Basic block | Supported | Basic cube geometry, registration and special information tooltips |
@@ -25,6 +25,7 @@ final feature matrix.
 | Projectiles | Supported | Basic arrow-style projectiles, custom renderer and shoot helpers |
 | Special entities | Supported | Basic boat/raft entities with model layers, renderers and items |
 | Overlays | Supported | Basic HUD and screen overlays using Forge render events |
+| GUIs | Partially supported | Basic menu/screen rendering; custom slot networking pending |
 | Block entity | Supported | Inventory, energy storage and single-tank fluid storage |
 | Block entity inventory | Supported | Forge `IItemHandler` backed by `InvWrapper` |
 | Block entity energy | Supported | Forge `EnergyStorage` / `IEnergyStorage` |
@@ -40,7 +41,7 @@ final feature matrix.
 | --- | --- | --- |
 | Item inventories | Pending | Phase 2 |
 | Custom armor animations and translucent layers | Pending | Phase 1B |
-| GUIs, menus, screens, keybinds, overlays | Pending | Phase 1B |
+| GUIs, menus, screens, keybinds, overlays | Partially supported | Basic GUIs and overlays; keybinds and custom slot networking pending |
 | Biomes, dimensions, features, structures | Pending | Phase 1C |
 | Potions, effects, particles, attributes, gamerules | Pending | Phase 1C |
 | Remaining procedures (567 total) | Pending | Phase 2 |
