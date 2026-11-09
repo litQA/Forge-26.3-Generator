@@ -8,9 +8,7 @@
     <#list spawnBiomes as spawnBiome>"${spawnBiome}"<#sep>,</#list>
   ],
   <#else>
-  "biomes": {
-    "type": "forge:any"
-  },
+  "biomes": "#minecraft:is_overworld",
   </#if>
   "features": "${modid}:${registryname}",
   "step": "${data.generationStep}"

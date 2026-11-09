@@ -2,6 +2,13 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.71.72-beta
+
+### Fixes
+
+- Feature biome modifiers now write to `data/<modid>/forge/biome_modifier` instead of the NeoForge directory path.
+- Features without explicit restriction biomes now default to `#minecraft:is_overworld` using the Forge biome modifier format.
+
 ## 2026.3-1.0.70.71-beta
 
 ### Fixes
