@@ -2,6 +2,13 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.96.97-beta
+
+### Fixes
+
+- Added explicit Forge imports to the base mod class so a stale import formatter cannot emit `net.neoforged` imports for `Mod`, `Dist`, `FMLEnvironment` or `FMLJavaModLoadingContext`.
+- Added a `checkForgeSources` Gradle guard that fails with a clear message if any generated Java source still contains `net.neoforged` instead of silently producing a broken jar.
+
 ## 2026.3-1.0.95.96-beta
 
 ### Fixes

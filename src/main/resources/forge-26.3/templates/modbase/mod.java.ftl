@@ -4,6 +4,11 @@ package ${package};
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.fml.loading.FMLEnvironment;
+
 @Mod("${modid}") public class ${JavaModName} {
 
 	public static final Logger LOGGER = LogManager.getLogger(${JavaModName}.class);
