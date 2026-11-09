@@ -2,6 +2,18 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.93.94-beta
+
+### Features
+
+- Added explicit loot table, recipe, advancement, command, item-extension, villager-trade, villager-profession, enchantment and function element definitions/templates.
+- Adapted command registration and villager profession registration to Forge 26.3 APIs where possible.
+
+### Fixes
+
+- Replaced the NeoForge fuel component hook with a Forge `FurnaceFuelBurnTimeEvent` template.
+- Removed NeoForge-only loot modifier generation from the basic loot-table element.
+
 ## 2026.3-1.0.92.93-beta
 
 ### Changes
