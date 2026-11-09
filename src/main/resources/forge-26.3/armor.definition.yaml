@@ -2,9 +2,22 @@ templates:
   - template: armor/armor.java.ftl
     name: "@SRCROOT/@BASEPACKAGEPATH/item/@NAMEItem.java"
 
-  - template: armor/armor_texture_marker.txt.ftl
-    writer: file
-    name: "@MODASSETSROOT/equipment/@registryname_custom_textures.txt"
+  - template: armor/armor_equipment_helmet.json.ftl
+    writer: json
+    condition: enableHelmet
+    name: "@MODASSETSROOT/equipment/@registryname_helmet.json"
+  - template: armor/armor_equipment_chestplate.json.ftl
+    writer: json
+    condition: enableBody
+    name: "@MODASSETSROOT/equipment/@registryname_chestplate.json"
+  - template: armor/armor_equipment_leggings.json.ftl
+    writer: json
+    condition: enableLeggings
+    name: "@MODASSETSROOT/equipment/@registryname_leggings.json"
+  - template: armor/armor_equipment_boots.json.ftl
+    writer: json
+    condition: enableBoots
+    name: "@MODASSETSROOT/equipment/@registryname_boots.json"
 
   - template: json/model_item.json.ftl
     writer: json

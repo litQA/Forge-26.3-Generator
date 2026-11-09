@@ -2,6 +2,14 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.57.58-beta
+
+### Fixes
+
+Fixed 1 bug(s).
+
+- Per-piece armor equipment JSON files are generated directly by separate JSON templates (one file per enabled piece) instead of relying on the marker build task. The armor Java template remains stable and is upgraded after generation by `patchArmorJava`.
+
 ## 2026.3-1.0.56.57-beta
 
 ### Fixes
