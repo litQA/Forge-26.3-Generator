@@ -52,7 +52,23 @@ final feature matrix.
 | Networking | Pending | Phase 2 |
 | Mixin packaging | Pending | Phase 3 |
 
+## MCreator / Forge hardcoded workarounds
+
+The following build-time workarounds are necessary because MCreator's template
+context or Forge's runtime API does not expose a stable template-only hook:
+
+| Workaround | Why it is needed | Owner |
+| --- | --- | --- |
+| `patchNetworkJava` | MCreator's base-template `guis`/`keybinds` collections are not reliably populated in `keybind_network.java.ftl`; the task scans generated `*Message.java` classes and registers them on the Forge `SimpleChannel`. | MCreator template context |
+| `patchArmorJava` | Forge 26.3 needs per-piece equipment assets, but changing the armor Java template causes MCreator armor element generation to fail; the task upgrades generated armor classes before compilation. | MCreator template generation |
+| `copySignGuiTextures` | `SignEditScreen` / `HangingSignEditScreen` hard-code the `minecraft` texture namespace. | Minecraft / Forge hardcoded path |
+| `copyArmorEquipmentTextures` | Forge 26.3 equipment assets use `textures/entity/equipment/humanoid` instead of MCreator's legacy armor texture directory. | Forge hardcoded path |
+
+These are compatibility workarounds, not feature requirements. They should be
+removed if MCreator/Forge later expose native template or API hooks.
+
 ## Known limitations
+
 
 - Block entity inventory exposes the full container; side-specific slot restrictions are not applied yet.
 - Energy and fluid block entity storage use Forge capability wrappers; transfer procedures are not ported yet.
