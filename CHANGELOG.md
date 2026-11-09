@@ -2,6 +2,14 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.50.51-beta
+
+### New Content
+
+- Added the complete `aitasks` template set, enabling MCreator AI task blocks (wander, attack, avoid, follow, doors, swim, panic, look, etc.) for living entities.
+- Added Forge `java_models` configuration and `copy_models` / `copy_model_animations` source-setup tasks, so MCreator Java model elements generate `client.model` classes and animation classes.
+- The Java model layer registry template now triggers through `hasJavaModels()`.
+
 ## 2026.3-1.0.49.50-beta
 
 ### Fixes

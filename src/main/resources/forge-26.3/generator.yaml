@@ -90,10 +90,29 @@ base_templates:
     condition: "${types.blocks?filter(e -> e.isSign())?size != 0}"
   - template: elementinits/javamodels.java.ftl
     name: "@SRCROOT/@BASEPACKAGEPATH/init/@JavaModNameModels.java"
-    condition: "${javamodels?has_content || types.specialentities?has_content}"
+    condition_any:
+      - hasJavaModels()
+      - "${types.specialentities?has_content}"
   - template: keybind_network.java.ftl
     name: "@SRCROOT/@BASEPACKAGEPATH/network/@JavaModNameNetwork.java"
     condition: "${keybinds?has_content || guis?has_content}"
+
+java_models:
+  key: mojmap-26.1.x
+  compatible: [mojmap-1.17.x, mojmap-1.18.x, mojmap-1.19.x, mojmap-1.20.x, mojmap-1.21.x, mojmap-26.1.x]
+  requested_key_words: [ModelPart, ~ModelRenderer]
+
+sources_setup_tasks:
+  - task: copy_models
+    type: JAVA_viatemplate
+    cleanupBeforeCopy: true
+    template: javamodel.java.ftl
+    to: "@SRCROOT/@BASEPACKAGEPATH/client/model"
+  - task: copy_model_animations
+    type: JAVA_viatemplate
+    cleanupBeforeCopy: true
+    template: javaanimation.java.ftl
+    to: "@SRCROOT/@BASEPACKAGEPATH/client/model/animations"
 
 tags:
   template: tags.json.ftl
