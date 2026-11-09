@@ -329,7 +329,8 @@ public class ${name}Screen extends AbstractContainerScreen<${name}Menu> implemen
 						if (!menuStateUpdateActive)
 							menu.sendMenuStateUpdate(entity, 2, "${component.getName()}", this.getValue(), false);
 						<#if hasProcedure(component.whenSliderMoves)>
-							${name}SliderMessage.handleSliderAction(entity, ${slid}, x, y, z, this.getValue());
+							${JavaModName}Network.CHANNEL.send(new ${name}SliderMessage(${slid}, x, y, z, this.getValue()), net.minecraftforge.network.PacketDistributor.SERVER.noArg());
+			${name}SliderMessage.handleSliderAction(entity, ${slid}, x, y, z, this.getValue());
 						</#if>
 					}
 				};
@@ -369,6 +370,7 @@ e -> {
 		int x = ${name}Screen.this.x; <#-- #5582 - x and y provided by buttons are in-GUI, not in-world coordinates -->
 		int y = ${name}Screen.this.y;
 		if (<@procedureOBJToConditionCode component.displayCondition/>) {
+			${JavaModName}Network.CHANNEL.send(new ${name}ButtonMessage(${btid}, x, y, z), net.minecraftforge.network.PacketDistributor.SERVER.noArg());
 			${name}ButtonMessage.handleButtonAction(entity, ${btid}, x, y, z);
 		}
 	</#if>

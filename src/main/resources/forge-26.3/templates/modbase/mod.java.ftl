@@ -23,7 +23,7 @@ import org.apache.logging.log4j.Logger;
 		<#if types.blocks?filter(e -> e.isSign())?size != 0>${JavaModName}SignBlockEntities.REGISTRY.register(modBusGroup);</#if>
 		<#if types.base_items?has_content>${JavaModName}Items.REGISTRY.register(modBusGroup);</#if>
 		<#if types.guis?has_content>${JavaModName}Menus.REGISTRY.register(modBusGroup);</#if>
-		<#if keybinds?has_content>${JavaModName}Network.init();</#if>
+		<#if keybinds?has_content || types.guis?has_content>${JavaModName}Network.init();</#if>
 		<#if w.hasItemsInTabs()>${JavaModName}Tabs.REGISTRY.register(modBusGroup);</#if>
 		<#if types.fluids?has_content>
 			${JavaModName}Fluids.REGISTRY.register(modBusGroup);

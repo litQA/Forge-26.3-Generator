@@ -3,6 +3,15 @@ templates:
     name: "@SRCROOT/@BASEPACKAGEPATH/world/inventory/@NAMEMenu.java"
   - template: gui/gui_window.java.ftl
     name: "@SRCROOT/@BASEPACKAGEPATH/client/gui/@NAMEScreen.java"
+  - template: gui/gui_msg_button.java.ftl
+    condition: hasButtonEvents()
+    name: "@SRCROOT/@BASEPACKAGEPATH/network/@NAMEButtonMessage.java"
+  - template: gui/gui_msg_slider.java.ftl
+    condition: hasSliderEvents()
+    name: "@SRCROOT/@BASEPACKAGEPATH/network/@NAMESliderMessage.java"
+  - template: gui/gui_msg_slot.java.ftl
+    condition: hasSlotEvents()
+    name: "@SRCROOT/@BASEPACKAGEPATH/network/@NAMESlotMessage.java"
 
 global_templates:
   - template: elementinits/menus.java.ftl

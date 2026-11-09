@@ -2,6 +2,23 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.25.26-beta
+
+### New Content
+
+- Forge `SimpleChannel` GUI button, slider and slot messages.
+- Server-side GUI button/slider procedures now execute from the received packet.
+- Slot change/take/quick-craft messages for GUI slot procedures.
+
+### Changes
+
+- Plugin version raised to `2026.3-1.0.25.26-beta`.
+
+### Known Limitations
+
+- GUI menu-state synchronization remains client-local.
+- Custom armor animation clips remain pending.
+
 ## 2026.3-1.0.24.25-beta
 
 ### New Content

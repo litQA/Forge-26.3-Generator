@@ -32,7 +32,24 @@ public class ${name}Menu extends AbstractContainerMenu implements ${JavaModName}
 		<#if component.getClass().getSimpleName()?ends_with("Slot")>
 		this.customSlots.put(${component.id}, this.addSlot(new SlotItemHandler(internal, ${component.id},
 			${component.gx(data.width) + 1},
-			${component.gy(data.height) + 1})));
+			${component.gy(data.height) + 1}) {
+			<#if data.hasSlotEvents()>
+			@Override public void setChanged() {
+				super.setChanged();
+				slotChanged(${component.id}, 0, 0);
+			}
+
+			@Override public void onTake(Player player, ItemStack stack) {
+				super.onTake(player, stack);
+				slotChanged(${component.id}, 1, stack.getCount());
+			}
+
+			@Override public void onQuickCraft(ItemStack a, ItemStack b) {
+				super.onQuickCraft(a, b);
+				slotChanged(${component.id}, 2, b.getCount() - a.getCount());
+			}
+			</#if>
+		}));
 		</#if>
 		</#list>
 
@@ -79,6 +96,15 @@ public class ${name}Menu extends AbstractContainerMenu implements ${JavaModName}
 	@Override public Map<Integer, Slot> getSlots() {
 		return customSlots;
 	}
+
+	<#if data.hasSlotEvents()>
+	private void slotChanged(int slotid, int ctype, int meta) {
+		if (world != null && world.isClientSide()) {
+			${JavaModName}Network.CHANNEL.send(new ${name}SlotMessage(slotid, x, y, z, ctype, meta), net.minecraftforge.network.PacketDistributor.SERVER.noArg());
+			${name}SlotMessage.handleSlotAction(entity, slotid, ctype, meta, x, y, z);
+		}
+	}
+	</#if>
 
 }
 <#-- @formatter:on -->
