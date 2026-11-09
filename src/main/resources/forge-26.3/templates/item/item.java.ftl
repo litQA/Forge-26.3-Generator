@@ -385,7 +385,7 @@ public class ${name}Item extends Item {
 
 	<#if data.hasInventory()>
 	@Override
-	public net.minecraftforge.common.capabilities.ICapabilityProvider initCapabilities(ItemStack stack, CompoundTag nbt) {
+	public net.minecraftforge.common.capabilities.ICapabilityProvider initCapabilities(ItemStack stack, net.minecraft.nbt.CompoundTag nbt) {
 		return new ${name}InventoryCapability();
 	}
 	</#if>

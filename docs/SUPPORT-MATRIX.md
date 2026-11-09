@@ -40,6 +40,7 @@ final feature matrix.
 | Custom biome overworld generation | Supported (experimental) | Runtime `BiomeSource` wrapper replaces the overworld source; this is not a Forge public API and is documented below |
 | Procedure templates | Supported (ported, 513 templates) | NeoForge 26.3 procedure snippets imported and Forge-specific API references fixed |
 | Item inventories | Experimental | Forge `ItemStackHandler` capability path; runtime GUI/item binding still needs a real-game regression |
+| Variables and player data | Experimental | Forge capability scaffolding generated; all variable types and sync still need regression |
 | Static validation | Supported | YAML, FreeMarker, template references, mappings |
 
 ## Not yet supported
@@ -53,7 +54,7 @@ final feature matrix.
 | Potions, effects, particles, attributes, gamerules | Pending | Phase 1C |
 | Remaining procedures (567 total) | Supported (ported templates) | 513 NeoForge 26.3 procedure templates imported; procedures using NeoForge inventory APIs still need individual regression |
 | Remaining triggers (64 of 65) | Pending | Phase 3 |
-| Variables and player data persistence | Pending | Phase 2; Forge capability port required |
+| Variables and player data persistence | Experimental | Forge capability scaffolding added; all variable/player-data flows still need regression |
 | Networking | Partial | Forge `SimpleChannel` menu/keybind messages work; variable sync is pending |
 | Mixin packaging | Not applicable | Current Forge biome path avoids Mixin; Forge 26.3 + Java 25 Mixin 0.8.7 is not a stable packaging target |
 
