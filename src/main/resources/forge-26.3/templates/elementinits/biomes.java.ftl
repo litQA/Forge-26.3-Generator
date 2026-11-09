@@ -7,10 +7,12 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.FeatureSorter;
 import net.minecraft.world.level.dimension.BuiltinDimensionTypes;
 import net.minecraft.world.level.dimension.LevelStem;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 
+import net.minecraftforge.common.util.ClearableLazy;
 import net.minecraftforge.event.server.ServerAboutToStartEvent;
 import net.minecraftforge.eventbus.api.listener.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -45,7 +47,10 @@ public final class ${JavaModName}Biomes {
 				continue;
 			ChunkGenerator generator = stem.generator();
 			generator.biomeSource = new ${JavaModName}OverworldBiomeSource(generator.getBiomeSource(), customBiomes);
-			generator.refreshFeaturesPerStep();
+			generator.featuresPerStep = ClearableLazy.concurrentOf(
+				() -> FeatureSorter.buildFeaturesPerStep(
+					List.copyOf(generator.getBiomeSource().possibleBiomes()),
+					biome -> generator.generationSettingsGetter.apply(biome).features(), true));
 		}
 	}
 }

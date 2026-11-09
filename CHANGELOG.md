@@ -2,6 +2,12 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.86.87-beta
+
+### Fixes
+
+- Rebuild `ChunkGenerator.featuresPerStep` from the wrapped BiomeSource. The vanilla lazy captures the original source, so `refreshFeaturesPerStep()` alone left custom biome features out of the index map and caused `IndexOutOfBoundsException` during biome decoration.
+
 ## 2026.3-1.0.85.86-beta
 
 ### Fixes
