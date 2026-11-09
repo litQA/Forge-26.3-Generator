@@ -40,6 +40,11 @@ final feature matrix.
 | Custom biome overworld generation | Supported (experimental) | Runtime `BiomeSource` wrapper replaces the overworld source; this is not a Forge public API and is documented below |
 | Procedure templates | Supported (ported, 513 templates) | NeoForge 26.3 procedure snippets imported and Forge-specific API references fixed |
 | Trigger templates | Supported (64 of 65) | 58 direct Forge events plus 6 compatibility/client-side triggers ported; only the sapling Mixin trigger remains in `docs/TRIGGERS.md` |
+| Loot tables | Supported | Datapack `loot_table` JSON; NeoForge-only loot modifier is not generated |
+| Recipes | Supported | Smelting, blasting, campfire, smoking, crafting, stonecutting, smithing and brewing JSON |
+| Advancements | Supported | Datapack advancement JSON plus localization keys |
+| Commands | Supported (basic) | Forge `RegisterCommandsEvent`; permission-level checks are omitted pending a Forge 26.3 permission API port |
+| Item extensions | Experimental | Fuel/compost/dispense templates are present; NeoForge context-provider APIs still require Forge-specific replacement |
 | Item inventories | Experimental | Forge `ItemStackHandler` capability path; runtime GUI/item binding still needs a real-game regression |
 | Variables and player data | Experimental | Forge capability scaffolding generated; all variable types and sync still need regression |
 | Static validation | Supported | YAML, FreeMarker, template references, mappings |
