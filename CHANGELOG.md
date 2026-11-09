@@ -2,6 +2,14 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.47.48-beta
+
+### Fixes
+
+Fixed 1 bug(s).
+
+- `copySignGuiTextures` now captures its source and target `File` instances at configuration time. This makes the task compatible with Gradle's configuration cache while still copying sign GUI textures after `processResources`.
+
 ## 2026.3-1.0.46.47-beta
 
 ### Fixes
