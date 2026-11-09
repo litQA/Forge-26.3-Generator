@@ -2,6 +2,14 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.65.66-beta
+
+### Fixes
+
+Fixed 1 bug(s).
+
+- Dimension teleporter POI registration now subscribes to the Forge mod bus. `RegisterEvent` is a mod-bus event; the previous game-bus listener never ran, leaving `poi` null when creating a portal.
+
 ## 2026.3-1.0.64.65-beta
 
 ### Fixes
