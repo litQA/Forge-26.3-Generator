@@ -2,6 +2,12 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.83.84-beta
+
+### Features
+
+- Added a Mixin accessor for `ChunkGenerator.biomeSource` and an overworld `BiomeSource` wrapper. This injects custom biomes without the private `Preset.SourceProvider` type or access transformers.
+
 ## 2026.3-1.0.82.83-beta
 
 ### Fixes

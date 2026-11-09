@@ -34,6 +34,28 @@ templates:
     name: "@SRCROOT/@BASEPACKAGEPATH/world/features/treedecorators/@NAMETrunkDecorator.java"
     condition: hasVines()
 
+global_templates:
+  - template: elementinits/biomes.java.ftl
+    writer: java
+    condition: "${biomes?filter(e -> e.spawnBiome)?size != 0}"
+    name: "@SRCROOT/@BASEPACKAGEPATH/init/@JavaModNameBiomes.java"
+  - template: biome/biome_source_access.java.ftl
+    writer: java
+    condition: "${biomes?filter(e -> e.spawnBiome)?size != 0}"
+    name: "@SRCROOT/@BASEPACKAGEPATH/biome/@JavaModNameBiomeSourceAccess.java"
+  - template: biome/biome_source_wrapper.java.ftl
+    writer: java
+    condition: "${biomes?filter(e -> e.spawnBiome)?size != 0}"
+    name: "@SRCROOT/@BASEPACKAGEPATH/biome/@JavaModNameOverworldBiomeSource.java"
+  - template: biome/mixin_chunkgenerator.java.ftl
+    writer: java
+    condition: "${biomes?filter(e -> e.spawnBiome)?size != 0}"
+    name: "@SRCROOT/@BASEPACKAGEPATH/mixin/@JavaModNameChunkGeneratorMixin.java"
+  - template: biome/mixin.json.ftl
+    writer: json
+    condition: "${biomes?filter(e -> e.spawnBiome)?size != 0}"
+    name: "@RESROOT/@modid.mixins.json"
+
 tags:
   - tag: BIOMES:minecraft:has_structure/mineshaft
     condition: spawnMineshaft

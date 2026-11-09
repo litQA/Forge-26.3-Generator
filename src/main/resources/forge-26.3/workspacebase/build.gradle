@@ -12,10 +12,14 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(25)
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
+def mixinConfigNames = file('src/main/resources').listFiles()?.findAll { it.isFile() && it.name.endsWith('.mixins.json') }?.collect { it.name } ?: []
+
 minecraft {
     runs {
         configureEach {
             workingDir = layout.projectDirectory.dir('run')
+            if (!mixinConfigNames.isEmpty())
+                jvmArgs "-Dmixin.config=${mixinConfigNames.join(',')}"
         }
 
         register('client')
@@ -338,3 +342,13 @@ tasks.register('copyTreePlacement') {
     }
 }
 tasks.named('processResources') { finalizedBy 'copyTreePlacement' }
+
+// Mixin configuration for ForgeGradle development runs.
+def generatedMixinConfigs = file('src/main/resources').listFiles()?.findAll { it.isFile() && it.name.endsWith('.mixins.json') }?.collect { it.name } ?: []
+if (!generatedMixinConfigs.isEmpty()) {
+    tasks.named('jar') {
+        manifest {
+            attributes['MixinConfigs'] = generatedMixinConfigs.join(',')
+        }
+    }
+}
