@@ -287,7 +287,6 @@ tasks.named('compileJava') { dependsOn 'patchNetworkJava' }
 // predicate, which never matches custom ground blocks. Remove that predicate
 // from generated tree placed-features so the tree feature can place.
 def treeSourceRoot = file('src/main/resources/data')
-def treeTargetRoot = layout.buildDirectory.dir('sourceSets/main/data').get().asFile
 
 tasks.register('patchTreePlacement') {
     doLast {
@@ -295,22 +294,18 @@ tasks.register('patchTreePlacement') {
             return
         treeSourceRoot.eachDir { File modData ->
             File sourceDir = new File(modData, 'worldgen/placed_feature')
-            File targetDir = new File(new File(treeTargetRoot, modData.name), 'worldgen/placed_feature')
             if (!sourceDir.exists())
                 return
             sourceDir.listFiles()?.findAll { it.isFile() && it.name.endsWith('_tree.json') }?.each { File source ->
                 def json = new groovy.json.JsonSlurper().parse(source)
-                if (json.placement instanceof List) {
-                    json.placement.removeAll { it instanceof Map && it.type == 'minecraft:block_predicate_filter' }
-                    File target = new File(targetDir, source.name)
-                    target.parentFile.mkdirs()
-                    target.setText(groovy.json.JsonOutput.prettyPrint(groovy.json.JsonOutput.toJson(json)), 'UTF-8')
+                if (json.placement instanceof List && json.placement.removeAll { it instanceof Map && it.type == 'minecraft:block_predicate_filter' }) {
+                    source.setText(groovy.json.JsonOutput.prettyPrint(groovy.json.JsonOutput.toJson(json)), 'UTF-8')
                 }
             }
         }
     }
 }
-tasks.named('processResources') { finalizedBy 'patchTreePlacement' }
+tasks.named('processResources') { dependsOn 'patchTreePlacement' }
 
 // Mixin configuration for ForgeGradle development runs.
 def generatedMixinConfigs = file('src/main/resources').listFiles()?.findAll { it.isFile() && it.name.endsWith('.mixins.json') }?.collect { it.name } ?: []
@@ -324,3 +319,34 @@ if (!generatedMixinConfigs.isEmpty()) {
         jvmArgs "-Dmixin.config=${generatedMixinConfigs.join(',')}"
     }
 }
+
+// Ensure custom tree placed-features are present in the merged resource output
+// and do not inherit the vanilla oak-sapling worldgen predicate.
+tasks.register('copyTreePlacement') {
+    doLast {
+        File sourceRoot = file('src/main/resources/data')
+        if (!sourceRoot.exists())
+            return
+        List<File> targets = [
+            new File(layout.buildDirectory.dir('sourceSets/main/data').get().asFile.path),
+            new File(layout.buildDirectory.dir('resources/main/data').get().asFile.path)
+        ]
+        sourceRoot.eachDir { File modData ->
+            File sourceDir = new File(modData, 'worldgen/placed_feature')
+            if (!sourceDir.exists())
+                return
+            sourceDir.listFiles()?.findAll { it.isFile() && it.name.endsWith('_tree.json') }?.each { File source ->
+                def json = new groovy.json.JsonSlurper().parse(source)
+                if (json.placement instanceof List)
+                    json.placement.removeAll { it instanceof Map && it.type == 'minecraft:block_predicate_filter' }
+                String content = groovy.json.JsonOutput.prettyPrint(groovy.json.JsonOutput.toJson(json))
+                targets.each { File base ->
+                    File target = new File(base, "${modData.name}/worldgen/placed_feature/${source.name}")
+                    target.parentFile.mkdirs()
+                    target.setText(content, 'UTF-8')
+                }
+            }
+        }
+    }
+}
+tasks.named('processResources') { finalizedBy 'copyTreePlacement' }

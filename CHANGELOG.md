@@ -2,6 +2,13 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.80.81-beta
+
+### Fixes
+
+- Custom tree placed-feature resources are now copied into both merged resource output directories after `processResources`, preventing `Unbound values ... test:test_biome_tree` registry failures.
+- The copy task also removes the vanilla oak-sapling survival predicate from custom tree placement.
+
 ## 2026.3-1.0.79.80-beta
 
 ### Fixes
