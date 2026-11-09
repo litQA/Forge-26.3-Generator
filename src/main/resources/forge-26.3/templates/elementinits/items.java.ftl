@@ -47,6 +47,10 @@ public class ${JavaModName}Items {
 			public static final RegistryObject<Item> ${item.getModElement().getRegistryNameUpper()}_BOOTS =
 				register("${item.getModElement().getRegistryName()}_boots", ${item.getModElement().getName()}Item.Boots::new);
 			</#if>
+		<#elseif item.getModElement().getTypeString() == "specialentity">
+			public static final RegistryObject<Item> ${item.getModElement().getRegistryNameUpper()} =
+				register("${item.getModElement().getRegistryName()}", properties -> new BoatItem(${JavaModName}Entities.${item.getModElement().getRegistryNameUpper()}.get(),
+					properties.stacksTo(1)<#if item.rarity != "COMMON">.rarity(Rarity.${item.rarity})</#if>));
 		<#elseif item.getModElement().getTypeString() == "livingentity">
 			<#if item.hasSpawnEgg>
 			public static final RegistryObject<Item> ${item.getModElement().getRegistryNameUpper()}_SPAWN_EGG =

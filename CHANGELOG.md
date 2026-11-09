@@ -2,6 +2,24 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.17.18-beta
+
+### New Content
+
+- Basic boat/raft special entity generation.
+- Special entity model layer registration and renderers.
+- `BoatItem` item registration for special entities.
+- Dispense behavior and entity/item tags for special entities.
+
+### Changes
+
+- Plugin version raised to `2026.3-1.0.17.18-beta`.
+
+### Known Limitations
+
+- Entity inventory capabilities remain unported.
+- Special entity model/layer behavior requires in-game validation.
+
 ## 2026.3-1.0.16.17-beta
 
 ### New Content

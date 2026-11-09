@@ -88,6 +88,9 @@ base_templates:
   - template: modbase/signrenderers.java.ftl
     name: "@SRCROOT/@BASEPACKAGEPATH/client/@JavaModNameSignRenderers.java"
     condition: "${types.blocks?filter(e -> e.isSign())?size != 0}"
+  - template: elementinits/javamodels.java.ftl
+    name: "@SRCROOT/@BASEPACKAGEPATH/init/@JavaModNameModels.java"
+    condition: "${javamodels?has_content || types.specialentities?has_content}"
 
 tags:
   template: tags.json.ftl

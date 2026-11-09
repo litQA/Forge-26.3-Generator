@@ -7,7 +7,7 @@ final feature matrix.
 
 | Area | Status | Notes |
 | --- | --- | --- |
-| Generator plugin metadata | Supported | `plugin.json` version `2026.3-1.0.16.17-beta` |
+| Generator plugin metadata | Supported | `plugin.json` version `2026.3-1.0.17.18-beta` |
 | Forge workspace base | Supported | ForgeGradle 7, Gradle 9.8.0, Java 25 |
 | `mods.toml` | Supported | Forge `loaderVersion="[66,)"`, Forge/Minecraft dependencies |
 | Basic block | Supported | Basic cube geometry, registration and special information tooltips |
@@ -23,6 +23,7 @@ final feature matrix.
 | Living entities | Supported | Basic entity type, attributes, spawn placement, renderer and spawn egg |
 | Living entity biome spawning | Supported | Forge `forge:add_spawns` biome modifiers |
 | Projectiles | Supported | Basic arrow-style projectiles, custom renderer and shoot helpers |
+| Special entities | Supported | Basic boat/raft entities with model layers, renderers and items |
 | Block entity | Supported | Inventory, energy storage and single-tank fluid storage |
 | Block entity inventory | Supported | Forge `IItemHandler` backed by `InvWrapper` |
 | Block entity energy | Supported | Forge `EnergyStorage` / `IEnergyStorage` |
@@ -38,7 +39,6 @@ final feature matrix.
 | --- | --- | --- |
 | Item inventories | Pending | Phase 2 |
 | Custom armor animations and translucent layers | Pending | Phase 1B |
-| Projectiles and special entities | Partially supported | Basic projectiles; special boat/raft entities pending |
 | GUIs, menus, screens, keybinds, overlays | Pending | Phase 1B |
 | Biomes, dimensions, features, structures | Pending | Phase 1C |
 | Potions, effects, particles, attributes, gamerules | Pending | Phase 1C |
