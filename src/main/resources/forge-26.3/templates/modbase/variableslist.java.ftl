@@ -14,13 +14,14 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.storage.TagValueInput;
 import net.minecraft.world.level.storage.TagValueOutput;
+import net.minecraft.world.level.storage.ValueInput;
 
+import net.minecraftforge.common.capabilities.AutoRegisterCapability;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.CapabilityToken;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
-import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
@@ -48,16 +49,8 @@ public final class ${JavaModName}Variables {
 	</#list>
 	</#if>
 
-	@Mod.EventBusSubscriber(modid = "${modid}", bus = Mod.EventBusSubscriber.Bus.MOD)
-	public static final class CapabilityRegistration {
-		@SubscribeEvent
-		public static void register(RegisterCapabilitiesEvent event) {
-			event.register(PlayerVariables.class);
-		}
-	}
-
 	@SubscribeEvent
-	public static void attach(AttachCapabilitiesEvent<Entity> event) {
+	public static void attach(AttachCapabilitiesEvent.Entities event) {
 		if (event.getObject() instanceof Player)
 			event.addCapability(Identifier.fromNamespaceAndPath("${modid}", "player_variables"), new PlayerVariablesProvider());
 	}
@@ -165,6 +158,7 @@ public final class ${JavaModName}Variables {
 	</#if>
 
 	<#if w.hasVariablesOfScope("PLAYER_LIFETIME") || w.hasVariablesOfScope("PLAYER_PERSISTENT")>
+	@AutoRegisterCapability
 	public static class PlayerVariables implements INBTSerializable<CompoundTag> {
 		<#list variables as var>
 			<#if var.getScope().name() == "PLAYER_LIFETIME">
@@ -189,7 +183,7 @@ public final class ${JavaModName}Variables {
 
 		@Override
 		public void deserializeNBT(HolderLookup.Provider provider, CompoundTag nbt) {
-			TagValueInput input = TagValueInput.create(ProblemReporter.DISCARDING, provider, nbt);
+			ValueInput input = TagValueInput.create(ProblemReporter.DISCARDING, provider, nbt);
 			<#list variables as var>
 				<#if var.getScope().name() == "PLAYER_LIFETIME">
 				<@var.getType().getScopeDefinition(generator.getWorkspace(), "PLAYER_LIFETIME")['read']?interpret/>
