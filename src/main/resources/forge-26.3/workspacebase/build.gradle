@@ -13,6 +13,8 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(25)
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 minecraft {
+    useDefaultAccessTransformer()
+
     runs {
         configureEach {
             workingDir = layout.projectDirectory.dir('run')

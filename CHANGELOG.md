@@ -2,6 +2,14 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.66.67-beta
+
+### Fixes
+
+- Restored biome source injection mixins with Forge access transformers, enabling custom biomes to participate in overworld/nether noise presets.
+- Added the generated `META-INF/accesstransformer.cfg` and enabled `useDefaultAccessTransformer()` in the workspace build.
+- Fixed tree decorator and dimension POI listeners to use the mod bus.
+
 ## 2026.3-1.0.65.66-beta
 
 ### Fixes
