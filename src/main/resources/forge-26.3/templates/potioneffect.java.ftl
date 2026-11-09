@@ -34,7 +34,7 @@
 package ${package}.potion;
 
 <@javacompress>
-<#if data.hasCustomRenderer() || data.isCuredbyHoney>
+<#if data.hasCustomRenderer()>
 @Mod.EventBusSubscriber(modid = "${modid}", bus = Mod.EventBusSubscriber.Bus.FORGE)
 </#if>
 public class ${name}MobEffect extends <#if data.isInstant>Instantaneous</#if>MobEffect {
@@ -153,15 +153,6 @@ public class ${name}MobEffect extends <#if data.isInstant>Instantaneous</#if>Mob
 	}
 	</#if>
 
-	<#if data.isCuredbyHoney>
-	@SubscribeEvent public static void modifyItemComponents(ModifyDefaultComponentsEvent event) {
-		Consumable original = Consumables.HONEY_BOTTLE;
-		List<ConsumeEffect> onConsumeEffects = new ArrayList<>(original.onConsumeEffects());
-		onConsumeEffects.add(new RemoveStatusEffectsConsumeEffect(${JavaModName}MobEffects.${REGISTRYNAME}));
-		Consumable replacementConsumable = new Consumable(original.consumeSeconds(), original.animation(), original.sound(), original.hasConsumeParticles(), onConsumeEffects);
-		event.modify(Items.HONEY_BOTTLE, (builder, _, _) -> builder.set(DataComponents.CONSUMABLE, replacementConsumable));
-	}
-	</#if>
 
 }
 </@javacompress>

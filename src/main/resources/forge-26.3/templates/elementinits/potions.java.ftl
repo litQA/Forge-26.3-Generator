@@ -44,7 +44,7 @@ public class ${JavaModName}Potions {
 		public static final RegistryObject<Potion> ${potion.getModElement().getRegistryNameUpper()} = REGISTRY.register("${potion.getModElement().getRegistryName()}",
 			() -> new Potion("${potion.getModElement().getRegistryName()}"
 				<#list potion.effects as effect>,
-				new MobEffectInstance(${effect.effect}, ${effect.getDuration()}, ${effect.amplifier}, ${effect.ambient}, ${effect.showParticles})
+				new MobEffectInstance(${effect.effect}.getHolder().orElseThrow(), ${effect.getDuration()}, ${effect.amplifier}, ${effect.ambient}, ${effect.showParticles})
 				</#list>
 			)
 		);

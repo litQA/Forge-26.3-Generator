@@ -2,6 +2,16 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.60.61-beta
+
+### Fixes
+
+- Removed generated biome mixin classes that depended on private `SourceProvider` access.
+- Removed the unsupported NeoForge honey-bottle component hook from mob effects.
+- Fixed Forge attribute registration and holder conversion.
+- Fixed potion `MobEffectInstance` holder conversion.
+- Removed the invalid custom-armor `setupAnim` anonymous subclass; animation delegation will be reintroduced separately.
+
 ## 2026.3-1.0.59.60-beta
 
 ### Fixes

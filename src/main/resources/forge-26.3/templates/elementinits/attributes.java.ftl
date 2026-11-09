@@ -36,10 +36,10 @@
 
 package ${package}.init;
 
-@Mod.EventBusSubscriber(modid = "${modid}")
+@Mod.EventBusSubscriber(modid = "${modid}", bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ${JavaModName}Attributes {
 
-	public static final DeferredRegister<Attribute> REGISTRY = DeferredRegister.create(BuiltInRegistries.ATTRIBUTE, ${JavaModName}.MODID);
+	public static final DeferredRegister<Attribute> REGISTRY = DeferredRegister.create(Registries.ATTRIBUTE, ${JavaModName}.MODID);
 
 	<#list attributes as attribute>
 	public static final RegistryObject<Attribute> ${attribute.getModElement().getRegistryNameUpper()} = REGISTRY.register("${attribute.getModElement().getRegistryName()}",
@@ -50,7 +50,7 @@ public class ${JavaModName}Attributes {
 	@SubscribeEvent public static void addAttributes(EntityAttributeModificationEvent event) {
 		<#list attributes as attribute>
 			<#if attribute.addToAllEntities>
-				event.getTypes().forEach(entity -> event.add(entity, ${attribute.getModElement().getRegistryNameUpper()}));
+				event.getTypes().forEach(entity -> event.add(entity, ${attribute.getModElement().getRegistryNameUpper()}.getHolder().orElseThrow()));
 			<#else>
 				<#if attribute.entities?has_content>
 					List.of(
@@ -60,10 +60,10 @@ public class ${JavaModName}Attributes {
 					).stream()
 					.filter(DefaultAttributes::hasSupplier)
 					.map(entityType -> (EntityType<? extends LivingEntity>) entityType)
-					.collect(Collectors.toList()).forEach(entity -> event.add(entity, ${attribute.getModElement().getRegistryNameUpper()}));
+					.collect(Collectors.toList()).forEach(entity -> event.add(entity, ${attribute.getModElement().getRegistryNameUpper()}.getHolder().orElseThrow()));
 				</#if>
 				<#if attribute.addToPlayers>
-					event.add(EntityTypes.PLAYER, ${attribute.getModElement().getRegistryNameUpper()});
+					event.add(EntityTypes.PLAYER, ${attribute.getModElement().getRegistryNameUpper()}.getHolder().orElseThrow());
 				</#if>
 			</#if>
 		</#list>

@@ -95,13 +95,7 @@ public abstract class ${name}Item extends Item {
 							"left_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
 							"right_leg", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
 							"left_leg", new ModelPart(Collections.emptyList(), Collections.emptyMap())
-						))
-						{
-							@Override public void setupAnim(LivingEntityRenderState state) {
-								super.setupAnim(state);
-								custom.setupAnim(state);
-							}
-						}<#if data.helmetTranslucency>, RenderTypes::entityTranslucent</#if>);
+						))<#if data.helmetTranslucency>, RenderTypes::entityTranslucent</#if>);
 					}
 					return helmetModel;
 				}
@@ -119,13 +113,7 @@ public abstract class ${name}Item extends Item {
 							)),
 							"right_leg", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
 							"left_leg", new ModelPart(Collections.emptyList(), Collections.emptyMap())
-						))
-						{
-							@Override public void setupAnim(LivingEntityRenderState state) {
-								super.setupAnim(state);
-								custom.setupAnim(state);
-							}
-						}<#if data.bodyTranslucency>, RenderTypes::entityTranslucent</#if>);
+						))<#if data.bodyTranslucency>, RenderTypes::entityTranslucent</#if>);
 					}
 					return bodyModel;
 				}
@@ -143,13 +131,7 @@ public abstract class ${name}Item extends Item {
 							"body", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
 							"right_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
 							"left_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap())
-						))
-						{
-							@Override public void setupAnim(LivingEntityRenderState state) {
-								super.setupAnim(state);
-								custom.setupAnim(state);
-							}
-						}<#if data.leggingsTranslucency>, RenderTypes::entityTranslucent</#if>);
+						))<#if data.leggingsTranslucency>, RenderTypes::entityTranslucent</#if>);
 					}
 					return leggingsModel;
 				}
@@ -167,13 +149,7 @@ public abstract class ${name}Item extends Item {
 							"body", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
 							"right_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
 							"left_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap())
-						))
-						{
-							@Override public void setupAnim(LivingEntityRenderState state) {
-								super.setupAnim(state);
-								custom.setupAnim(state);
-							}
-						}<#if data.bootsTranslucency>, RenderTypes::entityTranslucent</#if>);
+						))<#if data.bootsTranslucency>, RenderTypes::entityTranslucent</#if>);
 					}
 					return bootsModel;
 				}
