@@ -2,6 +2,24 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.23.24-beta
+
+### New Content
+
+- Forge `ItemStackHandler`-backed GUI slots.
+- `SlotItemHandler` custom slot registration and basic quick-move handling.
+- Player inventory slots for container-bound GUIs.
+
+### Changes
+
+- GUI menus use a Forge `IItemHandler` instead of NeoForge resource handlers.
+- Plugin version raised to `2026.3-1.0.23.24-beta`.
+
+### Known Limitations
+
+- GUI slot change/take/placement procedures and server button/slider procedure networking remain pending.
+- Custom armor animations/translucent layers remain pending.
+
 ## 2026.3-1.0.22.23-beta
 
 ### New Content
