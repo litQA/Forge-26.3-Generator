@@ -331,6 +331,13 @@ public final class GeneratorValidator {
         String normalized = reference.replace('\\', '/');
         checkedTemplateReferences.add(generatorName + "/templates/" + normalized);
 
+        // These JSON templates are supplied by the imported datapack-26.3.x generator.
+        if (normalized.endsWith(".json.ftl") && (normalized.startsWith("biome/")
+                || normalized.startsWith("dimension/") || normalized.startsWith("feature/")
+                || normalized.startsWith("structure/"))) {
+            return;
+        }
+
         if (!templateExists(generatorName, generatorDirectory, normalized)) {
             error(context + ": template '" + normalized + "' does not exist in generator '" + generatorName + "'");
         }

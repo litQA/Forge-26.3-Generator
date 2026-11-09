@@ -2,6 +2,18 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.58.59-beta
+
+### New Content
+
+- Added Phase 1C element definitions and templates for biomes, dimensions, features, structures, potions, mob effects, particles, attributes and gamerules.
+- Added custom Java armor-model animation delegation in `HumanoidModel#setupAnim`.
+
+### Changes
+
+- Copied the datapack-backed biome/dimension/feature/structure JSON definitions and the Forge-side Java templates.
+- Removed copied `DeferredHolder`/`@EventBusSubscriber` usage in favor of Forge `RegistryObject` and `@Mod.EventBusSubscriber`.
+
 ## 2026.3-1.0.57.58-beta
 
 ### Fixes

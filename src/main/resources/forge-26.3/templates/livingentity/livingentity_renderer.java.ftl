@@ -281,7 +281,7 @@ public class ${name}Renderer extends <#if humanoid>Humanoid</#if>MobRenderer<${n
 	<#if needsEntityInState>
 	public static final ContextKey<${name}Entity> ENTITY_KEY = new ContextKey<>(Identifier.parse("${modid}:${registryname}_entity"));
 
-	@EventBusSubscriber(Dist.CLIENT) public static class EntityStateAdder {
+	@Mod.EventBusSubscriber(modid = "${modid}", bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT) public static class EntityStateAdder {
 
 		@SubscribeEvent private static void registerRenderStateModifiersEvent(RegisterRenderStateModifiersEvent event) {
 			event.registerEntityModifier(${name}Renderer.class, (entity, state) -> state.setRenderData(ENTITY_KEY, entity));

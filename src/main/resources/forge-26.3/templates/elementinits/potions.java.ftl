@@ -41,7 +41,7 @@ public class ${JavaModName}Potions {
 	public static final DeferredRegister<Potion> REGISTRY = DeferredRegister.create(Registries.POTION, ${JavaModName}.MODID);
 
 	<#list potions as potion>
-		public static final DeferredHolder<Potion, Potion> ${potion.getModElement().getRegistryNameUpper()} = REGISTRY.register("${potion.getModElement().getRegistryName()}",
+		public static final RegistryObject<Potion, Potion> ${potion.getModElement().getRegistryNameUpper()} = REGISTRY.register("${potion.getModElement().getRegistryName()}",
 			() -> new Potion("${potion.getModElement().getRegistryName()}"
 				<#list potion.effects as effect>,
 				new MobEffectInstance(${effect.effect}, ${effect.getDuration()}, ${effect.amplifier}, ${effect.ambient}, ${effect.showParticles})

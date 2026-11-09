@@ -42,7 +42,7 @@ public class ${JavaModName}Attributes {
 	public static final DeferredRegister<Attribute> REGISTRY = DeferredRegister.create(BuiltInRegistries.ATTRIBUTE, ${JavaModName}.MODID);
 
 	<#list attributes as attribute>
-	public static final DeferredHolder<Attribute, Attribute> ${attribute.getModElement().getRegistryNameUpper()} = REGISTRY.register("${attribute.getModElement().getRegistryName()}",
+	public static final RegistryObject<Attribute, Attribute> ${attribute.getModElement().getRegistryNameUpper()} = REGISTRY.register("${attribute.getModElement().getRegistryName()}",
 		() -> new RangedAttribute("attribute.${modid}.${attribute.getModElement().getRegistryName()}", ${attribute.defaultValue}d, ${attribute.minValue}d, ${attribute.maxValue}d).setSyncable(true)
 		<#if attribute.sentiment != "POSITIVE">.setSentiment(Attribute.Sentiment.${attribute.sentiment})</#if>);
 	</#list>

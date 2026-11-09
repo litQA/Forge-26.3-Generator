@@ -43,7 +43,7 @@ package ${package}.init;
 	public static final DeferredRegister<MobEffect> REGISTRY = DeferredRegister.create(Registries.MOB_EFFECT, ${JavaModName}.MODID);
 
 	<#list potioneffects as effect>
-	public static final DeferredHolder<MobEffect, MobEffect> ${effect.getModElement().getRegistryNameUpper()} =
+	public static final RegistryObject<MobEffect, MobEffect> ${effect.getModElement().getRegistryNameUpper()} =
 			REGISTRY.register("${effect.getModElement().getRegistryName()}", ${effect.getModElement().getName()}MobEffect::new);
 	</#list>
 

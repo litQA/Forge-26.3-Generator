@@ -45,7 +45,7 @@ package ${package}.init;
 	public static final DeferredRegister<VillagerProfession> PROFESSIONS = DeferredRegister.create(Registries.VILLAGER_PROFESSION, ${JavaModName}.MODID);
 
 	<#list villagerprofessions as villagerprofession>
-		public static final DeferredHolder<VillagerProfession, VillagerProfession> ${villagerprofession.getModElement().getRegistryNameUpper()} =
+		public static final RegistryObject<VillagerProfession, VillagerProfession> ${villagerprofession.getModElement().getRegistryNameUpper()} =
 			registerProfession(
 				"${villagerprofession.getModElement().getRegistryName()}",
 				() -> ${mappedBlockToBlock(villagerprofession.pointOfInterest)},
@@ -53,7 +53,7 @@ package ${package}.init;
 			);
 	</#list>
 
-	private static DeferredHolder<VillagerProfession, VillagerProfession> registerProfession(String name, Supplier<Block> block, Supplier<SoundEvent> soundEvent) {
+	private static RegistryObject<VillagerProfession, VillagerProfession> registerProfession(String name, Supplier<Block> block, Supplier<SoundEvent> soundEvent) {
 		POI_TYPES.put(name, new ProfessionPoiType(block, null));
 
 		return PROFESSIONS.register(name, () -> {
