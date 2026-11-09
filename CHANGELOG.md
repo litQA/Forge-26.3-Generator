@@ -2,6 +2,15 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.45.46-beta
+
+### Fixes
+
+Fixed 2 bug(s).
+
+- Block-entity GUIs now bind their slots to the block entity's Forge `IItemHandler` capability instead of creating a new `ItemStackHandler`, so stored items survive closing and reopening the GUI.
+- Sign editor textures are copied into `assets/minecraft/textures/gui/signs` and `assets/minecraft/textures/gui/hanging_signs`, matching `SignEditScreen` and `HangingSignEditScreen` hard-coded namespace paths.
+
 ## 2026.3-1.0.44.45-beta
 
 ### Fixes

@@ -71,6 +71,15 @@ tasks.named('processResources', ProcessResources) {
                 copyTree(legacyArmor, humanoid)
                 copyTree(humanoid, leggings)
 
+
+                // SignEditScreen resolves GUI sign textures from the minecraft namespace.
+                // Copy mod-owned sign editors into assets/minecraft so they are visible.
+                ['textures/gui/signs', 'textures/gui/hanging_signs'].each { String signPath ->
+                    File signSource = new File(modDir, signPath)
+                    File signTarget = new File(resourcesAssetsDir, "minecraft/${signPath}")
+                    copyTree(signSource, signTarget)
+                }
+
                 // Dynamic fluid container models resolve their still texture from the item atlas.
                 modDir.listFiles()?.findAll { it.isFile() && it.name.startsWith('fluid_') && it.name.endsWith('_item_texture.txt') }?.each { File marker ->
                     marker.eachLine { String line ->

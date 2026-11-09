@@ -18,14 +18,21 @@ public class ${name}Menu extends AbstractContainerMenu implements ${JavaModName}
 
 		this.entity = inventory.player;
 		this.world = inventory.player.level();
-		this.internal = new ItemStackHandler(Math.max(0, ${data.getMaxSlotID() + 1}));
+		IItemHandler internalHandler = new ItemStackHandler(Math.max(0, ${data.getMaxSlotID() + 1}));
 
 		if (extraData != null) {
 			BlockPos pos = extraData.readBlockPos();
 			this.x = pos.getX();
 			this.y = pos.getY();
 			this.z = pos.getZ();
+			var blockEntity = this.world.getBlockEntity(pos);
+			if (blockEntity != null) {
+				var handler = blockEntity.getCapability(net.minecraftforge.common.capabilities.ForgeCapabilities.ITEM_HANDLER, null);
+				if (handler.isPresent() && handler.orElse(null).getSlots() > ${data.getMaxSlotID()})
+					internalHandler = handler.orElse(null);
+			}
 		}
+		this.internal = internalHandler;
 
 		<#if data.type == 1>
 		<#list data.components as component>
