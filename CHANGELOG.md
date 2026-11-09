@@ -2,6 +2,12 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.75.76-beta
+
+### Fixes
+
+- The network channel is now generated unconditionally and its GUI/keybind loops use the base `guis`/`keybinds` collections with safe defaults. This guarantees `TestModNetwork.java` is recreated after a clean regeneration.
+
 ## 2026.3-1.0.74.75-beta
 
 ### Fixes

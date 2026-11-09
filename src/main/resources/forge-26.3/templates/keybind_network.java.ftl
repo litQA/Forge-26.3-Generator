@@ -9,7 +9,7 @@ public final class ${JavaModName}Network {
 		.simpleChannel()
 			.play()
 				.bidirectional()
-					<#list types.guis as gui>
+					<#list guis![] as gui>
 					<#if gui.hasButtonEvents()>
 					.addMain(${gui.getModElement().getName()}ButtonMessage.class, ${gui.getModElement().getName()}ButtonMessage.STREAM_CODEC, ${gui.getModElement().getName()}ButtonMessage::handle)
 					</#if>
@@ -23,7 +23,7 @@ public final class ${JavaModName}Network {
 					<#if guis?has_content>
 					.addMain(MenuStateUpdateMessage.class, MenuStateUpdateMessage.STREAM_CODEC, MenuStateUpdateMessage::handle)
 					</#if>
-					<#list keybinds as keybind>
+					<#list keybinds![] as keybind>
 					<#if hasProcedure(keybind.onKeyPressed) || hasProcedure(keybind.onKeyReleased)>
 					.addMain(${keybind.getModElement().getName()}Message.class, ${keybind.getModElement().getName()}Message.STREAM_CODEC, ${keybind.getModElement().getName()}Message::handle)
 					</#if>
