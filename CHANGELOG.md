@@ -2,6 +2,12 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.88.89-beta
+
+### Fixes
+
+- Corrected the access-transformer method descriptor syntax for `BiomeSource.codec()`.
+
 ## 2026.3-1.0.87.88-beta
 
 ### Fixes
