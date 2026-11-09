@@ -10,10 +10,14 @@
   <#else>
   "biomes": "#minecraft:is_overworld",
   </#if>
-  "spawners": {
-    "type": "${modid}:${registryname}",
-    "weight": ${data.spawningProbability},
-    "minCount": ${data.minNumberOfMobsPerGroup},
-    "maxCount": ${data.maxNumberOfMobsPerGroup}
-  }
+  "spawners": [
+    {
+      "data": {
+        "type": "${modid}:${registryname}",
+        "minCount": ${data.minNumberOfMobsPerGroup},
+        "maxCount": ${data.maxNumberOfMobsPerGroup}
+      },
+      "weight": ${data.spawningProbability}
+    }
+  ]
 }

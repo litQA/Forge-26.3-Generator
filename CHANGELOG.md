@@ -2,6 +2,14 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.42.43-beta
+
+### Fixes
+
+Fixed 1 bug(s).
+
+- Entity spawn biome modifiers now emit the Forge 26.3 weighted-list JSON shape: a `spawners` array containing `data` and `weight` objects. This prevents registry loading failures and corrupted data-pack errors when creating or opening a world.
+
 ## 2026.3-1.0.41.42-beta
 
 ### Fixes
