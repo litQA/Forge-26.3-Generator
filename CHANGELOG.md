@@ -2,6 +2,14 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.30.31-beta
+
+### Fixes
+
+Fixed 1 bug(s).
+
+- Overlay classes now register a client setup hook so their static layer registration is guaranteed to execute.
+
 ## 2026.3-1.0.29.30-beta
 
 ### New Content

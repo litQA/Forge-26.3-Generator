@@ -33,10 +33,14 @@
 
 package ${package}.client.screens;
 
-@Mod.EventBusSubscriber(modid = "${modid}", value = Dist.CLIENT) public class ${name}Overlay {
+@Mod.EventBusSubscriber(modid = "${modid}", bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT) public class ${name}Overlay {
 	<#if data.baseTexture?has_content>
 		private static final Identifier BACKGROUND = Identifier.parse("${modid}:textures/screens/${data.baseTexture}");
 	</#if>
+
+	@SubscribeEvent public static void onClientSetup(FMLClientSetupEvent event) {
+		<#-- Static initialization registers the overlay layers; this hook only guarantees the class is loaded. -->
+	}
 
 	<#list data.getComponentsOfType("Image") as component>
 		private static final Identifier IMAGE_${component?index} = Identifier.parse("${modid}:textures/screens/${component.image}");
