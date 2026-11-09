@@ -2,6 +2,12 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.67.68-beta
+
+### Fixes
+
+- Added `mixin.fragment.yaml`, `mixin.json.ftl` and the `[[mixins]]` mods.toml entry, so the restored biome source/preset mixins are actually loaded at runtime.
+
 ## 2026.3-1.0.66.67-beta
 
 ### Fixes
