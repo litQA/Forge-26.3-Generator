@@ -435,28 +435,23 @@ public class ${name}Entity extends ${extendsClass} <#if interfaces?size gt 0>imp
 	</#if>
 
 	<#if data.guiBoundTo?has_content>
-	private final ItemStacksResourceHandler inventory = new ItemStacksResourceHandler(${data.inventorySize})
+	private final ItemStackHandler inventory = new ItemStackHandler(${data.inventorySize})
 	<#if data.inventoryStackSize != 99>
 	{
-		@Override protected int getCapacity(int index, ItemResource resource) {
-			return Math.min(${data.inventoryStackSize}, super.getCapacity(index, resource));
+		@Override public int getStackLimit(int slot, ItemStack stack) {
+			return Math.min(${data.inventoryStackSize}, super.getStackLimit(slot, stack));
 		}
 	}
 	</#if>;
 
-	private final CombinedResourceHandler combined = new CombinedResourceHandler(inventory,
-		LivingEntityEquipmentWrapper.of(this, EquipmentSlot.Type.HAND),
-		LivingEntityEquipmentWrapper.of(this, EquipmentSlot.Type.HUMANOID_ARMOR)
-	);
-
-	public CombinedResourceHandler getCombinedInventory() {
-		return combined;
+	public IItemHandler getCombinedInventory() {
+		return inventory;
 	}
 
 	@Override protected void dropEquipment(ServerLevel serverLevel) {
 		super.dropEquipment(serverLevel);
-		for (int i = 0; i < inventory.size(); i++) {
-			ItemStack itemstack = ItemUtil.getStack(inventory, i);
+		for (int i = 0; i < inventory.getSlots(); i++) {
+			ItemStack itemstack = inventory.getStackInSlot(i);
 			if (!itemstack.isEmpty() && !EnchantmentHelper.has(itemstack, EnchantmentEffectComponents.PREVENT_EQUIPMENT_DROP)) {
 				this.spawnAtLocation(serverLevel, itemstack);
 			}

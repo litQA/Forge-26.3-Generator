@@ -2,6 +2,19 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.27.28-beta
+
+### Changes
+
+- Living entity GUI inventories now use Forge `ItemStackHandler` and `IItemHandler`.
+- Entity equipment wrappers no longer depend on NeoForge combined resource handlers.
+- Plugin version raised to `2026.3-1.0.27.28-beta`.
+
+### Known Limitations
+
+- Living entity inventories are exposed through the generated handler but entity capability registration remains limited.
+- Custom armor animations and final dynamic bucket/sound confirmation remain pending.
+
 ## 2026.3-1.0.26.27-beta
 
 ### Fixes
