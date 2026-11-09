@@ -43,7 +43,8 @@ import java.util.Map;
 </#if>
 public abstract class ${name}Item extends Item {
 
-	public static ArmorMaterial ARMOR_MATERIAL = new ArmorMaterial(
+	public static ArmorMaterial createArmorMaterial(String assetPath) {
+		return new ArmorMaterial(
 		${data.maxDamage},
 		Map.of(
 			ArmorType.BOOTS, ${data.damageValueBoots},
@@ -60,9 +61,15 @@ public abstract class ${name}Item extends Item {
 		</#if>
 		${data.toughness}f,
 		${data.knockbackResistance}f,
-		TagKey.create(Registries.ITEM, Identifier.parse("${modid}:${registryname}_repair_items")), <#-- data.repairItems are put into a tag -->
-		ResourceKey.create(EquipmentAssets.ROOT_ID, Identifier.parse("${modid}:${registryname}")) <#-- data.armorTextureFile - just dummy, we override this in client extensions -->
-	);
+		TagKey.create(Registries.ITEM, Identifier.parse("${modid}:${registryname}_repair_items")),
+		ResourceKey.create(EquipmentAssets.ROOT_ID, Identifier.parse(assetPath))
+		);
+	}
+
+	public static final ArmorMaterial HELMET_MATERIAL = createArmorMaterial("${modid}:${registryname}_helmet");
+	public static final ArmorMaterial CHESTPLATE_MATERIAL = createArmorMaterial("${modid}:${registryname}_chestplate");
+	public static final ArmorMaterial LEGGINGS_MATERIAL = createArmorMaterial("${modid}:${registryname}_leggings");
+	public static final ArmorMaterial BOOTS_MATERIAL = createArmorMaterial("${modid}:${registryname}_boots");
 
 	private ${name}Item(Item.Properties properties) {
 		super(properties);
@@ -173,7 +180,7 @@ public abstract class ${name}Item extends Item {
 	public static class Helmet extends ${name}Item {
 
 		public Helmet(Item.Properties properties) {
-			super(<@itemProperties "HELMET" data.helmetImmuneToFire/>
+			super(<@itemProperties "HELMET" data.helmetImmuneToFire HELMET_MATERIAL/>
 					<@itemAttributeModifiers data.attributeModifiers?filter(e -> e.armorPieces[0]) "helmet" "EquipmentSlotGroup.HEAD" data.damageValueHelmet/>);
 		}
 
@@ -191,7 +198,7 @@ public abstract class ${name}Item extends Item {
 	public static class Chestplate extends ${name}Item {
 
 		public Chestplate(Item.Properties properties) {
-			super(<@itemProperties "CHESTPLATE" data.bodyImmuneToFire/>
+			super(<@itemProperties "CHESTPLATE" data.bodyImmuneToFire CHESTPLATE_MATERIAL/>
 					<@itemAttributeModifiers data.attributeModifiers?filter(e -> e.armorPieces[1]) "chestplate" "EquipmentSlotGroup.CHEST" data.damageValueBody/>);
 		}
 
@@ -209,7 +216,7 @@ public abstract class ${name}Item extends Item {
 	public static class Leggings extends ${name}Item {
 
 		public Leggings(Item.Properties properties) {
-			super(<@itemProperties "LEGGINGS" data.leggingsImmuneToFire/>
+			super(<@itemProperties "LEGGINGS" data.leggingsImmuneToFire LEGGINGS_MATERIAL/>
 					<@itemAttributeModifiers data.attributeModifiers?filter(e -> e.armorPieces[2]) "leggings" "EquipmentSlotGroup.LEGS" data.damageValueLeggings/>);
 		}
 
@@ -227,7 +234,7 @@ public abstract class ${name}Item extends Item {
 	public static class Boots extends ${name}Item {
 
 		public Boots(Item.Properties properties) {
-			super(<@itemProperties "BOOTS" data.bootsImmuneToFire/>
+			super(<@itemProperties "BOOTS" data.bootsImmuneToFire BOOTS_MATERIAL/>
 					<@itemAttributeModifiers data.attributeModifiers?filter(e -> e.armorPieces[3]) "boots" "EquipmentSlotGroup.FEET" data.damageValueBoots/>);
 		}
 
@@ -245,8 +252,8 @@ public abstract class ${name}Item extends Item {
 </@javacompress>
 <#-- @formatter:on -->
 
-<#macro itemProperties armorPart immuneToFire>
-properties.humanoidArmor(ARMOR_MATERIAL, ArmorType.${armorPart})
+<#macro itemProperties armorPart immuneToFire material>
+properties.humanoidArmor(${material}, ArmorType.${armorPart})
 <#if immuneToFire>
 .fireResistant()
 </#if>

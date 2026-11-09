@@ -2,6 +2,14 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.51.52-beta
+
+### Fixes
+
+Fixed 1 bug(s).
+
+- Custom armor model textures now flow through per-piece Forge equipment assets. Each armor piece has its own `ArmorMaterial`/equipment asset, custom model textures are copied into `textures/entity/equipment/humanoid`, and custom model textures are used instead of the fallback "From armor" texture.
+
 ## 2026.3-1.0.50.51-beta
 
 ### New Content

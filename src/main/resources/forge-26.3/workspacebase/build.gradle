@@ -69,7 +69,9 @@ tasks.named('processResources', ProcessResources) {
                 def legacyArmor = new File(modDir, 'textures/models/armor')
 
                 copyTree(legacyArmor, humanoid)
+                copyTree(new File(modDir, 'textures/entities'), humanoid)
                 copyTree(humanoid, leggings)
+                copyTree(new File(modDir, 'textures/entities'), leggings)
 
 
                 // SignEditScreen resolves GUI sign textures from the minecraft namespace.
