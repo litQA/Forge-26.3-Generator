@@ -1,4 +1,6 @@
 package ${package}.item.inventory;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.util.LazyOptional;
 
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;

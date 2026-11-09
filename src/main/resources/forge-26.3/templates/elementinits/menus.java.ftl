@@ -1,5 +1,7 @@
 <#-- @formatter:off -->
 package ${package}.init;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.RegistryObject;
 
 public class ${JavaModName}Menus {
 

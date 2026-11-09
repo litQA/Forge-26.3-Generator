@@ -32,6 +32,7 @@
 <#include "../procedures.java.ftl">
 
 package ${package}.fluid;
+import net.minecraftforge.fluids.ForgeFlowingFluid;
 
 <@javacompress>
 public abstract class ${name}Fluid extends ForgeFlowingFluid {

@@ -9,6 +9,8 @@
  *    MCreator note: This file will be REGENERATED on each build.
  */
 package ${package}.init;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.RegistryObject;
 
 <#if vanillaTabs?has_content>
 @Mod.EventBusSubscriber(modid = "${modid}", bus = Mod.EventBusSubscriber.Bus.FORGE)

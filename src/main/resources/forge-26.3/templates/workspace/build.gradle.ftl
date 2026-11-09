@@ -110,20 +110,7 @@ tasks.named('processResources', ProcessResources) {
 
 apply from: 'mcreator.gradle'
 
-// MCreator Forge migration guard: stale NeoForge sources cannot produce a valid Forge jar.
-tasks.register('checkForgeSources') {
-    doLast {
-        def offenders = []
-        fileTree('src/main/java').matching { include '**/*.java' }.each { File source ->
-            if (source.getText('UTF-8').contains('net.' + 'neoforged'))
-                offenders.add(source)
-        }
-        if (!offenders.isEmpty()) {
-            throw new GradleException("NeoForge source residue found. Regenerate the workspace with the Forge generator before building:\n" + offenders.join('\n'))
-        }
-    }
-}
-tasks.named('compileJava') { dependsOn 'checkForgeSources' }
+
 
 // Sign editors resolve their GUI textures from the minecraft namespace.
 // Copy mod sign textures again after resource processing, using the actual

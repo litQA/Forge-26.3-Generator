@@ -32,6 +32,9 @@
 <#include "../procedures.java.ftl">
 
 package ${package}.fluid.types;
+import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
+import net.minecraftforge.common.SoundActions;
+import net.minecraftforge.fluids.FluidType;
 
 <@javacompress>
 public class ${name}FluidType extends FluidType {

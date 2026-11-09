@@ -32,6 +32,8 @@
 <#include "../procedures.java.ftl">
 
 package ${package}.block.entity;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.util.LazyOptional;
 
 <@javacompress>
 public class ${name}BlockEntity extends RandomizableContainerBlockEntity implements WorldlyContainer

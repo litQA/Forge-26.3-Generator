@@ -33,6 +33,7 @@
 <#include "../procedures.java.ftl">
 
 package ${package}.entity;
+import net.minecraftforge.fluids.FluidType;
 
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.syncher.EntityDataAccessor;

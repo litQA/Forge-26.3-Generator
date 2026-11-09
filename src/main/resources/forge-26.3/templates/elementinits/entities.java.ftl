@@ -35,6 +35,8 @@
  */
 
 package ${package}.init;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.RegistryObject;
 
 <#assign hasLivingEntities = types.livingentities?has_content>
 <#assign entitiesWithInventory = types.livingentities?filter(e -> e.guiBoundTo?has_content)>

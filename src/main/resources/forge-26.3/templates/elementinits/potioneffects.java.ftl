@@ -36,6 +36,8 @@
  */
 
 package ${package}.init;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.RegistryObject;
 
 <#assign effects_that_expire = potioneffects?filter(effect -> hasProcedure(effect.onExpired))>
 <#if effects_that_expire?size != 0>@Mod.EventBusSubscriber(modid = "${modid}") </#if>public class ${JavaModName}MobEffects {

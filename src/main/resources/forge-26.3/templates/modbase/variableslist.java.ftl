@@ -1,4 +1,6 @@
 package ${package}.network;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.util.LazyOptional;
 
 import ${package}.${JavaModName};
 
