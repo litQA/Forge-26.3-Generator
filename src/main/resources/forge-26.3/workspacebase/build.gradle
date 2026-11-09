@@ -12,16 +12,10 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(25)
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
-def mixinConfigNames = file('src/main/resources').listFiles()?.findAll { it.isFile() && it.name.endsWith('.mixins.json') }?.collect { it.name } ?: []
-
 minecraft {
-    useDefaultAccessTransformer()
-
     runs {
         configureEach {
             workingDir = layout.projectDirectory.dir('run')
-            if (!mixinConfigNames.isEmpty())
-                jvmArgs "-Dmixin.config=${mixinConfigNames.join(',')}"
         }
 
         register('client')
@@ -40,7 +34,6 @@ repositories {
 
 dependencies {
     implementation minecraft.dependency('net.minecraftforge:forge:26.3-66.1.5')
-    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 }
 
 tasks.withType(JavaCompile).configureEach {
@@ -261,15 +254,3 @@ tasks.register('patchArmorJava') {
 }
 tasks.named('compileJava') { dependsOn 'patchArmorJava' }
 
-// Forge discovers mixin configurations from the jar manifest.
-def generatedMixinConfigs = file('src/main/resources').listFiles()?.findAll { it.isFile() && it.name.endsWith('.mixins.json') }?.collect { it.name } ?: []
-if (!generatedMixinConfigs.isEmpty()) {
-    tasks.named('jar') {
-        manifest {
-            attributes['MixinConfigs'] = generatedMixinConfigs.join(',')
-        }
-    }
-    tasks.matching { it.name == 'runClient' || it.name == 'runServer' }.configureEach {
-        jvmArgs "-Dmixin.config=${generatedMixinConfigs.join(',')}"
-    }
-}

@@ -2,6 +2,14 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.73.74-beta
+
+### Changes
+
+- Removed the experimental Mixin/access-transformer biome injection path because Forge 26.3's bundled Mixin/ASM does not support `JAVA_25` bytecode.
+- Biomes/features now use the stable datapack `configured_feature` / `placed_feature` / `forge:biome_modifier` path.
+- Removed generated Mixin, AT, refmap and manifest configuration.
+
 ## 2026.3-1.0.72.73-beta
 
 ### Fixes
