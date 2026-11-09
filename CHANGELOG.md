@@ -2,6 +2,14 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.18.19-beta
+
+### Fixes
+
+Fixed 1 bug(s).
+
+- The generated model registry no longer renders an undefined `javamodels` sequence when only a special entity model layer exists.
+
 ## 2026.3-1.0.17.18-beta
 
 ### New Content

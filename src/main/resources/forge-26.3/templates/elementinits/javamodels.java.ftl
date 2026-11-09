@@ -43,9 +43,11 @@ package ${package}.init;
 	</#list>
 
 	@SubscribeEvent public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
+		<#if javamodels?has_content>
 		<#list javamodels as model>
 		event.registerLayerDefinition(${model.getReadableName()}.LAYER_LOCATION, ${model.getReadableName()}::createBodyLayer);
 		</#list>
+		</#if>
 		<#list types.specialentities as entity>
 		event.registerLayerDefinition(${entity.getModElement().getRegistryNameUpper()}_LAYER_LOCATION, <#if entity.isAnyRaft()>Raft<#else>Boat</#if>Model::create${entity.entityType}Model);
 		</#list>
