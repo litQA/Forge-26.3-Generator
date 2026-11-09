@@ -2,6 +2,14 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.48.49-beta
+
+### Fixes
+
+Fixed 1 bug(s).
+
+- Hanging-sign GUI textures are now copied to both `assets/minecraft/textures/gui/hanging_signs` and `assets/minecraft/textures/gui/signs`. The generated hanging sign block entity is a plain `SignBlockEntity`, so the game may open `SignEditScreen` and request the normal `signs` path.
+
 ## 2026.3-1.0.47.48-beta
 
 ### Fixes

@@ -122,14 +122,17 @@ tasks.register('copySignGuiTextures') {
                 return
             ['signs', 'hanging_signs'].each { String kind ->
                 File sourceDir = new File(modDir, "textures/gui/${kind}")
-                File targetDir = new File(signGuiTargetRoot, "minecraft/textures/gui/${kind}")
                 if (!sourceDir.exists())
                     return
-                targetDir.mkdirs()
-                sourceDir.eachFileRecurse { File sourceFile ->
-                    if (sourceFile.isFile()) {
-                        File targetFile = new File(targetDir, sourceFile.name)
-                        java.nio.file.Files.copy(sourceFile.toPath(), targetFile.toPath(), java.nio.file.StandardCopyOption.REPLACE_EXISTING)
+                List<String> targetKinds = kind == 'hanging_signs' ? ['hanging_signs', 'signs'] : ['signs']
+                targetKinds.each { String targetKind ->
+                    File targetDir = new File(signGuiTargetRoot, "minecraft/textures/gui/${targetKind}")
+                    targetDir.mkdirs()
+                    sourceDir.eachFileRecurse { File sourceFile ->
+                        if (sourceFile.isFile()) {
+                            File targetFile = new File(targetDir, sourceFile.name)
+                            java.nio.file.Files.copy(sourceFile.toPath(), targetFile.toPath(), java.nio.file.StandardCopyOption.REPLACE_EXISTING)
+                        }
                     }
                 }
             }
