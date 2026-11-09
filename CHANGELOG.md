@@ -2,6 +2,14 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.55.56-beta
+
+### Fixes
+
+Fixed 1 bug(s).
+
+- Armor texture selection moved out of the armor FTL templates into a small marker plus `copyArmorEquipmentTextures` build task. This keeps armor Java generation intact while creating per-piece equipment assets for helmet, chestplate, leggings and boots.
+
 ## 2026.3-1.0.54.55-beta
 
 ### Fixes

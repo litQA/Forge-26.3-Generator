@@ -142,3 +142,72 @@ tasks.register('copySignGuiTextures') {
     }
 }
 tasks.named('processResources') { finalizedBy 'copySignGuiTextures' }
+
+// Generate per-piece equipment assets from MCreator armor texture markers.
+// Keeping this out of the FTL templates avoids aborting armor Java generation.
+def armorSourceRoot = file('src/main/resources/assets')
+def armorTargetRoot = layout.buildDirectory.dir('sourceSets/main/assets').get().asFile
+
+tasks.register('copyArmorEquipmentTextures') {
+    doLast {
+        if (!armorSourceRoot.exists())
+            return
+        armorSourceRoot.eachDir { File modDir ->
+            if (modDir.name == 'minecraft')
+                return
+            File equipmentSource = new File(modDir, 'equipment')
+            File equipmentTarget = new File(new File(armorTargetRoot, modDir.name), 'equipment')
+            if (!equipmentSource.exists())
+                return
+            equipmentSource.listFiles()?.findAll { it.isFile() && it.name.endsWith('_custom_textures.txt') }?.each { File marker ->
+                String base = marker.name.substring(0, marker.name.length() - '_custom_textures.txt'.length())
+                List<String> lines = java.nio.file.Files.readAllLines(marker.toPath())
+                if (lines.isEmpty())
+                    return
+                String armorFile = lines[0].trim()
+                String helmet = lines.size() > 1 ? lines[1].trim() : 'From armor'
+                String body = lines.size() > 2 ? lines[2].trim() : 'From armor'
+                String leggings = lines.size() > 3 ? lines[3].trim() : 'From armor'
+                String boots = lines.size() > 4 ? lines[4].trim() : 'From armor'
+                def texture = { String custom, String layer ->
+                    if (custom && custom != 'From armor')
+                        return "${modDir.name}:" + custom.replace('.png', '')
+                    return "${modDir.name}:${armorFile}_${layer}"
+                }
+                Map<String,String> humanoid = [
+                    helmet: texture(helmet, 'layer_1'),
+                    chestplate: texture(body, 'layer_1'),
+                    leggings: texture(null, 'layer_1'),
+                    boots: texture(boots, 'layer_1')
+                ]
+                Map<String,String> leggingsLayer = [
+                    helmet: "${modDir.name}:${armorFile}_layer_2",
+                    chestplate: "${modDir.name}:${armorFile}_layer_2",
+                    leggings: texture(leggings, 'layer_2'),
+                    boots: "${modDir.name}:${armorFile}_layer_2"
+                ]
+                ['helmet', 'chestplate', 'leggings', 'boots'].each { String part ->
+                    String json = String.format('''{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "%s"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "%s"
+      }
+    ]
+  }
+}
+''', humanoid[part], leggingsLayer[part])
+                    File target = new File(equipmentTarget, "${base}_${part}.json")
+                    target.parentFile.mkdirs()
+                    java.nio.file.Files.writeString(target.toPath(), json, java.nio.charset.StandardCharsets.UTF_8)
+                }
+            }
+        }
+    }
+}
+tasks.named('processResources') { finalizedBy 'copyArmorEquipmentTextures' }

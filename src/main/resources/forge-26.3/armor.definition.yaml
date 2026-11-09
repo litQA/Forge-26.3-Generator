@@ -2,9 +2,9 @@ templates:
   - template: armor/armor.java.ftl
     name: "@SRCROOT/@BASEPACKAGEPATH/item/@NAMEItem.java"
 
-  - template: armor/armor_equipment.json.ftl
-    writer: json
-    name: "@MODASSETSROOT/equipment/@registryname.json"
+  - template: armor/armor_texture_marker.txt.ftl
+    writer: file
+    name: "@MODASSETSROOT/equipment/@registryname_custom_textures.txt"
 
   - template: json/model_item.json.ftl
     writer: json

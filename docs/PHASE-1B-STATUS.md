@@ -1,6 +1,6 @@
 # Phase 1B Status
 
-Version: `2026.3-1.0.54.55-beta`
+Version: `2026.3-1.0.55.56-beta`
 
 This document tracks the Phase 1B feature surface of the Forge 26.3 generator.
 Only Forge 26.3 APIs and resources are used by the generator templates.
