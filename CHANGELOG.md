@@ -2,6 +2,13 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.59.60-beta
+
+### Fixes
+
+- Corrected `RegistryObject` generic arity in attribute, feature, gamerule, particle, potion and villager templates after the Phase 1C port.
+- Armor animation delegation is retained while armor materials are upgraded by the post-generation task.
+
 ## 2026.3-1.0.58.59-beta
 
 ### New Content

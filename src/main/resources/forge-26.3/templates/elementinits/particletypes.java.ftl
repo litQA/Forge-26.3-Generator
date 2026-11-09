@@ -41,7 +41,7 @@ public class ${JavaModName}ParticleTypes {
 	public static final DeferredRegister<ParticleType<?>> REGISTRY = DeferredRegister.create(Registries.PARTICLE_TYPE, ${JavaModName}.MODID);
 
 	<#list particles as particle>
-	public static final RegistryObject<ParticleType<?>, SimpleParticleType> ${particle.getModElement().getRegistryNameUpper()} =
+	public static final RegistryObject<SimpleParticleType> ${particle.getModElement().getRegistryNameUpper()} =
 			REGISTRY.register("${particle.getModElement().getRegistryName()}", () -> new SimpleParticleType(${particle.alwaysShow}));
 	</#list>
 
