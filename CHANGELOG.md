@@ -2,6 +2,17 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.37.38-beta
+
+### New Content
+
+- GUI menu-state packets now update the client menu and screen accessor on the client side.
+- Server-side menu state continues to update through the sender's open menu.
+
+### Changes
+
+- Plugin version raised to `2026.3-1.0.37.38-beta`.
+
 ## 2026.3-1.0.36.37-beta
 
 ### Fixes

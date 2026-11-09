@@ -37,8 +37,17 @@ public record MenuStateUpdateMessage(int elementType, String name, Object elemen
 			return;
 
 		context.enqueueWork(() -> {
-			if (context.getSender() != null && context.getSender().containerMenu instanceof ${JavaModName}Menus.MenuAccessor menu)
+			if (context.isClientSide()) {
+				net.minecraftforge.fml.DistExecutor.unsafeRunWhenOn(net.minecraftforge.api.distmarker.Dist.CLIENT, () -> () -> {
+					if (net.minecraft.client.Minecraft.getInstance().player != null
+							&& net.minecraft.client.Minecraft.getInstance().player.containerMenu instanceof ${JavaModName}Menus.MenuAccessor menu)
+						menu.getMenuState().put(message.elementType + ":" + message.name, message.elementState);
+					if (net.minecraft.client.Minecraft.getInstance().gui.screen() instanceof ${JavaModName}Screens.ScreenAccessor accessor)
+						accessor.updateMenuState(message.elementType, message.name, message.elementState);
+				});
+			} else if (context.getSender() != null && context.getSender().containerMenu instanceof ${JavaModName}Menus.MenuAccessor menu) {
 				menu.getMenuState().put(message.elementType + ":" + message.name, message.elementState);
+			}
 		});
 		context.setPacketHandled(true);
 	}
