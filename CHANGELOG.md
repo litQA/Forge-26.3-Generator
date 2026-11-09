@@ -2,6 +2,23 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.16.17-beta
+
+### New Content
+
+- Basic projectile entity generation using the 26.3 `AbstractArrow` implementation.
+- Projectile item rendering, custom projectile renderer generation, hit procedures and shoot helpers.
+- Projectile registration through the shared Forge entity registry.
+
+### Changes
+
+- Plugin version raised to `2026.3-1.0.16.17-beta`.
+
+### Known Limitations
+
+- Special boat/raft entities remain staged and are not validated in this batch.
+- Projectile custom models still follow the shared renderer template and need in-game validation.
+
 ## 2026.3-1.0.15.16-beta
 
 ### New Content
