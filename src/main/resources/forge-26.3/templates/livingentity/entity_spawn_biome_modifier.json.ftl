@@ -12,11 +12,16 @@
   </#if>
   "spawners": [
     {
-      "data": {
-        "type": "${modid}:${registryname}",
-        "minCount": ${data.minNumberOfMobsPerGroup},
-        "maxCount": ${data.maxNumberOfMobsPerGroup}
+      "type": "${modid}:${registryname}",
+      <#if data.minNumberOfMobsPerGroup == data.maxNumberOfMobsPerGroup>
+      "count": ${data.minNumberOfMobsPerGroup},
+      <#else>
+      "count": {
+        "type": "minecraft:uniform",
+        "min_inclusive": ${data.minNumberOfMobsPerGroup},
+        "max_inclusive": ${data.maxNumberOfMobsPerGroup}
       },
+      </#if>
       "weight": ${data.spawningProbability}
     }
   ]

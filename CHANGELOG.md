@@ -2,6 +2,14 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.43.44-beta
+
+### Fixes
+
+Fixed 1 bug(s).
+
+- Corrected the Forge 26.3 spawner schema again: each `spawners` array entry is a `SpawnerData` with `type`, `count`, and `weight` at the same level. `count` is an `IntProvider` constant or a `minecraft:uniform` object when min/max differ. This replaces the invalid `data` wrapper from 1.0.42.43.
+
 ## 2026.3-1.0.42.43-beta
 
 ### Fixes
