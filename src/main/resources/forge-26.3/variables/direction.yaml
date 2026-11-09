@@ -28,17 +28,17 @@ scopes:
     init: public Direction ${var.getName()} = ${generator.map(var.getValue(), "directions")};
     read: ${var.getName()} = Direction.from3DDataValue(input.getIntOr("${var.getName()}", 0));
     write: output.putInt("${var.getName()}", ${var.getName()}.get3DDataValue());
-    get: ${entity}.getData(${JavaModName}Variables.PLAYER_VARIABLES).${name}
+    get: ${JavaModName}Variables.getPlayerVariables(${entity}).${name}
     set: |
-      <@head>{${JavaModName}Variables.PlayerVariables _vars = ${entity}.getData(${JavaModName}Variables.PLAYER_VARIABLES);</@head>
+      <@head>{${JavaModName}Variables.PlayerVariables _vars = ${JavaModName}Variables.getPlayerVariables(${entity});</@head>
       _vars.${name} = ${opt.removeParentheses(value)};
-      <@tail>_vars.markSyncDirty();}</@tail>
+      <@tail>}</@tail>
   player_persistent:
     init: public Direction ${var.getName()} = ${generator.map(var.getValue(), "directions")};
     read: ${var.getName()} = Direction.from3DDataValue(input.getIntOr("${var.getName()}", 0));
     write: output.putInt("${var.getName()}", ${var.getName()}.get3DDataValue());
-    get: ${entity}.getData(${JavaModName}Variables.PLAYER_VARIABLES).${name}
+    get: ${JavaModName}Variables.getPlayerVariables(${entity}).${name}
     set: |
-      <@head>{${JavaModName}Variables.PlayerVariables _vars = ${entity}.getData(${JavaModName}Variables.PLAYER_VARIABLES);</@head>
+      <@head>{${JavaModName}Variables.PlayerVariables _vars = ${JavaModName}Variables.getPlayerVariables(${entity});</@head>
       _vars.${name} = ${opt.removeParentheses(value)};
-      <@tail>_vars.markSyncDirty();}</@tail>
+      <@tail>}</@tail>

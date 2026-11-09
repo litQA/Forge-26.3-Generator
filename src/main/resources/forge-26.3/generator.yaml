@@ -71,6 +71,9 @@ base_templates:
     usercodeComment: "#"
     writer: file
     name: "@RESROOT/META-INF/mods.toml"
+  - template: modbase/variableslist.java.ftl
+    name: "@SRCROOT/@BASEPACKAGEPATH/network/@JavaModNameVariables.java"
+    condition: hasVariables()
   - template: pack.mcmeta.ftl
     writer: json
     name: "@RESROOT/pack.mcmeta"
