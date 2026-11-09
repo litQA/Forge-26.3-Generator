@@ -2,6 +2,14 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.32.33-beta
+
+### Fixes
+
+Fixed 1 bug(s).
+
+- The keybind message template now includes `procedures.java.ftl` from the template root, so keybind message classes are generated.
+
 ## 2026.3-1.0.31.32-beta
 
 ### Changes

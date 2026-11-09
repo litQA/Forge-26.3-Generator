@@ -1,5 +1,5 @@
 <#-- @formatter:off -->
-<#include "../procedures.java.ftl">
+<#include "procedures.java.ftl">
 
 package ${package}.network;
 
