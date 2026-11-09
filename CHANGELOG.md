@@ -2,6 +2,23 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.19.20-beta
+
+### New Content
+
+- Basic HUD and screen overlays using Forge `RenderGuiEvent` and `ScreenEvent`.
+- Overlay image, sprite, label, item and entity-model components.
+- Overlay display conditions, priority and screen-target selection.
+
+### Changes
+
+- Plugin version raised to `2026.3-1.0.19.20-beta`.
+
+### Known Limitations
+
+- GUI menus, screens, buttons/sliders networking and keybinds remain pending.
+- Overlay rendering needs in-game validation.
+
 ## 2026.3-1.0.18.19-beta
 
 ### Fixes

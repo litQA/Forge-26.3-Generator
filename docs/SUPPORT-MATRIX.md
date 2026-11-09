@@ -7,7 +7,7 @@ final feature matrix.
 
 | Area | Status | Notes |
 | --- | --- | --- |
-| Generator plugin metadata | Supported | `plugin.json` version `2026.3-1.0.18.19-beta` |
+| Generator plugin metadata | Supported | `plugin.json` version `2026.3-1.0.19.20-beta` |
 | Forge workspace base | Supported | ForgeGradle 7, Gradle 9.8.0, Java 25 |
 | `mods.toml` | Supported | Forge `loaderVersion="[66,)"`, Forge/Minecraft dependencies |
 | Basic block | Supported | Basic cube geometry, registration and special information tooltips |
@@ -24,6 +24,7 @@ final feature matrix.
 | Living entity biome spawning | Supported | Forge `forge:add_spawns` biome modifiers |
 | Projectiles | Supported | Basic arrow-style projectiles, custom renderer and shoot helpers |
 | Special entities | Supported | Basic boat/raft entities with model layers, renderers and items |
+| Overlays | Supported | Basic HUD and screen overlays using Forge render events |
 | Block entity | Supported | Inventory, energy storage and single-tank fluid storage |
 | Block entity inventory | Supported | Forge `IItemHandler` backed by `InvWrapper` |
 | Block entity energy | Supported | Forge `EnergyStorage` / `IEnergyStorage` |
