@@ -20,6 +20,11 @@ The Phase 2 work follows the official NeoForge 26.3 generator resources under
 ## Build evidence
 
 - Plugin validation passed with 771 FTL templates and 158 template references.
+- A temporary Forge `ItemStackHandler` capability class compiled successfully in
+  the generated workspace.
+- A temporary Forge player-variable capability class (`AttachCapabilitiesEvent.Entities`,
+  `AutoRegisterCapability`, `INBTSerializable<CompoundTag>`, `TagValueInput`) compiled
+  successfully after the Forge 26.3 API corrections.
 - `compileJava` and `jar` complete for the current workspace once a valid
   Mavenizer cache is present.
 - Client launch reaches resource loading and can load `TestWorld` through
