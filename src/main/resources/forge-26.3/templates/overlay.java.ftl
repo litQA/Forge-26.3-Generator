@@ -46,13 +46,13 @@ package ${package}.client.screens;
 		private static final Identifier SPRITE_${component?index} = Identifier.parse("${modid}:textures/screens/${component.sprite}");
 	</#list>
 
-	@SubscribeEvent(priority = EventPriority.${data.priority})
+	@SubscribeEvent(priority = net.minecraftforge.eventbus.api.EventPriority.${data.priority})
 	<#if data.overlayTarget == "Ingame">
-		public static void eventHandler(RenderGuiEvent.Pre event) {
+		public static void eventHandler(net.minecraftforge.client.event.RenderGuiEvent.Pre event) {
 			int w = event.getGuiGraphics().guiWidth();
 			int h = event.getGuiGraphics().guiHeight();
 	<#else>
-		public static void eventHandler(ScreenEvent.Render.Post event) {
+		public static void eventHandler(net.minecraftforge.client.event.ScreenEvent.Render.Post event) {
 			if (event.getScreen() instanceof ${data.overlayTarget}) {
 				int w = event.getGuiGraphics().guiWidth();
 				int h = event.getGuiGraphics().guiHeight();

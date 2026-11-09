@@ -2,6 +2,16 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.26.27-beta
+
+### Fixes
+
+Fixed 3 bug(s).
+
+- Overlays now use fully qualified Forge `RenderGuiEvent` and `EventPriority` names.
+- Plant crop growth now uses Forge `ForgeHooks.onCropsGrowPre` / `onCropsGrowPost`.
+- Projectile knockback enchantment lookup now uses `EnchantmentHelper.getItemEnchantmentLevel`.
+
 ## 2026.3-1.0.25.26-beta
 
 ### New Content
