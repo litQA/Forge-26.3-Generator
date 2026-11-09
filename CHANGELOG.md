@@ -2,6 +2,14 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.63.64-beta
+
+### Fixes
+
+Fixed 1 bug(s).
+
+- Mod-constructor registry conditions now use `types.attributes`, `types.gamerules`, `types.potions`, `types.potioneffects`, `types.particles` and `types.base_features`, matching the collections MCreator actually exposes in the mod template.
+
 ## 2026.3-1.0.62.63-beta
 
 ### Fixes

@@ -31,12 +31,12 @@ import org.apache.logging.log4j.Logger;
 			if (FMLEnvironment.dist == Dist.CLIENT)
 				${JavaModName}FluidModels.register();
 		</#if>
-		<#if attributes?has_content>${JavaModName}Attributes.REGISTRY.register(modBusGroup);</#if>
-		<#if gamerules?has_content>${JavaModName}GameRules.REGISTRY.register(modBusGroup);</#if>
-		<#if potions?has_content>${JavaModName}Potions.REGISTRY.register(modBusGroup);</#if>
-		<#if potioneffects?has_content>${JavaModName}MobEffects.REGISTRY.register(modBusGroup);</#if>
-		<#if particles?has_content>${JavaModName}ParticleTypes.REGISTRY.register(modBusGroup);</#if>
-		<#if features?has_content>${JavaModName}FeatureTypes.REGISTRY.register(modBusGroup);</#if>
+		<#if types.attributes?has_content>${JavaModName}Attributes.REGISTRY.register(modBusGroup);</#if>
+		<#if types.gamerules?has_content>${JavaModName}GameRules.REGISTRY.register(modBusGroup);</#if>
+		<#if types.potions?has_content>${JavaModName}Potions.REGISTRY.register(modBusGroup);</#if>
+		<#if types.potioneffects?has_content>${JavaModName}MobEffects.REGISTRY.register(modBusGroup);</#if>
+		<#if types.particles?has_content>${JavaModName}ParticleTypes.REGISTRY.register(modBusGroup);</#if>
+		<#if types.base_features?has_content>${JavaModName}FeatureTypes.REGISTRY.register(modBusGroup);</#if>
 		</@javacompress>
 
 		// Start of user code block mod init
