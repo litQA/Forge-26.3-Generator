@@ -2,6 +2,12 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.87.88-beta
+
+### Fixes
+
+- The overworld BiomeSource wrapper now delegates `codec()` to the original BiomeSource. This prevents world saves from trying to serialize a direct, unregistered wrapper holder while preserving the runtime injected source.
+
 ## 2026.3-1.0.86.87-beta
 
 ### Fixes

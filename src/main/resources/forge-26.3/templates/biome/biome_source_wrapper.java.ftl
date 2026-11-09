@@ -27,7 +27,7 @@ public final class ${JavaModName}OverworldBiomeSource extends BiomeSource {
 
 	@Override
 	protected MapCodec<? extends BiomeSource> codec() {
-		return MapCodec.unit(this);
+		return original.codec();
 	}
 
 	@Override
