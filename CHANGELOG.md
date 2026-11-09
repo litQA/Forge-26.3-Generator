@@ -2,6 +2,15 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.98.99-beta
+
+### Fixes
+
+- Added explicit Forge imports for command, tab, screen, dispense, fuel, keybind and network events.
+- Added the `clientPlayer()` helper to the base Forge mod class.
+- Added the Forge `BonemealSource` import to generated blocks.
+- Replaced the remaining `NeoForgeRegistries.FLUID_TYPES` procedure with `ForgeRegistries.FLUID_TYPES`.
+
 ## 2026.3-1.0.97.98-beta
 
 ### Fixes

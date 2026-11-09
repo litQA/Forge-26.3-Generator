@@ -2,6 +2,7 @@
 <#include "../procedures.java.ftl">
 
 package ${package}.network;
+import net.minecraftforge.event.network.CustomPayloadEvent;
 
 public record ${name}ButtonMessage(int buttonID, int x, int y, int z) {
 

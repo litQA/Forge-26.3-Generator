@@ -1,5 +1,6 @@
 <#-- @formatter:off -->
 package ${package}.init;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 @Mod.EventBusSubscriber(modid = "${modid}", bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ${JavaModName}Screens {

@@ -1,5 +1,6 @@
 <#-- @formatter:off -->
 package ${package}.network;
+import net.minecraftforge.event.network.CustomPayloadEvent;
 
 public record MenuStateUpdateMessage(int elementType, String name, Object elementState) {
 

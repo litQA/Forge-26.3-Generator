@@ -1,5 +1,8 @@
 <#-- @formatter:off -->
 package ${package}.network;
+import net.minecraftforge.network.SimpleChannel;
+import net.minecraftforge.network.ChannelBuilder;
+import net.minecraft.resources.Identifier;
 
 public final class ${JavaModName}Network {
 

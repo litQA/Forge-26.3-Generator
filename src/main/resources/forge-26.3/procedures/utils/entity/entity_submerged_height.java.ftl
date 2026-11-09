@@ -1,5 +1,5 @@
 private static double getEntitySubmergedHeight(Entity entity) {
-	for (FluidType fluidType : NeoForgeRegistries.FLUID_TYPES) {
+	for (FluidType fluidType : ForgeRegistries.FLUID_TYPES) {
 		if (entity.level().getFluidState(entity.blockPosition()).getFluidType() == fluidType)
 			return entity.getFluidTypeHeight(fluidType);
 	}

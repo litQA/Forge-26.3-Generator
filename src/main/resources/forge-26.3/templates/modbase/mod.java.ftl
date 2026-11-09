@@ -51,5 +51,27 @@ import net.minecraftforge.fml.loading.FMLEnvironment;
 	// Start of user code block mod methods
 	// End of user code block mod methods
 
+	private static Object minecraft;
+	private static java.lang.invoke.MethodHandle playerHandle;
+
+	@Nullable public static net.minecraft.world.entity.player.Player clientPlayer() {
+		if (FMLEnvironment.dist.isClient()) {
+			try {
+				if (minecraft == null || playerHandle == null) {
+					Class<?> minecraftClass = Class.forName("net.minecraft.client.Minecraft");
+					minecraft = java.lang.invoke.MethodHandles.publicLookup().findStatic(minecraftClass, "getInstance",
+							java.lang.invoke.MethodType.methodType(minecraftClass)).invoke();
+					playerHandle = java.lang.invoke.MethodHandles.publicLookup().findGetter(minecraftClass, "player",
+							Class.forName("net.minecraft.client.player.LocalPlayer"));
+				}
+				return (net.minecraft.world.entity.player.Player) playerHandle.invoke(minecraft);
+			} catch (Throwable e) {
+				LOGGER.error("Failed to get client player", e);
+				return null;
+			}
+		}
+		return null;
+	}
+
 }
 <#-- @formatter:on -->

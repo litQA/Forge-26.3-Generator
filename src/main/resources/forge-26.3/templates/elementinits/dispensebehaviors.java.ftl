@@ -38,6 +38,7 @@
  */
 
 package ${package}.init;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 
 <#assign itemextensions = dispensebehaviors?filter(e -> e.getModElement().getTypeString() == "itemextension")>
 <#assign specialentities = dispensebehaviors?filter(e -> e.getModElement().getTypeString() == "specialentity")>

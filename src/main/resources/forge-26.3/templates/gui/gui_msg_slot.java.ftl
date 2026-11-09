@@ -2,6 +2,7 @@
 <#include "../procedures.java.ftl">
 
 package ${package}.network;
+import net.minecraftforge.event.network.CustomPayloadEvent;
 
 public record ${name}SlotMessage(int slotID, int x, int y, int z, int changeType, int meta) {
 

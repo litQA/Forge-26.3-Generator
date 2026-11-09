@@ -32,6 +32,7 @@
 <#include "procedures.java.ftl">
 
 package ${package}.client.screens;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 @Mod.EventBusSubscriber(modid = "${modid}", bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT) public class ${name}Overlay {
 	<#if data.baseTexture?has_content>

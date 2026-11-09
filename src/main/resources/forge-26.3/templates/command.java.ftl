@@ -32,6 +32,8 @@
 <#include "procedures.java.ftl">
 
 package ${package}.command;
+import net.minecraftforge.client.event.RegisterClientCommandsEvent;
+import net.minecraftforge.event.RegisterCommandsEvent;
 
 @Mod.EventBusSubscriber(modid = "${modid}"<#if data.type == "CLIENTSIDE">, value = Dist.CLIENT</#if>)
 public class ${name}Command {
