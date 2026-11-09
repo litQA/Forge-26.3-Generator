@@ -2,6 +2,14 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.53.54-beta
+
+### Fixes
+
+Fixed 1 bug(s).
+
+- Armor now has separate equipment assets per enabled piece without using template variables. Helmet custom textures no longer replace the chestplate/boots humanoid texture, and each piece binds to its matching equipment asset.
+
 ## 2026.3-1.0.52.53-beta
 
 ### Fixes
