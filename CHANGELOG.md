@@ -2,6 +2,22 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.14.15-beta
+
+### New Content
+
+- Basic custom armor model support through Forge `IClientItemExtensions` and `HumanoidModel`.
+- Helmet, chestplate, leggings and boots can use their configured MCreator model parts while retaining the equipment asset texture.
+
+### Changes
+
+- Plugin version raised to `2026.3-1.0.14.15-beta`.
+
+### Known Limitations
+
+- Custom armor animations and translucent armor buffers are not ported yet.
+- Custom armor model textures beyond the equipment asset texture are not ported yet.
+
 ## 2026.3-1.0.13.14-beta
 
 ### New Content

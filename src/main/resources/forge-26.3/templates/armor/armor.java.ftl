@@ -68,6 +68,98 @@ public abstract class ${name}Item extends Item {
 		super(properties);
 	}
 
+	<#assign customHelmetModel = data.enableHelmet && data.helmetModelName != "Default" && data.getHelmetModel()?? && data.helmetModelPart?has_content>
+	<#assign customBodyModel = data.enableBody && data.bodyModelName != "Default" && data.getBodyModel()?? && data.bodyModelPart?has_content && data.armsModelPartL?has_content && data.armsModelPartR?has_content>
+	<#assign customLeggingsModel = data.enableLeggings && data.leggingsModelName != "Default" && data.getLeggingsModel()?? && (data.leggingsModelPartL?has_content || data.leggingsModelPartR?has_content)>
+	<#assign customBootsModel = data.enableBoots && data.bootsModelName != "Default" && data.getBootsModel()?? && data.bootsModelPartL?has_content && data.bootsModelPartR?has_content>
+	<#if customHelmetModel || customBodyModel || customLeggingsModel || customBootsModel>
+	@Override public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+		consumer.accept(new IClientItemExtensions() {
+			<#if customHelmetModel>private HumanoidModel<?> helmetModel;</#if>
+			<#if customBodyModel>private HumanoidModel<?> bodyModel;</#if>
+			<#if customLeggingsModel>private HumanoidModel<?> leggingsModel;</#if>
+			<#if customBootsModel>private HumanoidModel<?> bootsModel;</#if>
+
+			@Override public HumanoidModel<?> getHumanoidArmorModel(LivingEntityRenderState state, ItemStack stack, EquipmentSlot slot, HumanoidModel<?> original) {
+				<#if customHelmetModel>
+				if (slot == EquipmentSlot.HEAD) {
+					if (helmetModel == null) {
+						var custom = new ${package}.client.model.${data.helmetModelName}(Minecraft.getInstance().getEntityModels().bakeLayer(${package}.client.model.${data.helmetModelName}.LAYER_LOCATION));
+						helmetModel = new HumanoidModel<>(new ModelPart(Collections.emptyList(), Map.of(
+							"head", new ModelPart(Collections.emptyList(), Map.of(
+								"head", custom.${data.helmetModelPart},
+								"hat", new ModelPart(Collections.emptyList(), Collections.emptyMap())
+							)),
+							"body", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
+							"right_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
+							"left_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
+							"right_leg", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
+							"left_leg", new ModelPart(Collections.emptyList(), Collections.emptyMap())
+						)));
+					}
+					return helmetModel;
+				}
+				</#if>
+				<#if customBodyModel>
+				if (slot == EquipmentSlot.CHEST) {
+					if (bodyModel == null) {
+						var custom = new ${package}.client.model.${data.bodyModelName}(Minecraft.getInstance().getEntityModels().bakeLayer(${package}.client.model.${data.bodyModelName}.LAYER_LOCATION));
+						bodyModel = new HumanoidModel<>(new ModelPart(Collections.emptyList(), Map.of(
+							"body", custom.${data.bodyModelPart},
+							"right_arm", custom.${data.armsModelPartL},
+							"left_arm", custom.${data.armsModelPartR},
+							"head", new ModelPart(Collections.emptyList(), Map.of(
+								"hat", new ModelPart(Collections.emptyList(), Collections.emptyMap())
+							)),
+							"right_leg", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
+							"left_leg", new ModelPart(Collections.emptyList(), Collections.emptyMap())
+						)));
+					}
+					return bodyModel;
+				}
+				</#if>
+				<#if customLeggingsModel>
+				if (slot == EquipmentSlot.LEGS) {
+					if (leggingsModel == null) {
+						var custom = new ${package}.client.model.${data.leggingsModelName}(Minecraft.getInstance().getEntityModels().bakeLayer(${package}.client.model.${data.leggingsModelName}.LAYER_LOCATION));
+						leggingsModel = new HumanoidModel<>(new ModelPart(Collections.emptyList(), Map.of(
+							"left_leg", <#if data.leggingsModelPartL?has_content>custom.${data.leggingsModelPartL}<#else>new ModelPart(Collections.emptyList(), Collections.emptyMap())</#if>,
+							"right_leg", <#if data.leggingsModelPartR?has_content>custom.${data.leggingsModelPartR}<#else>new ModelPart(Collections.emptyList(), Collections.emptyMap())</#if>,
+							"head", new ModelPart(Collections.emptyList(), Map.of(
+								"hat", new ModelPart(Collections.emptyList(), Collections.emptyMap())
+							)),
+							"body", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
+							"right_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
+							"left_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap())
+						)));
+					}
+					return leggingsModel;
+				}
+				</#if>
+				<#if customBootsModel>
+				if (slot == EquipmentSlot.FEET) {
+					if (bootsModel == null) {
+						var custom = new ${package}.client.model.${data.bootsModelName}(Minecraft.getInstance().getEntityModels().bakeLayer(${package}.client.model.${data.bootsModelName}.LAYER_LOCATION));
+						bootsModel = new HumanoidModel<>(new ModelPart(Collections.emptyList(), Map.of(
+							"left_leg", custom.${data.bootsModelPartL},
+							"right_leg", custom.${data.bootsModelPartR},
+							"head", new ModelPart(Collections.emptyList(), Map.of(
+								"hat", new ModelPart(Collections.emptyList(), Collections.emptyMap())
+							)),
+							"body", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
+							"right_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
+							"left_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap())
+						)));
+					}
+					return bootsModel;
+				}
+				</#if>
+				return original;
+			}
+		});
+	}
+	</#if>
+
 	<#if modifiesDefaultComponents>
 	@SubscribeEvent public static void modifyDamageComponent(ModifyDefaultComponentsEvent event) {
 		<#if data.enableHelmet>event.modify(${JavaModName}Items.${REGISTRYNAME}_HELMET.get(), (builder, _, _) -> builder.set(DataComponents.MAX_DAMAGE, null));</#if>

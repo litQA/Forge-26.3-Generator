@@ -7,7 +7,7 @@ final feature matrix.
 
 | Area | Status | Notes |
 | --- | --- | --- |
-| Generator plugin metadata | Supported | `plugin.json` version `2026.3-1.0.13.14-beta` |
+| Generator plugin metadata | Supported | `plugin.json` version `2026.3-1.0.14.15-beta` |
 | Forge workspace base | Supported | ForgeGradle 7, Gradle 9.8.0, Java 25 |
 | `mods.toml` | Supported | Forge `loaderVersion="[66,)"`, Forge/Minecraft dependencies |
 | Basic block | Supported | Basic cube geometry, registration and special information tooltips |
@@ -19,6 +19,7 @@ final feature matrix.
 | Plants | Supported | Basic cross/crop/sapling plants, models, loot tables and tags |
 | Tools | Supported | Pickaxe, axe, shovel, hoe and sword |
 | Armor | Supported | Helmet, chestplate, leggings and boots with equipment assets |
+| Custom armor models | Supported | Basic `HumanoidModel` part mapping through Forge `IClientItemExtensions` |
 | Block entity | Supported | Inventory, energy storage and single-tank fluid storage |
 | Block entity inventory | Supported | Forge `IItemHandler` backed by `InvWrapper` |
 | Block entity energy | Supported | Forge `EnergyStorage` / `IEnergyStorage` |
@@ -32,7 +33,7 @@ final feature matrix.
 | Area | Status | Planned batch |
 | --- | --- | --- |
 | Item inventories | Pending | Phase 2 |
-| Custom armor models and animations | Pending | Phase 1B |
+| Custom armor animations and translucent layers | Pending | Phase 1B |
 | Living entities, projectiles, special entities | Pending | Phase 1B |
 | GUIs, menus, screens, keybinds, overlays | Pending | Phase 1B |
 | Biomes, dimensions, features, structures | Pending | Phase 1C |
