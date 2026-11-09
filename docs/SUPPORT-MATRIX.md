@@ -43,6 +43,11 @@ final feature matrix.
 | Loot tables | Supported | Datapack `loot_table` JSON; NeoForge-only loot modifier is not generated |
 | Recipes | Supported | Smelting, blasting, campfire, smoking, crafting, stonecutting, smithing and brewing JSON |
 | Advancements | Supported | Datapack advancement JSON plus localization keys |
+| Enchantments | Supported | Datapack enchantment JSON and enchantment tags |
+| Functions | Supported | Datapack `.mcfunction` generation |
+| Villager trades | Supported | Datapack villager trade JSON and trade-set tags |
+| Villager professions | Experimental | Forge `RegistryObject` adaptation; POI/trade-set semantics still need a runtime test |
+| Custom elements | Supported | No Forge-specific template required; MCreator emits the user-provided Java element |
 | Commands | Supported (basic) | Forge `RegisterCommandsEvent`; permission-level checks are omitted pending a Forge 26.3 permission API port |
 | Item extensions | Experimental | Fuel/compost/dispense templates are present; NeoForge context-provider APIs still require Forge-specific replacement |
 | Item inventories | Experimental | Forge `ItemStackHandler` capability path; runtime GUI/item binding still needs a real-game regression |
