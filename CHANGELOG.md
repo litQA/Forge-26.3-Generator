@@ -2,6 +2,14 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.21.22-beta
+
+### Fixes
+
+Fixed 1 bug(s).
+
+- Sign block entity types are created through static factory methods, removing the Java self-reference error in the generated `SIGN` and `HANGING_SIGN` initializers.
+
 ## 2026.3-1.0.20.21-beta
 
 ### New Content
