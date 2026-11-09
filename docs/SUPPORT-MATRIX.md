@@ -47,7 +47,6 @@ final feature matrix.
 
 | Area | Status | Planned batch |
 | --- | --- | --- |
-| Item inventories | Pending | Phase 2 |
 | Custom armor animations | Pending | Phase 1B |
 | GUIs, menus, screens, keybinds, overlays | Supported | Basic GUIs, overlays, keybinds and Forge GUI procedure networking |
 | Biomes, dimensions, features, structures | Supported | Biome/feature/tree generation is implemented; overworld biome injection is experimental (see below) |
@@ -64,9 +63,9 @@ final feature matrix.
 | --- | --- | --- | --- |
 | Item inventories | `ItemAccess`, `ItemAccessItemHandler`, `ResourceHandler<ItemResource>`, item `ITEM` capability | Forge `IItemHandler`, `ItemStackHandler`, `ICapabilitySerializable<CompoundTag>`, `ForgeCapabilities.ITEM_HANDLER` | Forge path implemented experimentally; NeoForge item-access API does not exist in Forge |
 | Procedures | `net.neoforged.bus.api.Event`, NeoForge item/energy/fluid capabilities | `net.minecraftforge.eventbus.api.Event`, Forge capability APIs | 513 templates imported; most are API-neutral, inventory/energy/fluid procedures need targeted replacement |
-| Global/session variables | Static fields in `${JavaModName}Variables` | Same Forge-compatible static fields | Pending port |
-| World/map variables | `SavedData` | Forge `SavedData` (same Minecraft API) | Pending port |
-| Player variables | NeoForge `AttachmentType` / player attachments | Forge `AttachCapabilitiesEvent<Entity>` + `ICapabilitySerializable<CompoundTag>` | Pending port; no direct AttachmentType equivalent |
+| Global/session variables | Static fields in `${JavaModName}Variables` | Same Forge-compatible static fields | Implemented; needs regression |
+| World/map variables | `SavedData` | Forge `SavedData` (same Minecraft API) | Implemented; needs regression |
+| Player variables | NeoForge `AttachmentType` / player attachments | Forge `AttachCapabilitiesEvent<Entity>` + `ICapabilitySerializable<CompoundTag>` | Implemented scaffold; no direct AttachmentType equivalent; needs regression |
 | Networking | `CustomPacketPayload` + NeoForge payload registrar | Forge `SimpleChannel` | Menu/keybind channel supported; variable sync pending |
 | Mixin packaging | Reference biome generator uses `Preset.SourceProvider` Mixin + AT | Forge has no public biome-source hook; runtime wrapper is used instead | Mixin not used; Forge 26.3/Java 25 Mixin packaging is not a stable target |
 
@@ -157,7 +156,7 @@ removed if MCreator/Forge later expose native template or API hooks.
 - Energy and fluid block entity storage use Forge capability wrappers; transfer procedures are not ported yet.
 - Fluid buckets use the Forge `forge:fluid_container` model.
 - Custom fluid movement hooks and access-transformer-based extensions are deferred to a later batch; fluid movement uses Forge defaults.
-- Item inventories stop generation with an explicit message instead of emitting unsupported code.
+- Item inventories now use a Forge item capability, but the item-bound GUI path still needs a real-game regression.
 - Hanging sign text metrics use the shared `SignBlockEntity` implementation and should be validated in-game.
 - Custom armor models, animations, living entities and GUI elements are not yet ported.
 - `enumextensions`, NeoForge data maps and item model property events are not ported.

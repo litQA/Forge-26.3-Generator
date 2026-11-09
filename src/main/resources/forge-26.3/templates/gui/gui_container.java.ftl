@@ -31,6 +31,13 @@ public class ${name}Menu extends AbstractContainerMenu implements ${JavaModName}
 				if (handler.isPresent() && handler.orElse(null).getSlots() > ${data.getMaxSlotID()})
 					internalHandler = handler.orElse(null);
 			}
+			if (extraData.readableBytes() > 0) {
+				byte hand = extraData.readByte();
+				ItemStack held = hand == 0 ? this.entity.getMainHandItem() : this.entity.getOffhandItem();
+				var handler = held.getCapability(net.minecraftforge.common.capabilities.ForgeCapabilities.ITEM_HANDLER, null);
+				if (handler.isPresent() && handler.orElse(null).getSlots() > ${data.getMaxSlotID()})
+					internalHandler = handler.orElse(null);
+			}
 		}
 		this.internal = internalHandler;
 
