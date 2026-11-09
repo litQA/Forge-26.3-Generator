@@ -2,6 +2,14 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.39.40-beta
+
+### Fixes
+
+Fixed 1 bug(s).
+
+- Removed the generated `DistExecutor` client branch from `MenuStateUpdateMessage`; Forge 26.3 does not expose `net.minecraftforge.fml.DistExecutor`. Menu-state packets now update the server-side sender menu.
+
 ## 2026.3-1.0.37.38-beta
 
 ### New Content
