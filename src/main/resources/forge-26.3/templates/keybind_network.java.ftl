@@ -9,7 +9,7 @@ public final class ${JavaModName}Network {
 		.simpleChannel()
 			.play()
 				.bidirectional()
-					<#list guis as gui>
+					<#list types.guis as gui>
 					<#if gui.hasButtonEvents()>
 					.addMain(${gui.getModElement().getName()}ButtonMessage.class, ${gui.getModElement().getName()}ButtonMessage.STREAM_CODEC, ${gui.getModElement().getName()}ButtonMessage::handle)
 					</#if>

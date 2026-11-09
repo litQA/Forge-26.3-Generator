@@ -95,7 +95,7 @@ base_templates:
       - "${types.specialentities?has_content}"
   - template: keybind_network.java.ftl
     name: "@SRCROOT/@BASEPACKAGEPATH/network/@JavaModNameNetwork.java"
-    condition: "${keybinds?has_content || guis?has_content}"
+    condition: "${keybinds?has_content || types.guis?has_content}"
 
 java_models:
   key: mojmap-26.1.x

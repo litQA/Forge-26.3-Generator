@@ -2,6 +2,12 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.74.75-beta
+
+### Fixes
+
+- Network-channel generation now checks `types.guis` and iterates `types.guis`, so regenerating after removing temporary files recreates `TestModNetwork` for menu/keybind messages.
+
 ## 2026.3-1.0.73.74-beta
 
 ### Changes
