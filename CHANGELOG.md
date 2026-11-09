@@ -2,6 +2,12 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.68.69-beta
+
+### Fixes
+
+- Forge 26.3 discovers mixin configs from the jar manifest, not only `mods.toml`. The generated jar now sets `MixinConfigs` from any `*.mixins.json` resource.
+
 ## 2026.3-1.0.67.68-beta
 
 ### Fixes

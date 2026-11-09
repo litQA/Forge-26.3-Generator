@@ -255,3 +255,13 @@ tasks.register('patchArmorJava') {
     }
 }
 tasks.named('compileJava') { dependsOn 'patchArmorJava' }
+
+// Forge discovers mixin configurations from the jar manifest.
+def generatedMixinConfigs = file('src/main/resources').listFiles()?.findAll { it.isFile() && it.name.endsWith('.mixins.json') }?.collect { it.name } ?: []
+if (!generatedMixinConfigs.isEmpty()) {
+    tasks.named('jar') {
+        manifest {
+            attributes['MixinConfigs'] = generatedMixinConfigs.join(',')
+        }
+    }
+}
