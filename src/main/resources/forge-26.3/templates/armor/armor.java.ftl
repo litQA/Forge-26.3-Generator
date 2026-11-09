@@ -95,7 +95,7 @@ public abstract class ${name}Item extends Item {
 							"left_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
 							"right_leg", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
 							"left_leg", new ModelPart(Collections.emptyList(), Collections.emptyMap())
-						)));
+						))<#if data.helmetTranslucency>, RenderTypes::entityTranslucent</#if>);
 					}
 					return helmetModel;
 				}
@@ -113,7 +113,7 @@ public abstract class ${name}Item extends Item {
 							)),
 							"right_leg", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
 							"left_leg", new ModelPart(Collections.emptyList(), Collections.emptyMap())
-						)));
+						))<#if data.bodyTranslucency>, RenderTypes::entityTranslucent</#if>);
 					}
 					return bodyModel;
 				}
@@ -131,7 +131,7 @@ public abstract class ${name}Item extends Item {
 							"body", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
 							"right_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
 							"left_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap())
-						)));
+						))<#if data.leggingsTranslucency>, RenderTypes::entityTranslucent</#if>);
 					}
 					return leggingsModel;
 				}
@@ -149,7 +149,7 @@ public abstract class ${name}Item extends Item {
 							"body", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
 							"right_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
 							"left_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap())
-						)));
+						))<#if data.bootsTranslucency>, RenderTypes::entityTranslucent</#if>);
 					}
 					return bootsModel;
 				}

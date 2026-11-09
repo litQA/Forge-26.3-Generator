@@ -7,7 +7,7 @@ final feature matrix.
 
 | Area | Status | Notes |
 | --- | --- | --- |
-| Generator plugin metadata | Supported | `plugin.json` version `2026.3-1.0.23.24-beta` |
+| Generator plugin metadata | Supported | `plugin.json` version `2026.3-1.0.24.25-beta` |
 | Forge workspace base | Supported | ForgeGradle 7, Gradle 9.8.0, Java 25 |
 | `mods.toml` | Supported | Forge `loaderVersion="[66,)"`, Forge/Minecraft dependencies |
 | Basic block | Supported | Basic cube geometry, registration and special information tooltips |
@@ -20,6 +20,7 @@ final feature matrix.
 | Tools | Supported | Pickaxe, axe, shovel, hoe and sword |
 | Armor | Supported | Helmet, chestplate, leggings and boots with equipment assets |
 | Custom armor models | Supported | Basic `HumanoidModel` part mapping through Forge `IClientItemExtensions` |
+| Custom armor translucency | Supported | Translucent render type for custom armor models |
 | Living entities | Supported | Basic entity type, attributes, spawn placement, renderer and spawn egg |
 | Living entity biome spawning | Supported | Forge `forge:add_spawns` biome modifiers |
 | Projectiles | Supported | Basic arrow-style projectiles, custom renderer and shoot helpers |
@@ -41,7 +42,7 @@ final feature matrix.
 | Area | Status | Planned batch |
 | --- | --- | --- |
 | Item inventories | Pending | Phase 2 |
-| Custom armor animations and translucent layers | Pending | Phase 1B |
+| Custom armor animations | Pending | Phase 1B |
 | GUIs, menus, screens, keybinds, overlays | Partially supported | Basic GUIs with Forge item-handler slots, overlays and keybinds |
 | Biomes, dimensions, features, structures | Pending | Phase 1C |
 | Potions, effects, particles, attributes, gamerules | Pending | Phase 1C |

@@ -2,6 +2,23 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.24.25-beta
+
+### New Content
+
+- Custom armor model translucency using a translucent `RenderTypes` render type.
+- Helmet, chestplate, leggings and boots custom models can select the translucent render type independently.
+
+### Changes
+
+- Plugin version raised to `2026.3-1.0.24.25-beta`.
+
+### Known Limitations
+
+- Custom armor animation clips remain pending.
+- Standard non-custom armor translucency remains pending.
+- GUI slot/server-button procedures remain pending.
+
 ## 2026.3-1.0.23.24-beta
 
 ### New Content
