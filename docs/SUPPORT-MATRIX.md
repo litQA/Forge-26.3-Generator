@@ -7,7 +7,7 @@ final feature matrix.
 
 | Area | Status | Notes |
 | --- | --- | --- |
-| Generator plugin metadata | Supported | `plugin.json` version `2026.3-1.0.91.92-beta` |
+| Generator plugin metadata | Supported | `plugin.json` version `2026.3-1.0.92.93-beta` |
 | Forge workspace base | Supported | ForgeGradle 7, Gradle 9.8.0, Java 25 |
 | `mods.toml` | Supported | Forge `loaderVersion="[66,)"`, Forge/Minecraft dependencies |
 | Basic block | Supported | Basic cube geometry, registration and special information tooltips |
@@ -38,6 +38,8 @@ final feature matrix.
 | Custom feature / tree | Supported | Datapack `configured_feature` + `placed_feature`; custom trees are data-driven and do not require Mixin |
 | Custom biome JSON | Supported | Datapack `worldgen/biome`; used by custom dimensions and by the overworld injection path |
 | Custom biome overworld generation | Supported (experimental) | Runtime `BiomeSource` wrapper replaces the overworld source; this is not a Forge public API and is documented below |
+| Procedure templates | Supported (ported, 513 templates) | NeoForge 26.3 procedure snippets imported and Forge-specific API references fixed |
+| Item inventories | Experimental | Forge `ItemStackHandler` capability path; runtime GUI/item binding still needs a real-game regression |
 | Static validation | Supported | YAML, FreeMarker, template references, mappings |
 
 ## Not yet supported
@@ -49,11 +51,28 @@ final feature matrix.
 | GUIs, menus, screens, keybinds, overlays | Supported | Basic GUIs, overlays, keybinds and Forge GUI procedure networking |
 | Biomes, dimensions, features, structures | Supported | Biome/feature/tree generation is implemented; overworld biome injection is experimental (see below) |
 | Potions, effects, particles, attributes, gamerules | Pending | Phase 1C |
-| Remaining procedures (567 total) | Pending | Phase 2 |
+| Remaining procedures (567 total) | Supported (ported templates) | 513 NeoForge 26.3 procedure templates imported; procedures using NeoForge inventory APIs still need individual regression |
 | Remaining triggers (64 of 65) | Pending | Phase 3 |
-| Variables and player data persistence | Pending | Phase 2 |
-| Networking | Pending | Phase 2 |
-| Mixin packaging | Pending | Phase 3 |
+| Variables and player data persistence | Pending | Phase 2; Forge capability port required |
+| Networking | Partial | Forge `SimpleChannel` menu/keybind messages work; variable sync is pending |
+| Mixin packaging | Not applicable | Current Forge biome path avoids Mixin; Forge 26.3 + Java 25 Mixin 0.8.7 is not a stable packaging target |
+
+## Phase 2 API comparison
+
+| Area | Official NeoForge 26.3 generator | Forge 26.3 equivalent | Status |
+| --- | --- | --- | --- |
+| Item inventories | `ItemAccess`, `ItemAccessItemHandler`, `ResourceHandler<ItemResource>`, item `ITEM` capability | Forge `IItemHandler`, `ItemStackHandler`, `ICapabilitySerializable<CompoundTag>`, `ForgeCapabilities.ITEM_HANDLER` | Forge path implemented experimentally; NeoForge item-access API does not exist in Forge |
+| Procedures | `net.neoforged.bus.api.Event`, NeoForge item/energy/fluid capabilities | `net.minecraftforge.eventbus.api.Event`, Forge capability APIs | 513 templates imported; most are API-neutral, inventory/energy/fluid procedures need targeted replacement |
+| Global/session variables | Static fields in `${JavaModName}Variables` | Same Forge-compatible static fields | Pending port |
+| World/map variables | `SavedData` | Forge `SavedData` (same Minecraft API) | Pending port |
+| Player variables | NeoForge `AttachmentType` / player attachments | Forge `AttachCapabilitiesEvent<Entity>` + `ICapabilitySerializable<CompoundTag>` | Pending port; no direct AttachmentType equivalent |
+| Networking | `CustomPacketPayload` + NeoForge payload registrar | Forge `SimpleChannel` | Menu/keybind channel supported; variable sync pending |
+| Mixin packaging | Reference biome generator uses `Preset.SourceProvider` Mixin + AT | Forge has no public biome-source hook; runtime wrapper is used instead | Mixin not used; Forge 26.3/Java 25 Mixin packaging is not a stable target |
+
+The item-inventory and procedure rows are template-porting work, not a claim
+that every NeoForge-only inventory primitive has a Forge API equivalent.
+Player-data persistence must be implemented with Forge capabilities rather
+than NeoForge attachments.
 
 ## Overworld biome generation: NeoForge reference vs Forge
 

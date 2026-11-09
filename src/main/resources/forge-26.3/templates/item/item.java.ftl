@@ -383,6 +383,13 @@ public class ${name}Item extends Item {
 		}
 	</#list>
 
+	<#if data.hasInventory()>
+	@Override
+	public net.minecraftforge.common.capabilities.ICapabilityProvider initCapabilities(ItemStack stack, CompoundTag nbt) {
+		return new ${name}InventoryCapability();
+	}
+	</#if>
+
 }
 
 <#macro arrowShootCode>

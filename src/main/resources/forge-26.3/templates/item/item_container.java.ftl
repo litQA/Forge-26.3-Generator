@@ -1,63 +1,35 @@
-<#--
- # MCreator (https://mcreator.net/)
- # Copyright (C) 2012-2020, Pylo
- # Copyright (C) 2020-2023, Pylo, opensource contributors
- #
- # This program is free software: you can redistribute it and/or modify
- # it under the terms of the GNU General Public License as published by
- # the Free Software Foundation, either version 3 of the License, or
- # (at your option) any later version.
- #
- # This program is distributed in the hope that it will be useful,
- # but WITHOUT ANY WARRANTY; without even the implied warranty of
- # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- # GNU General Public License for more details.
- #
- # You should have received a copy of the GNU General Public License
- # along with this program.  If not, see <https://www.gnu.org/licenses/>.
- #
- # Additional permission for code generator templates (*.ftl files)
- #
- # As a special exception, you may create a larger work that contains part or
- # all of the MCreator code generator templates (*.ftl files) and distribute
- # that work under terms of your choice, so long as that work isn't itself a
- # template for code generation. Alternatively, if you modify or redistribute
- # the template itself, you may (at your option) remove this special exception,
- # which will cause the template and the resulting code generator output files
- # to be licensed under the GNU General Public License without this special
- # exception.
--->
-
-<#-- @formatter:off -->
-<#stop "Item inventory capabilities are not supported by this generator build yet. Use a block entity inventory instead.">
 package ${package}.item.inventory;
 
-<@javacompress>
-@Mod.EventBusSubscriber(modid = "${modid}") public class ${name}InventoryCapability extends ItemAccessItemHandler {
+import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import net.minecraftforge.common.capabilities.ICapabilitySerializable;
+import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.items.ItemStackHandler;
 
-	@SubscribeEvent public static void onItemDropped(ItemTossEvent event) {
-		if (event.getEntity().getItem().getItem() == ${JavaModName}Items.${REGISTRYNAME}.get()) {
-			Player player = event.getPlayer();
-			if (player.containerMenu instanceof ${data.guiBoundTo}Menu)
-				player.closeContainer();
-		}
-	}
+public class ${name}InventoryCapability extends ItemStackHandler implements ICapabilitySerializable<CompoundTag> {
+	private final LazyOptional<ItemStackHandler> handler = LazyOptional.of(() -> this);
 
-	public ${name}InventoryCapability(ItemAccess access) {
-		super(access, DataComponents.CONTAINER, ${data.inventorySize});
+	public ${name}InventoryCapability() {
+		super(${data.inventorySize});
 	}
 
 	<#if data.inventoryStackSize != 99>
-	@Override protected int getCapacity(int index, ItemResource resource) {
-		return Math.min(${data.inventoryStackSize}, super.getCapacity(index, resource));
+	@Override
+	protected int getStackLimit(int slot, ItemStack stack) {
+		return Math.min(${data.inventoryStackSize}, super.getStackLimit(slot, stack));
 	}
 	</#if>
 
-	@Override public boolean isValid(int index, ItemResource resource) {
-		return super.isValid(index, resource) && resource.getItem() != ${JavaModName}Items.${REGISTRYNAME}.get();
+	@Override
+	public boolean isItemValid(int slot, ItemStack stack) {
+		return super.isItemValid(slot, stack) && stack.getItem() != ${JavaModName}Items.${REGISTRYNAME}.get();
 	}
 
+	@Override
+	public <T> LazyOptional<T> getCapability(Capability<T> capability, Direction side) {
+		return capability == ForgeCapabilities.ITEM_HANDLER ? handler.cast() : LazyOptional.empty();
+	}
 }
-</@javacompress>
-
-<#-- @formatter:on -->

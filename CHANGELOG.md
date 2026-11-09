@@ -2,6 +2,13 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.92.93-beta
+
+### Changes
+
+- Imported the NeoForge 26.3 procedure template set and variable scope definitions for Phase 2 porting.
+- Replaced the item-inventory stop stub with a Forge `ItemStackHandler` capability and item `initCapabilities` hook.
+
 ## 2026.3-1.0.91.92-beta
 
 ### Fixes
