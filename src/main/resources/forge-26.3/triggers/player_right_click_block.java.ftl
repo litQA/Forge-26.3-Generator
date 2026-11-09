@@ -1,7 +1,7 @@
 <#include "procedures.java.ftl">
 @Mod.EventBusSubscriber(modid = "${modid}") public class ${name}Procedure {
 	@SubscribeEvent public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
-		<#-- The event is fired for both hands; only the main hand is handled here. -->
+		<#-- fix #5491, event is fired for both hands always, so we can filter by either -->
 		if (event.getHand() != InteractionHand.MAIN_HAND) return;
 		<#assign dependenciesCode>
 			<@procedureDependenciesCode dependencies, {
@@ -16,4 +16,7 @@
 			}/>
 		</#assign>
 		execute(event<#if dependenciesCode?has_content>,</#if>${dependenciesCode});
+		<#-- fix #6700, fail the interaction if canceled so the off hand is not tried after the main hand -->
+		if (event.isCanceled())
+			event.setCancellationResult(InteractionResult.FAIL);
 	}
