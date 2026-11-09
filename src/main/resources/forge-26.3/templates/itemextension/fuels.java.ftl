@@ -8,6 +8,10 @@
 
 package ${package}.init;
 
+import net.minecraftforge.event.furnace.FurnaceFuelBurnTimeEvent;
+import net.minecraftforge.eventbus.api.listener.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+
 @Mod.EventBusSubscriber(modid = "${modid}")
 public class ${JavaModName}Fuels {
 	@SubscribeEvent

@@ -1,5 +1,8 @@
 <#-- @formatter:off -->
 package ${package}.world.inventory;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
 
 import ${package}.${JavaModName};
 

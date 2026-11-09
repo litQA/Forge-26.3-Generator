@@ -2,6 +2,13 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.97.98-beta
+
+### Fixes
+
+- Added explicit Forge imports for item/energy/fluid capabilities, `InvWrapper`, `ItemStackHandler`, fluid types and fuel events in generated element templates.
+- Removed the configuration-cache-incompatible `checkForgeSources` guard; the explicit imports are the generation fix.
+
 ## 2026.3-1.0.96.97-beta
 
 ### Fixes
