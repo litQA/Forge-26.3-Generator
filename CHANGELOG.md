@@ -2,6 +2,12 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.82.83-beta
+
+### Fixes
+
+- Removed the Java 25 Mixin/AT path again because Forge's early-window `DummyProvider` fails before the game starts. Stable datapack rendering/tree output remains enabled.
+
 ## 2026.3-1.0.81.82-beta
 
 ### Fixes

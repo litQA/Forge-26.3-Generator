@@ -307,18 +307,6 @@ tasks.register('patchTreePlacement') {
 }
 tasks.named('processResources') { dependsOn 'patchTreePlacement' }
 
-// Mixin configuration for ForgeGradle development runs.
-def generatedMixinConfigs = file('src/main/resources').listFiles()?.findAll { it.isFile() && it.name.endsWith('.mixins.json') }?.collect { it.name } ?: []
-if (!generatedMixinConfigs.isEmpty()) {
-    tasks.named('jar') {
-        manifest {
-            attributes['MixinConfigs'] = generatedMixinConfigs.join(',')
-        }
-    }
-    tasks.matching { it.name == 'runClient' || it.name == 'runServer' }.configureEach {
-        jvmArgs "-Dmixin.config=${generatedMixinConfigs.join(',')}"
-    }
-}
 
 // Ensure custom tree placed-features are present in the merged resource output
 // and do not inherit the vanilla oak-sapling worldgen predicate.
