@@ -5,7 +5,7 @@ package ${package}.client;
 <#assign regularSigns = signs?filter(e -> e.blockBase != "HangingSign")>
 <#assign hangingSigns = signs?filter(e -> e.blockBase == "HangingSign")>
 
-@Mod.EventBusSubscriber(modid = "${modid}", bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = "${modid}", bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class ${JavaModName}SignRenderers {
 
 	@SubscribeEvent public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {

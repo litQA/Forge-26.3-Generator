@@ -65,7 +65,7 @@
 
 package ${package}.init;
 
-@Mod.EventBusSubscriber(modid = "${modid}", value = Dist.CLIENT) public class ${JavaModName}KeyMappings {
+@Mod.EventBusSubscriber(modid = "${modid}", bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT) public class ${JavaModName}KeyMappings {
 
 	<#-- preload categories so they can be referenced later -->
 	<#list keybinds as keybind>
@@ -130,7 +130,7 @@ package ${package}.init;
 		</#list>
 	}
 
-	@Mod.EventBusSubscriber(modid = "${modid}", value = Dist.CLIENT) public static class KeyEventListener {
+	@Mod.EventBusSubscriber(modid = "${modid}", bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT) public static class KeyEventListener {
 
 		@SubscribeEvent public static void onClientTick(net.minecraftforge.event.TickEvent.ClientTickEvent.Post event) {
 			if (Minecraft.getInstance().gui.screen() == null) {

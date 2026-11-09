@@ -11,7 +11,7 @@
 package ${package}.init;
 
 <#if vanillaTabs?has_content>
-@Mod.EventBusSubscriber(modid = "${modid}")
+@Mod.EventBusSubscriber(modid = "${modid}", bus = Mod.EventBusSubscriber.Bus.FORGE)
 </#if>
 <@javacompress>
 public class ${JavaModName}Tabs {

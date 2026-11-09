@@ -2,6 +2,14 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.40.41-beta
+
+### Fixes
+
+Fixed 1 bug(s).
+
+- Event subscriber annotations now select the correct Forge bus. Entity renderers, entity registration, creative tabs, key mappings, sign renderers and model layers use `Bus.FORGE`; client setup classes continue to use `Bus.MOD`. This prevents `BusGroup "modBus..." requires IModBusEvent` crashes during client startup.
+
 ## 2026.3-1.0.39.40-beta
 
 ### Fixes
