@@ -3,11 +3,11 @@
 	@SubscribeEvent public static void onPlayerTick(TickEvent.PlayerTickEvent.Post event) {
 		<#assign dependenciesCode>
 			<@procedureDependenciesCode dependencies, {
-				"x": "event.getEntity().getX()",
-				"y": "event.getEntity().getY()",
-				"z": "event.getEntity().getZ()",
-				"world": "event.getEntity().level()",
-				"entity": "event.getEntity()",
+				"x": "event.player().getX()",
+				"y": "event.player().getY()",
+				"z": "event.player().getZ()",
+				"world": "event.player().level()",
+				"entity": "event.player()",
 				"event": "event"
 			}/>
 		</#assign>

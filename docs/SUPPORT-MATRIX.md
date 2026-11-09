@@ -39,6 +39,7 @@ final feature matrix.
 | Custom biome JSON | Supported | Datapack `worldgen/biome`; used by custom dimensions and by the overworld injection path |
 | Custom biome overworld generation | Supported (experimental) | Runtime `BiomeSource` wrapper replaces the overworld source; this is not a Forge public API and is documented below |
 | Procedure templates | Supported (ported, 513 templates) | NeoForge 26.3 procedure snippets imported and Forge-specific API references fixed |
+| Trigger templates | Supported (58 of 65) | Easy Forge event triggers ported; classification and remaining triggers are in `docs/TRIGGERS.md` |
 | Item inventories | Experimental | Forge `ItemStackHandler` capability path; runtime GUI/item binding still needs a real-game regression |
 | Variables and player data | Experimental | Forge capability scaffolding generated; all variable types and sync still need regression |
 | Static validation | Supported | YAML, FreeMarker, template references, mappings |

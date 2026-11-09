@@ -3,7 +3,7 @@
 	@SubscribeEvent public static void onWorldTick(TickEvent.LevelTickEvent.Post event) {
 		<#assign dependenciesCode>
 			<@procedureDependenciesCode dependencies, {
-				"world": "event.getLevel()",
+				"world": "event.level()",
 				"event": "event"
 			}/>
 		</#assign>
