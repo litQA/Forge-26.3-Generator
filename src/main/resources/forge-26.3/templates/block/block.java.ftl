@@ -721,7 +721,7 @@ public class ${getClassName()}Block extends ${getBlockClass(data.blockBase)}
 
 	<#if data.blockBase?has_content && (data.blockBase == "Sign" || data.blockBase == "HangingSign")>
 	@Override public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-		return new SignBlockEntity(${JavaModName}SignBlockEntities.<#if data.blockBase == "HangingSign">HANGING_SIGN<#else>SIGN</#if>.get(), pos, state);
+		return <#if data.blockBase == "HangingSign">new HangingSignBlockEntity(${JavaModName}SignBlockEntities.HANGING_SIGN.get(), pos, state)<#else>new SignBlockEntity(${JavaModName}SignBlockEntities.SIGN.get(), pos, state)</#if>;
 	}
 
 	@Override public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {

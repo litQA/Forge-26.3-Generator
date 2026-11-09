@@ -2,6 +2,14 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.49.50-beta
+
+### Fixes
+
+Fixed 1 bug(s).
+
+- Hanging signs now use `HangingSignBlockEntity` and a typed `BlockEntityType<HangingSignBlockEntity>` instead of plain `SignBlockEntity`. This makes the client open `HangingSignEditScreen` and use the 16x16 `hanging_signs` texture path correctly.
+
 ## 2026.3-1.0.48.49-beta
 
 ### Fixes

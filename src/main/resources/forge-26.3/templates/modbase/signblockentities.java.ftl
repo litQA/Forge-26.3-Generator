@@ -27,11 +27,11 @@ public class ${JavaModName}SignBlockEntities {
 	}
 	</#if>
 	<#if hangingSignEntries?size != 0>
-	public static final RegistryObject<BlockEntityType<SignBlockEntity>> HANGING_SIGN = REGISTRY.register("hanging_sign", ${JavaModName}SignBlockEntities::createHangingSignType);
+	public static final RegistryObject<BlockEntityType<HangingSignBlockEntity>> HANGING_SIGN = REGISTRY.register("hanging_sign", ${JavaModName}SignBlockEntities::createHangingSignType);
 
-	private static BlockEntityType<SignBlockEntity> createHangingSignType() {
+	private static BlockEntityType<HangingSignBlockEntity> createHangingSignType() {
 		return new BlockEntityType<>(
-			(pos, state) -> new SignBlockEntity(HANGING_SIGN.get(), pos, state),
+			(pos, state) -> new HangingSignBlockEntity(HANGING_SIGN.get(), pos, state),
 			Set.of(${hangingSignEntries?join(", ")})
 		);
 	}
