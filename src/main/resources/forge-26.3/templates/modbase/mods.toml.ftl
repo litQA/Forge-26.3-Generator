@@ -28,7 +28,7 @@ displayTest="IGNORE_SERVER_VERSION"
 # Start of user code block mod configuration
 # End of user code block mod configuration
 
-<#if biomes?filter(e -> e.spawnBiome)?size != 0>
+<#if fragments.mixin?size != 0>
 [[mixins]]
     config = "${settings.getModID()}.mixins.json"
 </#if>

@@ -2,6 +2,12 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.84.85-beta
+
+### Fixes
+
+- Restored the conditional `[[mixins]]` block in `mods.toml` via the `fragments.mixin` context; the previous `biomes` condition was unavailable in base-template rendering and caused `mods.toml` generation to be skipped.
+
 ## 2026.3-1.0.83.84-beta
 
 ### Features

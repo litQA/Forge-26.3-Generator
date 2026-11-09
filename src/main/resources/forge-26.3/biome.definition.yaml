@@ -56,6 +56,11 @@ global_templates:
     condition: "${biomes?filter(e -> e.spawnBiome)?size != 0}"
     name: "@RESROOT/@modid.mixins.json"
 
+fragments:
+  - type: mixin
+    condition: "${biomes?filter(e -> e.spawnBiome)?size != 0}"
+    content: [ "${JavaModName}ChunkGeneratorMixin" ]
+
 tags:
   - tag: BIOMES:minecraft:has_structure/mineshaft
     condition: spawnMineshaft
