@@ -2,6 +2,14 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.36.37-beta
+
+### Fixes
+
+Fixed 1 bug(s).
+
+- GUI menu-state packets now pass `ServerPlayer` directly to `PacketDistributor.PLAYER.with` instead of a supplier.
+
 ## 2026.3-1.0.35.36-beta
 
 ### Changes
