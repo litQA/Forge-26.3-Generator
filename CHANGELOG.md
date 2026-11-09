@@ -2,6 +2,12 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.70.71-beta
+
+### Fixes
+
+- Mixin configuration is now passed through the ForgeGradle `minecraft.runs.configureEach` JVM arguments, covering dev client/server runs that do not use the jar manifest.
+
 ## 2026.3-1.0.69.70-beta
 
 ### Fixes
