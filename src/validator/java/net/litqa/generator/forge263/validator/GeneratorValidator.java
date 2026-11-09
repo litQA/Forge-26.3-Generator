@@ -34,6 +34,8 @@ public final class GeneratorValidator {
 
     private static final Pattern INCLUDE_PATTERN =
             Pattern.compile("<#include\\s+(?:\"([^\"]+)\"|'([^']+)')");
+    private static final Pattern NEOFORGE_PATTERN =
+            Pattern.compile("net\\.neoforged|neoforge:|NeoForgeMod|CommonHooks");
 
     private final Path resourcesRoot;
     private final List<String> errors = new ArrayList<>();
@@ -87,6 +89,7 @@ public final class GeneratorValidator {
         generatorDirectories.forEach(this::validateGeneratorConfiguration);
         validateYamlDocuments();
         validateTemplates();
+        validateForgeOnlyResources();
         validateMappings();
 
         return errors.isEmpty();
@@ -379,6 +382,30 @@ public final class GeneratorValidator {
 
             if (!found) {
                 error(relative + ": included template '" + include + "' could not be resolved");
+            }
+        }
+    }
+
+    private void validateForgeOnlyResources() throws IOException {
+        List<Path> resources;
+        try (Stream<Path> files = Files.walk(resourcesRoot)) {
+            resources = files.filter(Files::isRegularFile)
+                    .filter(file -> {
+                        String name = file.getFileName().toString();
+                        return name.endsWith(".ftl") || name.endsWith(".yaml");
+                    })
+                    .sorted()
+                    .toList();
+        }
+
+        for (Path resource : resources) {
+            List<String> lines = Files.readAllLines(resource, StandardCharsets.UTF_8);
+            for (int i = 0; i < lines.size(); i++) {
+                Matcher matcher = NEOFORGE_PATTERN.matcher(lines.get(i));
+                if (matcher.find()) {
+                    error(resourcesRoot.relativize(resource) + ":" + (i + 1)
+                            + ": forbidden NeoForge reference '" + matcher.group() + "'");
+                }
             }
         }
     }

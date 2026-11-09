@@ -2,6 +2,13 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.31.32-beta
+
+### Changes
+
+- The generator validator now rejects NeoForge references (`net.neoforged`, `neoforge:`, `NeoForgeMod`, `CommonHooks`) in generator YAML and FreeMarker resources.
+- Plugin version raised to `2026.3-1.0.31.32-beta`.
+
 ## 2026.3-1.0.30.31-beta
 
 ### Fixes
