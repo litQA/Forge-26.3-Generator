@@ -81,7 +81,7 @@ public class ${name}Block extends ${getPlantClass(data.plantType)}Block <#if int
 		.randomTicks()
 		</#if>
 		<#if data.isCustomSoundType>
-			.sound(new DeferredSoundType(1.0f, 1.0f,
+			.sound(new ${package}.util.DeferredSoundType(1.0f, 1.0f,
 				() -> BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("${data.breakSound}")),
 				() -> BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("${data.stepSound}")),
 				() -> BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("${data.placeSound}")),

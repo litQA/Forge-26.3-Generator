@@ -119,7 +119,7 @@ public class ${getClassName()}Block extends ${getBlockClass(data.blockBase)}
 			.mapColor(MapColor.${data.colorOnMap})
 		</#if>
 		<#if data.isCustomSoundType>
-			.sound(new DeferredSoundType(1.0f, 1.0f,
+			.sound(new ${package}.util.DeferredSoundType(1.0f, 1.0f,
 				() -> BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("${data.breakSound}")),
 				() -> BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("${data.stepSound}")),
 				() -> BuiltInRegistries.SOUND_EVENT.getValue(Identifier.parse("${data.placeSound}")),
@@ -717,6 +717,16 @@ public class ${getClassName()}Block extends ${getBlockClass(data.blockBase)}
 				return 0;
 		}
 		</#if>
+	</#if>
+
+	<#if data.blockBase?has_content && (data.blockBase == "Sign" || data.blockBase == "HangingSign")>
+	@Override public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+		return new SignBlockEntity(${JavaModName}SignBlockEntities.<#if data.blockBase == "HangingSign">HANGING_SIGN<#else>SIGN</#if>.get(), pos, state);
+	}
+
+	@Override public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
+		return createTickerHelper(type, ${JavaModName}SignBlockEntities.<#if data.blockBase == "HangingSign">HANGING_SIGN<#else>SIGN</#if>.get(), SignBlockEntity::tick);
+	}
 	</#if>
 
 	<#if data.sensitiveToVibration && data.hasInventory>

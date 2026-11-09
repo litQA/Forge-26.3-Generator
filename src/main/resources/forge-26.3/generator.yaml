@@ -80,6 +80,14 @@ base_templates:
   - template: modbase/clientfluidmodels.java.ftl
     name: "@SRCROOT/@BASEPACKAGEPATH/client/@JavaModNameFluidModels.java"
     condition: "${types.fluids?has_content}"
+  - template: modbase/deferredsoundtype.java.ftl
+    name: "@SRCROOT/@BASEPACKAGEPATH/util/DeferredSoundType.java"
+  - template: modbase/signblockentities.java.ftl
+    name: "@SRCROOT/@BASEPACKAGEPATH/init/@JavaModNameSignBlockEntities.java"
+    condition: "${types.blocks?filter(e -> e.isSign())?size != 0}"
+  - template: modbase/signrenderers.java.ftl
+    name: "@SRCROOT/@BASEPACKAGEPATH/client/@JavaModNameSignRenderers.java"
+    condition: "${types.blocks?filter(e -> e.isSign())?size != 0}"
 
 tags:
   template: tags.json.ftl

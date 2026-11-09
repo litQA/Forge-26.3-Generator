@@ -16,6 +16,10 @@ public class ${JavaModName}Blocks {
 		<#else>
 			public static final RegistryObject<Block> ${block.getModElement().getRegistryNameUpper()} =
 				register("${block.getModElement().getRegistryName()}", ${block.getModElement().getName()}Block::new);
+			<#if block.getModElement().getTypeString() == "block" && block.isSign()>
+			public static final RegistryObject<Block> ${block.getWallRegistryNameUpper()} =
+				register("${block.getWallRegistryName()}", ${block.getWallName()}Block::new);
+			</#if>
 		</#if>
 	</#list>
 	</@javacompress>

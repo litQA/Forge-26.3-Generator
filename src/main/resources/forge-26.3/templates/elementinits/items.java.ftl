@@ -11,7 +11,18 @@ public class ${JavaModName}Items {
 
 	<@javacompress>
 	<#list items as item>
-		<#if item.getModElement().getTypeString() == "block" || item.getModElement().getTypeString() == "plant">
+		<#if item.getModElement().getTypeString() == "block" && item.isSign()>
+			<#if item.hasSpecialInformation(w)>
+			public static final RegistryObject<Item> ${item.getModElement().getRegistryNameUpper()} =
+				register("${item.getModElement().getRegistryName()}", ${item.getModElement().getName()}Block.Item::new);
+			<#elseif item.blockBase == "HangingSign">
+			public static final RegistryObject<Item> ${item.getModElement().getRegistryNameUpper()} =
+				register("${item.getModElement().getRegistryName()}", properties -> new HangingSignItem(${JavaModName}Blocks.${item.getModElement().getRegistryNameUpper()}.get(), ${JavaModName}Blocks.${item.getWallRegistryNameUpper()}.get(), properties));
+			<#else>
+			public static final RegistryObject<Item> ${item.getModElement().getRegistryNameUpper()} =
+				register("${item.getModElement().getRegistryName()}", properties -> new StandingAndWallBlockItem(${JavaModName}Blocks.${item.getModElement().getRegistryNameUpper()}.get(), ${JavaModName}Blocks.${item.getWallRegistryNameUpper()}.get(), Direction.DOWN, properties));
+			</#if>
+		<#elseif item.getModElement().getTypeString() == "block" || item.getModElement().getTypeString() == "plant">
 			<#if item.hasSpecialInformation(w)>
 			public static final RegistryObject<Item> ${item.getModElement().getRegistryNameUpper()} =
 				register("${item.getModElement().getRegistryName()}", ${item.getModElement().getName()}Block.Item::new);

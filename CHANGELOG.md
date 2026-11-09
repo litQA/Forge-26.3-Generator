@@ -2,6 +2,27 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.13.14-beta
+
+### New Content
+
+- Advanced block base support for stairs, slabs, fences, walls, fence gates, trapdoors, doors, panes, leaves, end rods, pressure plates, buttons, signs and hanging signs.
+- Forge-native sign support with custom sign `BlockEntityType` registration, ticking and sign renderers.
+- Forge-native `DeferredSoundType` material for custom block and plant sound events.
+- Sign item generation now uses `StandingAndWallBlockItem` and `HangingSignItem`.
+
+### Changes
+
+- Wood types use the public 26.3 `WoodType` constructor instead of the removed registry helper.
+- Wall sign and wall hanging sign blocks are registered alongside their standing variants.
+- Plugin version raised to `2026.3-1.0.13.14-beta`.
+
+### Known Limitations
+
+- Custom armor models and animations, living entities, projectiles, GUIs, menus, screens, keybinds and overlays are not part of this batch.
+- Hanging sign text behavior should be validated in-game; the custom sign block entity uses the shared 26.3 text implementation.
+- Fluid bucket texture copying still requires the current `processResources` refresh and is pending retest.
+
 ## 2026.3-1.0.12.13-beta
 
 ### Changes
