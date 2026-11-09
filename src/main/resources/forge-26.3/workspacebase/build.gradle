@@ -34,6 +34,11 @@ repositories {
 
 dependencies {
     implementation minecraft.dependency('net.minecraftforge:forge:26.3-66.1.5')
+    implementation 'org.ow2.asm:asm:9.8'
+    implementation 'org.ow2.asm:asm-tree:9.8'
+    implementation 'org.ow2.asm:asm-analysis:9.8'
+    implementation 'org.ow2.asm:asm-commons:9.8'
+    implementation 'org.ow2.asm:asm-util:9.8'
 }
 
 tasks.withType(JavaCompile).configureEach {
@@ -282,3 +287,45 @@ tasks.register('patchNetworkJava') {
     }
 }
 tasks.named('compileJava') { dependsOn 'patchNetworkJava' }
+
+// Custom biome trees inherit vanilla's would_survive(oak_sapling) placement
+// predicate, which never matches custom ground blocks. Remove that predicate
+// from generated tree placed-features so the tree feature can place.
+def treeSourceRoot = file('src/main/resources/data')
+def treeTargetRoot = layout.buildDirectory.dir('sourceSets/main/data').get().asFile
+
+tasks.register('patchTreePlacement') {
+    doLast {
+        if (!treeSourceRoot.exists())
+            return
+        treeSourceRoot.eachDir { File modData ->
+            File sourceDir = new File(modData, 'worldgen/placed_feature')
+            File targetDir = new File(new File(treeTargetRoot, modData.name), 'worldgen/placed_feature')
+            if (!sourceDir.exists())
+                return
+            sourceDir.listFiles()?.findAll { it.isFile() && it.name.endsWith('_tree.json') }?.each { File source ->
+                def json = new groovy.json.JsonSlurper().parse(source)
+                if (json.placement instanceof List) {
+                    json.placement.removeAll { it instanceof Map && it.type == 'minecraft:block_predicate_filter' }
+                    File target = new File(targetDir, source.name)
+                    target.parentFile.mkdirs()
+                    target.setText(groovy.json.JsonOutput.prettyPrint(groovy.json.JsonOutput.toJson(json)), 'UTF-8')
+                }
+            }
+        }
+    }
+}
+tasks.named('processResources') { finalizedBy 'patchTreePlacement' }
+
+// Mixin configuration for ForgeGradle development runs.
+def generatedMixinConfigs = file('src/main/resources').listFiles()?.findAll { it.isFile() && it.name.endsWith('.mixins.json') }?.collect { it.name } ?: []
+if (!generatedMixinConfigs.isEmpty()) {
+    tasks.named('jar') {
+        manifest {
+            attributes['MixinConfigs'] = generatedMixinConfigs.join(',')
+        }
+    }
+    tasks.matching { it.name == 'runClient' || it.name == 'runServer' }.configureEach {
+        jvmArgs "-Dmixin.config=${generatedMixinConfigs.join(',')}"
+    }
+}

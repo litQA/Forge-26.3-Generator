@@ -2,6 +2,13 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.78.79-beta
+
+### Fixes
+
+- Restored biome-injection Mixin support with `JAVA_21` compatibility and ASM 9.8 dependencies, avoiding the Mixin 0.8.7 `JAVA_25` compatibility rejection.
+- Added tree placement patching so custom biome tree placed-features no longer require an oak sapling to survive on custom ground blocks.
+
 ## 2026.3-1.0.77.78-beta
 
 ### Fixes
