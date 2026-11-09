@@ -2,6 +2,14 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.44.45-beta
+
+### Fixes
+
+Fixed 1 bug(s).
+
+- Wood type names are now emitted without the `modid:` prefix. Forge 26.3 uses the wood type name directly in the sign GUI texture path, so the namespace prefix caused `Non [a-z0-9/._-] character in path of location` and disconnected the client when editing a sign.
+
 ## 2026.3-1.0.43.44-beta
 
 ### Fixes
