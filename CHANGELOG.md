@@ -2,6 +2,13 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.72.73-beta
+
+### Fixes
+
+- Added Mixin annotation processor and `test.refmap.json` generation to the workspace build; mixin config now declares its refmap.
+- Kept the dev-run `-Dmixin.config` argument as a fallback.
+
 ## 2026.3-1.0.71.72-beta
 
 ### Fixes

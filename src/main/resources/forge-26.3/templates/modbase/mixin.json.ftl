@@ -1,6 +1,7 @@
 {
   "required": true,
   "package": "${package}.mixin",
+  "refmap": "${modid}.refmap.json",
   "compatibilityLevel": "JAVA_25",
   "mixins": [
 	<#list fragments.mixin as mixin>"${mixin}"<#sep>,</#list>
