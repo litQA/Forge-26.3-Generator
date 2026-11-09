@@ -2,6 +2,12 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.81.82-beta
+
+### Fixes
+
+- Captured tree resource source/target directories at configuration time so `copyTreePlacement` works with Gradle configuration cache.
+
 ## 2026.3-1.0.80.81-beta
 
 ### Fixes

@@ -322,16 +322,16 @@ if (!generatedMixinConfigs.isEmpty()) {
 
 // Ensure custom tree placed-features are present in the merged resource output
 // and do not inherit the vanilla oak-sapling worldgen predicate.
+def treeCopySourceRoot = file('src/main/resources/data')
+def treeCopyTargetRoots = [
+    layout.buildDirectory.dir('sourceSets/main/data').get().asFile,
+    layout.buildDirectory.dir('resources/main/data').get().asFile
+]
 tasks.register('copyTreePlacement') {
     doLast {
-        File sourceRoot = file('src/main/resources/data')
-        if (!sourceRoot.exists())
+        if (!treeCopySourceRoot.exists())
             return
-        List<File> targets = [
-            new File(layout.buildDirectory.dir('sourceSets/main/data').get().asFile.path),
-            new File(layout.buildDirectory.dir('resources/main/data').get().asFile.path)
-        ]
-        sourceRoot.eachDir { File modData ->
+        treeCopySourceRoot.eachDir { File modData ->
             File sourceDir = new File(modData, 'worldgen/placed_feature')
             if (!sourceDir.exists())
                 return
@@ -340,7 +340,7 @@ tasks.register('copyTreePlacement') {
                 if (json.placement instanceof List)
                     json.placement.removeAll { it instanceof Map && it.type == 'minecraft:block_predicate_filter' }
                 String content = groovy.json.JsonOutput.prettyPrint(groovy.json.JsonOutput.toJson(json))
-                targets.each { File base ->
+                treeCopyTargetRoots.each { File base ->
                     File target = new File(base, "${modData.name}/worldgen/placed_feature/${source.name}")
                     target.parentFile.mkdirs()
                     target.setText(content, 'UTF-8')
