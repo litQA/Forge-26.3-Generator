@@ -24,9 +24,7 @@ public final class ${JavaModName}Network {
 					.addMain(MenuStateUpdateMessage.class, MenuStateUpdateMessage.STREAM_CODEC, MenuStateUpdateMessage::handle)
 					</#if>
 					<#list keybinds![] as keybind>
-					<#if hasProcedure(keybind.onKeyPressed) || hasProcedure(keybind.onKeyReleased)>
 					.addMain(${keybind.getModElement().getName()}Message.class, ${keybind.getModElement().getName()}Message.STREAM_CODEC, ${keybind.getModElement().getName()}Message::handle)
-					</#if>
 					</#list>
 			.build();
 

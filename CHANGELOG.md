@@ -2,6 +2,12 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.76.77-beta
+
+### Fixes
+
+- Keybind message packets are registered unconditionally for every generated keybind, preventing `Attempted to send invalid message TestKeybindMessage` at runtime.
+
 ## 2026.3-1.0.75.76-beta
 
 ### Fixes
