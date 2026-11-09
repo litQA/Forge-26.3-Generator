@@ -34,7 +34,7 @@
 
 package ${package}.world.features.treedecorators;
 
-@Mod.EventBusSubscriber(modid = "${modid}", bus = Mod.EventBusSubscriber.Bus.FORGE) public class ${name}LeaveDecorator extends LeaveVineDecorator {
+@Mod.EventBusSubscriber(modid = "${modid}", bus = Mod.EventBusSubscriber.Bus.MOD) public class ${name}LeaveDecorator extends LeaveVineDecorator {
 
 	public static MapCodec<${name}LeaveDecorator> CODEC = MapCodec.unit(${name}LeaveDecorator::new);
 

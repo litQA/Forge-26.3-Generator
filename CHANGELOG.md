@@ -2,6 +2,14 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.64.65-beta
+
+### Fixes
+
+Fixed 1 bug(s).
+
+- Tree decorator `RegisterEvent` listeners now subscribe to the Forge mod bus. Previously they used the game bus, so `test:test_biome_tree_*_decorator` types were never registered and the biome tree feature failed registry loading.
+
 ## 2026.3-1.0.63.64-beta
 
 ### Fixes
