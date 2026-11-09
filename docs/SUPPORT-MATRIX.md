@@ -35,6 +35,9 @@ final feature matrix.
 | Fluids | Supported | Source and flowing fluids, fluid block, dynamic bucket model; Forge default movement |
 | Procedure element | Supported | Java generation with event parameter and chat output templates |
 | `player_right_click_block` trigger | Supported | Forge `PlayerInteractEvent.RightClickBlock` |
+| Custom feature / tree | Supported | Datapack `configured_feature` + `placed_feature`; custom trees are data-driven and do not require Mixin |
+| Custom biome JSON | Supported | Datapack `worldgen/biome`; used by custom dimensions and by the overworld injection path |
+| Custom biome overworld generation | Supported (experimental) | Runtime `BiomeSource` wrapper replaces the overworld source; this is not a Forge public API and is documented below |
 | Static validation | Supported | YAML, FreeMarker, template references, mappings |
 
 ## Not yet supported
@@ -44,7 +47,7 @@ final feature matrix.
 | Item inventories | Pending | Phase 2 |
 | Custom armor animations | Pending | Phase 1B |
 | GUIs, menus, screens, keybinds, overlays | Supported | Basic GUIs, overlays, keybinds and Forge GUI procedure networking |
-| Biomes, dimensions, features, structures | Pending | Phase 1C |
+| Biomes, dimensions, features, structures | Supported | Biome/feature/tree generation is implemented; overworld biome injection is experimental (see below) |
 | Potions, effects, particles, attributes, gamerules | Pending | Phase 1C |
 | Remaining procedures (567 total) | Pending | Phase 2 |
 | Remaining triggers (64 of 65) | Pending | Phase 3 |
@@ -52,13 +55,73 @@ final feature matrix.
 | Networking | Pending | Phase 2 |
 | Mixin packaging | Pending | Phase 3 |
 
+## Overworld biome generation: NeoForge reference vs Forge
+
+This section explains why the Forge generator uses a runtime wrapper while the
+official NeoForge 26.3 generator uses Mixin templates.
+
+### Official NeoForge 26.3 generator
+
+The reference generator declares these pieces in `biome.definition.yaml`:
+
+| Piece | Implementation |
+| --- | --- |
+| Biome JSON | Datapack `worldgen/biome` |
+| Custom tree/feature | Datapack `configured_feature` / `placed_feature` |
+| Overworld biome source | `mixin_biomesourcepreset.java.ftl` replaces the private `MultiNoiseBiomeSourceParameterList.Preset.SourceProvider` |
+| Surface material rules | `mixin_noisegeneratorsettings.java.ftl` wraps `NoiseGeneratorSettings.materialRule()` |
+| Private-type access | Access Transformer for `MultiNoiseBiomeSourceParameterList$Preset$SourceProvider` |
+| Mixin registration | `mixin.fragment.yaml` + `mixin.json.ftl` + `[[mixins]]` |
+
+The NeoForge path is **not a public NeoForge API**. It is a generator-specific
+Mixin/AT workaround that assumes the NeoForge Mixin/ModDevGradle environment.
+
+### Why Forge cannot use the same direct API
+
+1. `ForgeBiomeModifiers` only provides `add_features`, `remove_features`,
+   `add_spawns` and `remove_spawns`. It does not provide an `add_biomes`
+   modifier.
+2. `MultiNoiseBiomeSourceParameterList.Preset.SourceProvider` and the
+   `Preset.provider` field are package-private implementation details.
+   Forge exposes neither an event nor a public registration hook to append
+   biome climate points to the overworld preset.
+3. `ChunkGenerator.biomeSource`, `featuresPerStep` and
+   `generationSettingsGetter` are final internal fields with no public setters.
+   Replacing the overworld source therefore requires an internal hook
+   (Mixin/AT/reflection), not a Forge API.
+4. Mixin/AT is especially fragile in the Forge 26.3 + Java 25 MCreator
+   workspace: Mixin 0.8.7 reports `JAVA_21` as its highest compatibility
+   level, and the Mavenizer AT/early-window path previously failed in this
+   environment.
+5. MCreator's Forge generator base exposes datapack biome JSON but has no
+   element field or public generation API for “inject this biome into the
+   existing overworld noise preset.” This is partly an MCreator template
+   limitation; the underlying missing hook is a Forge API limitation.
+
+### Implemented Forge path
+
+The generator now uses this non-Mixin path:
+
+- Registers a custom `BiomeSource` codec through `Registries.BIOME_SOURCE`.
+- Wraps the original overworld `BiomeSource`.
+- Injects the wrapper into `ChunkGenerator.biomeSource`.
+- Rebuilds `ChunkGenerator.featuresPerStep` from the wrapped source.
+- Serializes the wrapper through its registered codec, avoiding the
+  “unregistered direct holder” save crash.
+- Uses `UnsafeHacks` only for the final `ChunkGenerator` fields.
+
+This is **experimental/internal-API support**, not a stable Forge API. It
+should be revisited if Forge adds a public biome-source extension point.
+
 ## MCreator / Forge hardcoded workarounds
+
 
 The following build-time workarounds are necessary because MCreator's template
 context or Forge's runtime API does not expose a stable template-only hook:
 
 | Workaround | Why it is needed | Owner |
 | --- | --- | --- |
+| `TestModBiomeSource` runtime wrapper / `UnsafeHacks` | Forge has no public API to add a biome to the existing overworld noise preset and no setter for `ChunkGenerator` source fields. | Forge internal API + MCreator template limitation |
 | `patchNetworkJava` | MCreator's base-template `guis`/`keybinds` collections are not reliably populated in `keybind_network.java.ftl`; the task scans generated `*Message.java` classes and registers them on the Forge `SimpleChannel`. | MCreator template context |
 | `patchArmorJava` | Forge 26.3 needs per-piece equipment assets, but changing the armor Java template causes MCreator armor element generation to fail; the task upgrades generated armor classes before compilation. | MCreator template generation |
 | `copySignGuiTextures` | `SignEditScreen` / `HangingSignEditScreen` hard-code the `minecraft` texture namespace. | Minecraft / Forge hardcoded path |

@@ -21,6 +21,8 @@ Only Forge 26.3 APIs and resources are used by the generator templates.
 | Keybinds | Forge key mapping registration and `SimpleChannel` press/release procedures |
 | Overlays | HUD `ForgeLayeredDraw` overlays and screen-target `ScreenEvent.Render.Post` overlays |
 | Dynamic fluid buckets | Forge `forge:fluid_container` model and item-atlas texture copying |
+| Custom features/trees | Datapack `configured_feature` / `placed_feature`; trees are data-driven |
+| Custom biome overworld generation | Experimental runtime `BiomeSource` wrapper; no public Forge API (see `SUPPORT-MATRIX.md`) |
 
 ## Known Limitations
 
