@@ -2,6 +2,13 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.34.35-beta
+
+### Changes
+
+- Template include validation no longer falls back to the templates root for relative paths, preventing missing keybind-style messages from passing validation.
+- Plugin version raised to `2026.3-1.0.34.35-beta`.
+
 ## 2026.3-1.0.33.34-beta
 
 ### New Content

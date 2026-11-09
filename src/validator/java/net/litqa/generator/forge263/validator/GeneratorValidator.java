@@ -370,13 +370,12 @@ public final class GeneratorValidator {
             } else {
                 found = Files.isRegularFile(templateFile.getParent().resolve(include).normalize());
                 if (!found && generatorDirectory != null) {
-                    // MCreator resolves relative includes from both the templates and utils roots.
+                    // MCreator also exposes the utils root to relative includes.
                     String normalized = include.replace('\\', '/');
                     while (normalized.startsWith("../")) {
                         normalized = normalized.substring(3);
                     }
-                    found = Files.isRegularFile(generatorDirectory.resolve("templates").resolve(normalized))
-                            || Files.isRegularFile(generatorDirectory.resolve("utils").resolve(normalized));
+                    found = Files.isRegularFile(generatorDirectory.resolve("utils").resolve(normalized));
                 }
             }
 
