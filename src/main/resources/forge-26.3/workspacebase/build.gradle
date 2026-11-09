@@ -254,3 +254,31 @@ tasks.register('patchArmorJava') {
 }
 tasks.named('compileJava') { dependsOn 'patchArmorJava' }
 
+// MCreator's network template cannot reliably enumerate GUI/keybind collections.
+// Populate the generated channel from the message classes that actually exist.
+def networkJavaRoot = file('src/main/java')
+
+tasks.register('patchNetworkJava') {
+    doLast {
+        if (!networkJavaRoot.exists())
+            return
+        networkJavaRoot.eachFileRecurse { File source ->
+            if (!source.isFile() || !source.name.endsWith('Network.java'))
+                return
+            File dir = source.parentFile
+            List<File> messages = dir.listFiles()?.findAll { it.isFile() && it.name.endsWith('Message.java') }?.sort { it.name } ?: []
+            if (messages.isEmpty())
+                return
+            String text = source.getText('UTF-8')
+            if (text.contains('.addMain('))
+                return
+            String additions = messages.collect { File message ->
+                String className = message.name.substring(0, message.name.length() - '.java'.length())
+                "\t\t\t\t.addMain(${className}.class, ${className}.STREAM_CODEC, ${className}::handle)"
+            }.join('\n')
+            text = text.replace('.bidirectional().build()', ".bidirectional()\n" + additions + "\n\t\t\t.build()")
+            source.setText(text, 'UTF-8')
+        }
+    }
+}
+tasks.named('compileJava') { dependsOn 'patchNetworkJava' }

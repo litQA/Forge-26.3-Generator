@@ -2,6 +2,12 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.77.78-beta
+
+### Fixes
+
+- Added a post-generation `patchNetworkJava` task that scans generated `*Message.java` classes and registers them on the `SimpleChannel`. This does not depend on MCreator's GUI/keybind template collections.
+
 ## 2026.3-1.0.76.77-beta
 
 ### Fixes
