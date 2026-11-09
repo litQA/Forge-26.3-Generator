@@ -2,6 +2,15 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.61.62-beta
+
+### Fixes
+
+- Fixed custom armor animation overrides to subclass `HumanoidModel` with a `HumanoidRenderState` signature and correct constructor argument order.
+- Removed biome mixin generation that required private `SourceProvider` access.
+- Removed the unsupported honey-bottle component event from mob effects.
+- Fixed attribute registration and `Holder` conversion for attributes and potion effects.
+
 ## 2026.3-1.0.60.61-beta
 
 ### Fixes

@@ -95,7 +95,12 @@ public abstract class ${name}Item extends Item {
 							"left_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
 							"right_leg", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
 							"left_leg", new ModelPart(Collections.emptyList(), Collections.emptyMap())
-						))<#if data.helmetTranslucency>, RenderTypes::entityTranslucent</#if>);
+						))<#if data.helmetTranslucency>, RenderTypes::entityTranslucent</#if>) {
+							@Override public void setupAnim(HumanoidRenderState state) {
+								super.setupAnim(state);
+								custom.setupAnim(state);
+							}
+						};
 					}
 					return helmetModel;
 				}
@@ -113,7 +118,12 @@ public abstract class ${name}Item extends Item {
 							)),
 							"right_leg", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
 							"left_leg", new ModelPart(Collections.emptyList(), Collections.emptyMap())
-						))<#if data.bodyTranslucency>, RenderTypes::entityTranslucent</#if>);
+						))<#if data.bodyTranslucency>, RenderTypes::entityTranslucent</#if>) {
+							@Override public void setupAnim(HumanoidRenderState state) {
+								super.setupAnim(state);
+								custom.setupAnim(state);
+							}
+						};
 					}
 					return bodyModel;
 				}
@@ -131,7 +141,12 @@ public abstract class ${name}Item extends Item {
 							"body", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
 							"right_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
 							"left_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap())
-						))<#if data.leggingsTranslucency>, RenderTypes::entityTranslucent</#if>);
+						))<#if data.leggingsTranslucency>, RenderTypes::entityTranslucent</#if>) {
+							@Override public void setupAnim(HumanoidRenderState state) {
+								super.setupAnim(state);
+								custom.setupAnim(state);
+							}
+						};
 					}
 					return leggingsModel;
 				}
@@ -149,7 +164,12 @@ public abstract class ${name}Item extends Item {
 							"body", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
 							"right_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
 							"left_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap())
-						))<#if data.bootsTranslucency>, RenderTypes::entityTranslucent</#if>);
+						))<#if data.bootsTranslucency>, RenderTypes::entityTranslucent</#if>) {
+							@Override public void setupAnim(HumanoidRenderState state) {
+								super.setupAnim(state);
+								custom.setupAnim(state);
+							}
+						};
 					}
 					return bootsModel;
 				}
