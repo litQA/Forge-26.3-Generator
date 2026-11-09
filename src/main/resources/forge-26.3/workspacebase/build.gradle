@@ -211,3 +211,45 @@ tasks.register('copyArmorEquipmentTextures') {
     }
 }
 tasks.named('processResources') { finalizedBy 'copyArmorEquipmentTextures' }
+
+// MCreator's armor Java template is kept stable for generation, then this task
+// upgrades the generated material bindings to per-piece equipment assets.
+def armorJavaRoot = file('src/main/java')
+
+tasks.register('patchArmorJava') {
+    doLast {
+        if (!armorJavaRoot.exists())
+            return
+        armorJavaRoot.eachFileRecurse { File source ->
+            if (!source.isFile() || !source.name.endsWith('.java'))
+                return
+            String text = source.getText('UTF-8')
+            if (!text.contains('ARMOR_MATERIAL'))
+                return
+            def matcher = text =~ /(?s)public static ArmorMaterial ARMOR_MATERIAL = new ArmorMaterial\((.*?)\);/
+            if (!matcher.find())
+                return
+            String body = matcher.group(1)
+            List<String> ids = (body =~ /Identifier\.parse\("([^"]+)"\)/).collect { it[1] }
+            if (ids.isEmpty())
+                return
+            String fullId = ids[ids.size() - 1]
+            int colon = fullId.indexOf(':')
+            String namespace = colon >= 0 ? fullId.substring(0, colon) : 'test'
+            String base = colon >= 0 ? fullId.substring(colon + 1) : fullId
+            body = body.replaceAll(/ResourceKey\.create\(EquipmentAssets\.ROOT_ID, Identifier\.parse\("[^"]+"\)\)/, 'ResourceKey.create(EquipmentAssets.ROOT_ID, Identifier.parse(assetPath))')
+            String replacement = "public static ArmorMaterial createArmorMaterial(String assetPath) {\n\t\treturn new ArmorMaterial(" + body + ");\n\t}\n\n" +
+                "\tpublic static final ArmorMaterial HELMET_MATERIAL = createArmorMaterial(\"${namespace}:${base}_helmet\");\n" +
+                "\tpublic static final ArmorMaterial CHESTPLATE_MATERIAL = createArmorMaterial(\"${namespace}:${base}_chestplate\");\n" +
+                "\tpublic static final ArmorMaterial LEGGINGS_MATERIAL = createArmorMaterial(\"${namespace}:${base}_leggings\");\n" +
+                "\tpublic static final ArmorMaterial BOOTS_MATERIAL = createArmorMaterial(\"${namespace}:${base}_boots\");"
+            text = matcher.replaceFirst(java.util.regex.Matcher.quoteReplacement(replacement))
+            text = text.replace('properties.humanoidArmor(ARMOR_MATERIAL, ArmorType.HELMET)', 'properties.humanoidArmor(HELMET_MATERIAL, ArmorType.HELMET)')
+            text = text.replace('properties.humanoidArmor(ARMOR_MATERIAL, ArmorType.CHESTPLATE)', 'properties.humanoidArmor(CHESTPLATE_MATERIAL, ArmorType.CHESTPLATE)')
+            text = text.replace('properties.humanoidArmor(ARMOR_MATERIAL, ArmorType.LEGGINGS)', 'properties.humanoidArmor(LEGGINGS_MATERIAL, ArmorType.LEGGINGS)')
+            text = text.replace('properties.humanoidArmor(ARMOR_MATERIAL, ArmorType.BOOTS)', 'properties.humanoidArmor(BOOTS_MATERIAL, ArmorType.BOOTS)')
+            source.setText(text, 'UTF-8')
+        }
+    }
+}
+tasks.named('compileJava') { dependsOn 'patchArmorJava' }

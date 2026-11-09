@@ -2,6 +2,14 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.56.57-beta
+
+### Fixes
+
+Fixed 1 bug(s).
+
+- Armor generation now uses the stable single-material FTL template. A post-generation `patchArmorJava` task upgrades generated armor classes to per-piece equipment assets before compilation, so custom textures do not break MCreator's armor element generation.
+
 ## 2026.3-1.0.55.56-beta
 
 ### Fixes
