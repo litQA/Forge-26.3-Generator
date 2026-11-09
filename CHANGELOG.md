@@ -2,6 +2,14 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.41.42-beta
+
+### Fixes
+
+Fixed 1 bug(s).
+
+- The mod constructor now registers the GUI menu `DeferredRegister` and initializes the shared network channel when `types.guis` is present, preventing `Registry Object not present: test:test_gui` during client setup.
+
 ## 2026.3-1.0.40.41-beta
 
 ### Fixes
