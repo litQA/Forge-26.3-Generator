@@ -46,17 +46,15 @@ package ${package}.client.screens;
 		private static final Identifier SPRITE_${component?index} = Identifier.parse("${modid}:textures/screens/${component.sprite}");
 	</#list>
 
-	@SubscribeEvent(priority = net.minecraftforge.eventbus.api.EventPriority.${data.priority})
-	<#if data.overlayTarget == "Ingame">
-		public static void eventHandler(net.minecraftforge.client.event.RenderGuiEvent.Pre event) {
-			int w = event.getGuiGraphics().guiWidth();
-			int h = event.getGuiGraphics().guiHeight();
-	<#else>
-		public static void eventHandler(net.minecraftforge.client.event.ScreenEvent.Render.Post event) {
-			if (event.getScreen() instanceof ${data.overlayTarget}) {
-				int w = event.getGuiGraphics().guiWidth();
-				int h = event.getGuiGraphics().guiHeight();
-	</#if>
+	static {
+		AddGuiOverlayLayersEvent.BUS.addListener(event -> event.getLayeredDraw().add(
+			Identifier.parse("${modid}:${registryname}_overlay"),
+			(guiGraphics, deltaTracker) -> eventHandler(guiGraphics)));
+	}
+
+	public static void eventHandler(GuiGraphicsExtractor guiGraphics) {
+		int w = guiGraphics.guiWidth();
+		int h = guiGraphics.guiHeight();
 
 		Level world = null;
 		double x = 0;
@@ -73,14 +71,14 @@ package ${package}.client.screens;
 
 		if (<@procedureOBJToConditionCode data.displayCondition/>) {
 			<#if data.baseTexture?has_content>
-				event.getGuiGraphics().blit(RenderPipelines.GUI_TEXTURED, BACKGROUND, 0, 0, 0, 0, w, h, w, h);
+				guiGraphics.blit(RenderPipelines.GUI_TEXTURED, BACKGROUND, 0, 0, 0, 0, w, h, w, h);
 			</#if>
 
 			<#list data.getComponentsOfType("Image") as component>
 				<#if hasProcedure(component.displayCondition)>
 						if (<@procedureOBJToConditionCode component.displayCondition/>) {
 				</#if>
-					event.getGuiGraphics().blit(RenderPipelines.GUI_TEXTURED, IMAGE_${component?index}, <@calculatePosition component/>, 0, 0,
+					guiGraphics.blit(RenderPipelines.GUI_TEXTURED, IMAGE_${component?index}, <@calculatePosition component/>, 0, 0,
 						${component.getWidth(w.getWorkspace())}, ${component.getHeight(w.getWorkspace())},
 						${component.getWidth(w.getWorkspace())}, ${component.getHeight(w.getWorkspace())});
 				<#if hasProcedure(component.displayCondition)>}</#if>
@@ -88,7 +86,7 @@ package ${package}.client.screens;
 
 			<#list data.getComponentsOfType("Sprite") as component>
 				<#if hasProcedure(component.displayCondition)>if (<@procedureOBJToConditionCode component.displayCondition/>) {</#if>
-					event.getGuiGraphics().blit(RenderPipelines.GUI_TEXTURED, SPRITE_${component?index}, <@calculatePosition component/>,
+					guiGraphics.blit(RenderPipelines.GUI_TEXTURED, SPRITE_${component?index}, <@calculatePosition component/>,
 						<#if (component.getTextureWidth(w.getWorkspace()) > component.getTextureHeight(w.getWorkspace()))>
 							<@getSpriteByIndex component "width"/>, 0
 						<#else>
@@ -103,7 +101,7 @@ package ${package}.client.screens;
 				<#if hasProcedure(component.displayCondition)>
 					if (<@procedureOBJToConditionCode component.displayCondition/>)
 				</#if>
-				event.getGuiGraphics().text(Minecraft.getInstance().font,
+				guiGraphics.text(Minecraft.getInstance().font,
 					<#if hasProcedure(component.text)><@procedureOBJToStringCode component.text/><#else>Component.translatable("gui.${modid}.${registryname}.${component.getName()}")</#if>,
 					<@calculatePosition component/>, ${component.color.getRGB()}, ${component.hasShadow});
 			</#list>
@@ -113,7 +111,7 @@ package ${package}.client.screens;
 					<#if hasProcedure(component.displayCondition)>
 						if (<@procedureOBJToConditionCode component.displayCondition/>)
 					</#if>
-					InventoryScreen.renderEntityInInventoryFollowsAngle(event.getGuiGraphics(),
+					InventoryScreen.renderEntityInInventoryFollowsAngle(guiGraphics,
 						<@calculatePosition component=component x_offset=(10 - 1000) y_offset=(20 - 1000)/>,
 						<@calculatePosition component=component x_offset=(10 + 1000) y_offset=(20 + 1000)/>,
 						${component.scale}, -livingEntity.getBbHeight() / (2.0f * livingEntity.getScale()),
@@ -121,9 +119,6 @@ package ${package}.client.screens;
 				}
 			</#list>
 		}
-	<#if data.overlayTarget != "Ingame">
-		}
-	</#if>
 	}
 
 }

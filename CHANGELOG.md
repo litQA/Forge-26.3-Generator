@@ -2,6 +2,15 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.28.29-beta
+
+### Fixes
+
+Fixed 2 bug(s).
+
+- HUD overlays now register through Forge `AddGuiOverlayLayersEvent` and `ForgeLayer`; removed the removed `RenderGuiEvent`/`EventPriority` APIs.
+- GUI/keybind network generation now keys off the actual `guis` collection, fixing missing generated network classes when a GUI exists without a keybind.
+
 ## 2026.3-1.0.27.28-beta
 
 ### Changes

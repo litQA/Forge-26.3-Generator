@@ -93,7 +93,7 @@ base_templates:
     condition: "${javamodels?has_content || types.specialentities?has_content}"
   - template: keybind_network.java.ftl
     name: "@SRCROOT/@BASEPACKAGEPATH/network/@JavaModNameNetwork.java"
-    condition: "${keybinds?has_content || types.guis?has_content}"
+    condition: "${keybinds?has_content || guis?has_content}"
 
 tags:
   template: tags.json.ftl
