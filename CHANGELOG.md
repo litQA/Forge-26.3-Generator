@@ -2,6 +2,12 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.90.91-beta
+
+### Fixes
+
+- Removed the Access Transformer path that caused the Mavenizer AT processor to fail. Runtime injection now uses `UnsafeHacks` for the final `ChunkGenerator` fields and reflection for the original BiomeSource codec.
+
 ## 2026.3-1.0.88.89-beta
 
 ### Fixes

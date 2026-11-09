@@ -13,12 +13,14 @@ import net.minecraft.world.level.dimension.LevelStem;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 
 import net.minecraftforge.common.util.ClearableLazy;
+import net.minecraftforge.unsafe.UnsafeHacks;
 import net.minecraftforge.event.server.ServerAboutToStartEvent;
 import net.minecraftforge.eventbus.api.listener.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 import ${package}.biome.${JavaModName}OverworldBiomeSource;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,11 +48,23 @@ public final class ${JavaModName}Biomes {
 			if (!stem.type().is(BuiltinDimensionTypes.OVERWORLD))
 				continue;
 			ChunkGenerator generator = stem.generator();
-			generator.biomeSource = new ${JavaModName}OverworldBiomeSource(generator.getBiomeSource(), customBiomes);
-			generator.featuresPerStep = ClearableLazy.concurrentOf(
+			${JavaModName}OverworldBiomeSource wrapper = new ${JavaModName}OverworldBiomeSource(generator.getBiomeSource(), customBiomes);
+			setField(generator, "biomeSource", wrapper);
+			ClearableLazy<List<FeatureSorter.StepFeatureData>> features = ClearableLazy.concurrentOf(
 				() -> FeatureSorter.buildFeaturesPerStep(
-					List.copyOf(generator.getBiomeSource().possibleBiomes()),
-					biome -> generator.generationSettingsGetter.apply(biome).features(), true));
+					List.copyOf(wrapper.possibleBiomes()),
+					biome -> biome.value().getGenerationSettings().features(), true));
+			setField(generator, "featuresPerStep", features);
+		}
+	}
+
+	private static void setField(ChunkGenerator generator, String name, Object value) {
+		try {
+			Field field = ChunkGenerator.class.getDeclaredField(name);
+			UnsafeHacks.setAccessible(field);
+			UnsafeHacks.setField(field, generator, value);
+		} catch (ReflectiveOperationException e) {
+			throw new IllegalStateException("Unable to inject " + name, e);
 		}
 	}
 }
