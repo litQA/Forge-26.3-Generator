@@ -1,5 +1,6 @@
 <#-- @formatter:off -->
 package ${package};
+import net.minecraftforge.api.distmarker.Dist;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

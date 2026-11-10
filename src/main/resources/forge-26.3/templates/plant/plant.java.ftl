@@ -35,6 +35,7 @@
 <#include "../mcitems.ftl">
 
 package ${package}.block;
+import net.minecraft.resources.Identifier;
 
 import net.minecraft.util.random.Weighted;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;

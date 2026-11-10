@@ -30,6 +30,7 @@
 
 <#-- @formatter:off -->
 package ${package}.client.model;
+import net.minecraft.resources.Identifier;
 
 ${model
     ?replace("private final ModelPart", "public final ModelPart")

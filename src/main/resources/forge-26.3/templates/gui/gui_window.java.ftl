@@ -31,6 +31,7 @@
 <#-- @formatter:off -->
 <#include "../procedures.java.ftl">
 package ${package}.client.gui;
+import net.minecraft.resources.Identifier;
 
 <#assign textFields = data.getComponentsOfType("TextField")>
 <#assign checkboxes = data.getComponentsOfType("Checkbox")>

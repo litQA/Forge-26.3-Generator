@@ -34,6 +34,7 @@
 <#include "../triggers.java.ftl">
 <#assign modifiesDefaultComponents = (data.maxDamage == 0 && (data.enableHelmet || data.enableBody || data.enableLeggings || data.enableBoots))>
 package ${package}.item;
+import net.minecraft.resources.Identifier;
 
 import java.util.Map;
 

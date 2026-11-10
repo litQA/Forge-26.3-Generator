@@ -1,4 +1,5 @@
 package ${package}.init;
+import net.minecraft.resources.Identifier;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;

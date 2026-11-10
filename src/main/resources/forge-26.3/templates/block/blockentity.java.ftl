@@ -32,6 +32,7 @@
 <#include "../procedures.java.ftl">
 
 package ${package}.block.entity;
+import net.minecraft.resources.Identifier;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.fluids.capability.IFluidHandler;

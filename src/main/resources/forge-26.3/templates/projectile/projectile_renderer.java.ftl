@@ -30,6 +30,7 @@
 
 <#-- @formatter:off -->
 package ${package}.client.renderer;
+import net.minecraft.resources.Identifier;
 
 import com.mojang.math.Axis;
 

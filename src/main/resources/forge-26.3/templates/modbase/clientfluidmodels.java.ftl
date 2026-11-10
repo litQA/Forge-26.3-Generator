@@ -1,5 +1,6 @@
 <#-- @formatter:off -->
 package ${package}.client;
+import net.minecraft.resources.Identifier;
 
 public final class ${JavaModName}FluidModels {
 

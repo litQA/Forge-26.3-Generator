@@ -1,4 +1,5 @@
 package ${package}.init;
+import net.minecraft.resources.Identifier;
 
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;

@@ -34,6 +34,7 @@
 <#include "../triggers.java.ftl">
 
 package ${package}.item;
+import net.minecraft.resources.Identifier;
 
 <@javacompress>
 <#if data.hasCustomEatResultItem()>

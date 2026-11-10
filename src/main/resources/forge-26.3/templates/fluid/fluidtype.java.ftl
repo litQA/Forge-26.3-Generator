@@ -32,6 +32,7 @@
 <#include "../procedures.java.ftl">
 
 package ${package}.fluid.types;
+import net.minecraft.resources.Identifier;
 import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.minecraftforge.common.SoundActions;
 import net.minecraftforge.fluids.FluidType;

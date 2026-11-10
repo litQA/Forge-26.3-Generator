@@ -1,5 +1,6 @@
 <#-- @formatter:off -->
 package ${package}.network;
+import net.minecraft.resources.Identifier;
 import net.minecraftforge.network.SimpleChannel;
 import net.minecraftforge.network.ChannelBuilder;
 import net.minecraft.resources.Identifier;

@@ -2,6 +2,14 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.101.102-beta
+
+### Fixes
+
+- Restored workspace base templates for `build.gradle` and `settings.gradle`; MCreator deletes these as stale during Regenerate when they are only in `workspacebase`.
+- Added explicit `Identifier`, `LevelBasedPermissionSet`, `Prediction`, `SwingAnimation`, `Dist` and `Cancellable` imports to procedure generation.
+- Replaced the NeoForge `ICancellableEvent` reference in `_cancel_event`.
+
 ## 2026.3-1.0.100.101-beta
 
 ### Fixes

@@ -32,6 +32,7 @@
 <#include "procedures.java.ftl">
 
 package ${package}.command;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterClientCommandsEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 

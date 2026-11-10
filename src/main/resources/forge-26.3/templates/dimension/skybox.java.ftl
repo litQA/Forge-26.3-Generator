@@ -31,6 +31,8 @@
 <#-- @formatter:off -->
 
 package ${package}.client;
+import net.minecraft.resources.Identifier;
+import net.minecraftforge.api.distmarker.Dist;
 
 @Mod.EventBusSubscriber(modid = "${modid}", bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class ${JavaModName}SkyboxRenderer {

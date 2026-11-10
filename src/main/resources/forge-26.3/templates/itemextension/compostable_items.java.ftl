@@ -37,6 +37,7 @@
  */
 
 package ${package}.init;
+import net.minecraft.resources.Identifier;
 
 @EventBusSubscriber public class ${JavaModName}Compostables {
 

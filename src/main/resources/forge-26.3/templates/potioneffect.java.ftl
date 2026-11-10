@@ -32,6 +32,7 @@
 <#include "procedures.java.ftl">
 
 package ${package}.potion;
+import net.minecraft.resources.Identifier;
 
 <@javacompress>
 <#if data.hasCustomRenderer()>

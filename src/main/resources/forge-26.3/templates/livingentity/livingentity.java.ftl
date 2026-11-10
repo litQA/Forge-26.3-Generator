@@ -33,6 +33,7 @@
 <#include "../procedures.java.ftl">
 
 package ${package}.entity;
+import net.minecraft.resources.Identifier;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.fluids.FluidType;

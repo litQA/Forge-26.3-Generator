@@ -37,6 +37,7 @@
  */
 
 package ${package}.init;
+import net.minecraft.resources.Identifier;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 

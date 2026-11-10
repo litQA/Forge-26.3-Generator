@@ -35,6 +35,7 @@
  */
 
 package ${package}.init;
+import net.minecraftforge.api.distmarker.Dist;
 
 @Mod.EventBusSubscriber(modid = "${modid}", bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT) public class ${JavaModName}EntityRenderers {
 

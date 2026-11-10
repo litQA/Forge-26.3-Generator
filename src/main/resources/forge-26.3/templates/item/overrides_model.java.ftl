@@ -30,6 +30,8 @@
 
 <#-- @formatter:off -->
 package ${package}.client.renderer.item;
+import net.minecraft.resources.Identifier;
+import net.minecraftforge.api.distmarker.Dist;
 
 @Mod.EventBusSubscriber(modid = "${modid}", value = Dist.CLIENT) public class LegacyOverrideSelectItemModel implements ItemModel {
 

@@ -33,6 +33,8 @@
 <#include "../procedures.java.ftl">
 
 package ${package}.client.renderer;
+import net.minecraft.resources.Identifier;
+import net.minecraftforge.api.distmarker.Dist;
 
 <#assign humanoid = false>
 <#assign model = "HumanoidModel<HumanoidRenderState>">

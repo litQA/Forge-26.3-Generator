@@ -33,6 +33,7 @@
 <#include "../procedures.java.ftl">
 
 package ${package}.block;
+import net.minecraft.resources.Identifier;
 
 import org.slf4j.Logger;
 

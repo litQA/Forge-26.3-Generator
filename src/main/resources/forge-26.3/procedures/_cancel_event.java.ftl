@@ -1,3 +1,3 @@
-if(event instanceof ICancellableEvent _cancellable) {
+if(event instanceof Cancellable _cancellable) {
 	_cancellable.setCanceled(true);
 }

@@ -31,6 +31,13 @@
 <#-- @formatter:off -->
 package ${package}.procedures;
 
+import net.minecraft.resources.Identifier;
+import net.minecraft.server.permissions.LevelBasedPermissionSet;
+import net.minecraft.util.Prediction;
+import net.minecraft.world.item.component.SwingAnimation;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.eventbus.api.event.characteristic.Cancellable;
+
 <#assign nullableDependencies = []/>
 <#if !(data.skipDependencyNullCheck)>
 	<#list dependencies as dependency>

@@ -38,6 +38,7 @@
 	e.property().getName().startsWith("CUSTOM:") || generator.map(e.property().getName(), "blockstateproperties") != "")>
 
 package ${package}.block;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.BonemealSource;
 import net.minecraftforge.common.util.BlockSnapshot;
 

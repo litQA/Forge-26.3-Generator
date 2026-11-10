@@ -1,4 +1,5 @@
 package ${package}.network;
+import net.minecraft.resources.Identifier;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 

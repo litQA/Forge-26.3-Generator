@@ -32,6 +32,8 @@
 <#include "../procedures.java.ftl">
 
 package ${package}.client.renderer.block;
+import net.minecraft.resources.Identifier;
+import net.minecraftforge.api.distmarker.Dist;
 
 @Mod.EventBusSubscriber(modid = "${modid}", value = Dist.CLIENT) public class ${name}Renderer implements BlockEntityRenderer<${name}BlockEntity, ${name}Renderer.CustomRenderState> {
 

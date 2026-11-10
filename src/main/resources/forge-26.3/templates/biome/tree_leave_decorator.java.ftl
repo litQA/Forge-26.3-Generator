@@ -33,6 +33,7 @@
 <#include "../mcitems.ftl">
 
 package ${package}.world.features.treedecorators;
+import net.minecraft.resources.Identifier;
 
 @Mod.EventBusSubscriber(modid = "${modid}", bus = Mod.EventBusSubscriber.Bus.MOD) public class ${name}LeaveDecorator extends LeaveVineDecorator {
 

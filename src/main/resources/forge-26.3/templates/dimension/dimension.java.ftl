@@ -33,6 +33,7 @@
 <#include "../procedures.java.ftl">
 
 package ${package}.world.dimension;
+import net.minecraft.resources.Identifier;
 
 <@javacompress>
 

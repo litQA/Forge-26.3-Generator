@@ -33,6 +33,7 @@
 <#include "../procedures.java.ftl">
 
 package ${package}.entity;
+import net.minecraft.resources.Identifier;
 
 <@javacompress>
 public class ${name}Entity extends AbstractArrow implements ItemSupplier {

@@ -1,5 +1,6 @@
 <#-- @formatter:off -->
 package ${package}.client;
+import net.minecraftforge.api.distmarker.Dist;
 
 <#assign signs = types.blocks?filter(e -> e.isSign())>
 <#assign regularSigns = signs?filter(e -> e.blockBase != "HangingSign")>
