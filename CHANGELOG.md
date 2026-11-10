@@ -2,6 +2,14 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.108.109-beta
+
+### Fixes
+
+- Corrected the FTL expression around `effectHolder` so `generator.map(field$potion, "effects")` is evaluated instead of emitted literally.
+- Added the missing `mappings/effects.yaml` used by potion procedure blocks.
+- Changed `SavedDataType` to Forge's zero-argument supplier plus direct Codec/DataFixTypes constructor form.
+
 ## 2026.3-1.0.107.108-beta
 
 ### Fixes

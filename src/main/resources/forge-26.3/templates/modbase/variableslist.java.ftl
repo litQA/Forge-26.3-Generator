@@ -69,12 +69,12 @@ public final class ${JavaModName}Variables {
 	<#if w.hasVariablesOfScope("GLOBAL_WORLD") || w.hasVariablesOfScope("GLOBAL_MAP")>
 	public static class WorldVariables extends net.minecraft.world.level.saveddata.SavedData {
 		public static final net.minecraft.world.level.saveddata.SavedDataType<WorldVariables> TYPE = new net.minecraft.world.level.saveddata.SavedDataType<>(
-			Identifier.fromNamespaceAndPath("${modid}", "worldvars"), level -> new WorldVariables(),
-			level -> CompoundTag.CODEC.xmap(tag -> {
+			Identifier.fromNamespaceAndPath("${modid}", "worldvars"), WorldVariables::new,
+			CompoundTag.CODEC.xmap(tag -> {
 				WorldVariables instance = new WorldVariables();
-				instance.read(tag, level.registryAccess());
+				instance.read(tag, null);
 				return instance;
-			}, instance -> instance.save(new CompoundTag(), level.registryAccess())), net.minecraft.util.datafix.DataFixTypes.SAVED_DATA_MAP_DATA);
+			}, instance -> instance.save(new CompoundTag(), null)), net.minecraft.util.datafix.DataFixTypes.SAVED_DATA_MAP_DATA);
 
 		boolean _syncDirty = false;
 
@@ -116,12 +116,12 @@ public final class ${JavaModName}Variables {
 
 	public static class MapVariables extends net.minecraft.world.level.saveddata.SavedData {
 		public static final net.minecraft.world.level.saveddata.SavedDataType<MapVariables> TYPE = new net.minecraft.world.level.saveddata.SavedDataType<>(
-			Identifier.fromNamespaceAndPath("${modid}", "mapvars"), level -> new MapVariables(),
-			level -> CompoundTag.CODEC.xmap(tag -> {
+			Identifier.fromNamespaceAndPath("${modid}", "mapvars"), MapVariables::new,
+			CompoundTag.CODEC.xmap(tag -> {
 				MapVariables instance = new MapVariables();
-				instance.read(tag, level.registryAccess());
+				instance.read(tag, null);
 				return instance;
-			}, instance -> instance.save(new CompoundTag(), level.registryAccess())), net.minecraft.util.datafix.DataFixTypes.SAVED_DATA_MAP_DATA);
+			}, instance -> instance.save(new CompoundTag(), null)), net.minecraft.util.datafix.DataFixTypes.SAVED_DATA_MAP_DATA);
 
 		boolean _syncDirty = false;
 
