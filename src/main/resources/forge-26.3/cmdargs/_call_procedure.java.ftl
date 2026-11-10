@@ -7,8 +7,6 @@
     double z = arguments.getSource().getPosition().z();
 
     Entity entity = arguments.getSource().getEntity();
-    if (entity == null && world instanceof ServerLevel _servLevel)
-        entity = FakePlayerFactory.getMinecraft(_servLevel);
 
     Direction direction = Direction.DOWN;
     if (entity != null)

@@ -2,6 +2,15 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.106.107-beta
+
+### Fixes
+
+- Removed the nonexistent Forge 26.3 `FakePlayerFactory` from command argument generation.
+- Fixed player variable capability emission when only global variables exist.
+- Replaced removed `stepOn` block override with Forge 26.3 `entityInside`.
+- Fixed `IClientMobEffectExtensions.extractInventory` for Forge 26.3.
+
 ## 2026.3-1.0.105.106-beta
 
 ### Fixes

@@ -144,7 +144,7 @@ public class ${name}MobEffect extends <#if data.isInstant>Instantaneous</#if>Mob
 				return false;
 			}
 
-			@Override public boolean extractInventoryText(MobEffectInstance instance, AbstractContainerScreen<?> screen, GuiGraphicsExtractor graphics, int x, int y, int canvasWidth, int color) {
+			@Override public boolean extractInventory(MobEffectInstance instance, net.minecraft.client.gui.screens.inventory.EffectsInInventory screen, GuiGraphicsExtractor graphics, int x, int y, int color) {
 				return false;
 			}
 			</#if>

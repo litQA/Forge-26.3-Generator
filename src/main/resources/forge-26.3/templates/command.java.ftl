@@ -32,7 +32,7 @@
 <#include "procedures.java.ftl">
 
 package ${package}.command;
-import net.minecraftforge.common.util.FakePlayerFactory;
+
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.listener.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;

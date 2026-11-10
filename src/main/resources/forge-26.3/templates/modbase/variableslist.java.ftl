@@ -162,7 +162,7 @@ public final class ${JavaModName}Variables {
 	}
 	</#if>
 
-	<#if w.hasVariablesOfScope("PLAYER_LIFETIME") || w.hasVariablesOfScope("PLAYER_PERSISTENT")>
+	<#if true>
 	@AutoRegisterCapability
 	public static class PlayerVariables implements INBTSerializable<CompoundTag> {
 		<#list variables as var>

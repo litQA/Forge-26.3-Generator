@@ -401,8 +401,8 @@
 
 <#macro onEntityWalksOn procedure="">
 <#if hasProcedure(procedure)>
-@Override public void stepOn(Level world, BlockPos pos, BlockState blockstate, Entity entity) {
-	super.stepOn(world, pos, blockstate, entity);
+@Override public void entityInside(BlockState blockstate, Level world, BlockPos pos, Entity entity, InsideBlockEffectApplier insideBlockEffectApplier, boolean isPrecise) {
+	super.entityInside(blockstate, world, pos, entity, insideBlockEffectApplier, isPrecise);
 	<@procedureCode procedure, {
 		"x": "pos.getX()",
 		"y": "pos.getY()",
