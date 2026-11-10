@@ -2,6 +2,17 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.103.104-beta
+
+### Fixes
+
+- Fixed `getCloneItemStack` and `onDestroyedByPlayer` signatures for Forge 26.3.
+- Fixed `SavedDataType` construction with the required `DataFixTypes` argument.
+- Added a holder conversion for custom mob-effect registry objects.
+- Added the missing `FakePlayerFactory` import to command generation.
+- Added mob-effect client registration imports.
+- Made the Forge 26.3 cancellation template a compile-safe adapter; mutable cancellation requires a dedicated listener API.
+
 ## 2026.3-1.0.102.103-beta
 
 ### Fixes

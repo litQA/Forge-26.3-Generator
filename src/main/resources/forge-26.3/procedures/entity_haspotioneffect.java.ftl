@@ -1,1 +1,1 @@
-(${input$entity} instanceof LivingEntity _livEnt${cbi} && _livEnt${cbi}.hasEffect(${generator.map(field$potion, "effects")}))
+(${input$entity} instanceof LivingEntity _livEnt${cbi} && _livEnt${cbi}.hasEffect(${effectHolder(generator.map(field$potion, "effects"))}))

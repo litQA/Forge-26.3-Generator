@@ -1,4 +1,12 @@
 <#-- @formatter:off -->
+<#function effectHolder effect>
+<#if effect?contains("MobEffects.")>
+<#return effect>
+<#else>
+<#return effect + ".getHolder().orElseThrow()">
+</#if>
+</#function>
+
 <#macro procedureDependenciesCode requiredDependencies dependencies={}>
 <@javacompress>
     <#local deps_filtered = [] />

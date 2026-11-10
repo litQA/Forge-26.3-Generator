@@ -74,7 +74,7 @@ public final class ${JavaModName}Variables {
 				WorldVariables instance = new WorldVariables();
 				instance.read(tag, level.registryAccess());
 				return instance;
-			}, instance -> instance.save(new CompoundTag(), level.registryAccess())));
+			}, instance -> instance.save(new CompoundTag(), level.registryAccess())), net.minecraft.util.datafix.DataFixTypes.SAVED_DATA_MAP_DATA);
 
 		boolean _syncDirty = false;
 
@@ -121,7 +121,7 @@ public final class ${JavaModName}Variables {
 				MapVariables instance = new MapVariables();
 				instance.read(tag, level.registryAccess());
 				return instance;
-			}, instance -> instance.save(new CompoundTag(), level.registryAccess())));
+			}, instance -> instance.save(new CompoundTag(), level.registryAccess())), net.minecraft.util.datafix.DataFixTypes.SAVED_DATA_MAP_DATA);
 
 		boolean _syncDirty = false;
 
