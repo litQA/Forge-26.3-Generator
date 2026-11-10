@@ -2,6 +2,12 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.99.100-beta
+
+### Fixes
+
+- Wrapped `workspacebase/build.gradle` and `workspacebase/settings.gradle` in FreeMarker `<#noparse>`. MCreator processes workspacebase files as inline templates, so Groovy `${signPath}` was aborting generator setup and leaving the old NeoForge build file in place.
+
 ## 2026.3-1.0.98.99-beta
 
 ### Fixes
