@@ -39,9 +39,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraft.resources.Identifier;
 
 <@javacompress>
-<#if data.hasCustomRenderer()>
-@Mod.EventBusSubscriber(modid = "${modid}", bus = Mod.EventBusSubscriber.Bus.FORGE)
-</#if>
 public class ${name}MobEffect extends <#if data.isInstant>Instantaneous</#if>MobEffect {
 
 	public ${name}MobEffect() {

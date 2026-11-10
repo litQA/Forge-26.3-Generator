@@ -2,6 +2,14 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.109.110-beta
+
+### Fixes
+
+- Moved particle-provider registration to the Forge MOD event bus so `RegisterParticleProvidersEvent` runs after particle registry objects are bound.
+- Removed the empty `@EventBusSubscriber` from mob effects that only implement `initializeClient`; Forge rejects subscriber classes with no listener methods.
+- Removed the unsupported `MenuProvider.shouldTriggerClientSideContainerClosingOnOpen()` override.
+
 ## 2026.3-1.0.108.109-beta
 
 ### Fixes
