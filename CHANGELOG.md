@@ -2,6 +2,13 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.105.106-beta
+
+### Fixes
+
+- Moved block-inventory imports out of procedure snippets into the procedure wrapper; snippets cannot contain top-level import declarations.
+- Inlined the Forge item-handler lookup to avoid duplicate helper methods when multiple inventory operations are used in one procedure.
+
 ## 2026.3-1.0.104.105-beta
 
 ### Fixes
