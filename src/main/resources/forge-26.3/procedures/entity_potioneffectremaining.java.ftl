@@ -1,2 +1,2 @@
-/*@int*/(${input$entity} instanceof LivingEntity _livEnt && _livEnt.hasEffect(${effectHolder(generator.map(field$potion, "effects"))}) ?
-    _livEnt.getEffect(${effectHolder(generator.map(field$potion, "effects"))}).getDuration() : 0)
+/*@int*/(${input$entity} instanceof LivingEntity _livEnt && _livEnt.hasEffect(${JavaModName}.effectHolder(generator.map(field$potion, "effects"))) ?
+    _livEnt.getEffect(${JavaModName}.effectHolder(generator.map(field$potion, "effects"))).getDuration() : 0)

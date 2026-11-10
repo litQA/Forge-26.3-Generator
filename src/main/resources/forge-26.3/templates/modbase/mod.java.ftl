@@ -1,5 +1,8 @@
 <#-- @formatter:off -->
 package ${package};
+import net.minecraft.core.Holder;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.api.distmarker.Dist;
@@ -76,5 +79,12 @@ import net.minecraftforge.fml.loading.FMLEnvironment;
 		return null;
 	}
 
-}
+
+	public static Holder<MobEffect> effectHolder(Object effect) {
+		if (effect instanceof Holder<?> holder)
+			return (Holder<MobEffect>) holder;
+		if (effect instanceof RegistryObject<?> registryObject)
+			return (Holder<MobEffect>) registryObject.getHolder().orElseThrow();
+		return null;
+	}}
 <#-- @formatter:on -->

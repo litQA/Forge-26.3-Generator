@@ -2,6 +2,15 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.107.108-beta
+
+### Fixes
+
+- Replaced the unavailable FreeMarker `effectHolder` function with a generated Java helper on the mod class; procedure generation no longer aborts and missing procedure classes are emitted again.
+- Removed unsupported `event.isCanceled()` / `setCancellationResult` calls from right-click block/entity/item triggers.
+- Fixed damage-source holder lookup through `registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE)`.
+- Fixed client mob-effect `extractInventory` signature.
+
 ## 2026.3-1.0.106.107-beta
 
 ### Fixes
