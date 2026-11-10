@@ -2,6 +2,14 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.110.111-beta
+
+### Fixes
+
+- Restored particle-provider registration to the Forge bus. Forge 66.1.5's `RegisterParticleProvidersEvent` does not implement `IModBusEvent`, so the MOD bus throws before registration.
+- Removed the empty mob-effect subscriber (already fixed) and retained the corrected client extension method.
+- Removed the unsupported `MenuProvider` override.
+
 ## 2026.3-1.0.109.110-beta
 
 ### Fixes
