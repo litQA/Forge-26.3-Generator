@@ -32,6 +32,8 @@
 <#include "../mcitems.ftl">
 
 package ${package}.world.teleporter;
+import net.minecraftforge.eventbus.api.listener.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraft.resources.Identifier;
 
 @Mod.EventBusSubscriber(modid = "${modid}", bus = Mod.EventBusSubscriber.Bus.MOD) public class ${name}Teleporter {

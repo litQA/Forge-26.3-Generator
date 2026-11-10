@@ -30,6 +30,9 @@
 
 <#-- @formatter:off -->
 package ${package}.procedures;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.eventbus.api.listener.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.permissions.LevelBasedPermissionSet;
@@ -37,6 +40,15 @@ import net.minecraft.util.Prediction;
 import net.minecraft.world.item.component.SwingAnimation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.event.characteristic.Cancellable;
+import net.minecraftforge.eventbus.api.listener.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.level.BlockEvent;
+import net.minecraftforge.event.entity.living.LivingDamageEvent;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.ShieldBlockEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 
 <#assign nullableDependencies = []/>
 <#if !(data.skipDependencyNullCheck)>

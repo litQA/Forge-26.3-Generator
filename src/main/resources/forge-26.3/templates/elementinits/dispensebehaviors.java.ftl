@@ -38,6 +38,8 @@
  */
 
 package ${package}.init;
+import net.minecraftforge.eventbus.api.listener.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 
 <#assign itemextensions = dispensebehaviors?filter(e -> e.getModElement().getTypeString() == "itemextension")>

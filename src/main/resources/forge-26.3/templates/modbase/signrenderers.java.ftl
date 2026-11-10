@@ -1,6 +1,9 @@
 <#-- @formatter:off -->
 package ${package}.client;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.eventbus.api.listener.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.api.distmarker.Dist;
 
 <#assign signs = types.blocks?filter(e -> e.isSign())>
 <#assign regularSigns = signs?filter(e -> e.blockBase != "HangingSign")>

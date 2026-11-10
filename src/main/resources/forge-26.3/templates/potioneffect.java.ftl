@@ -32,6 +32,8 @@
 <#include "procedures.java.ftl">
 
 package ${package}.potion;
+import net.minecraftforge.eventbus.api.listener.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraft.resources.Identifier;
 
 <@javacompress>

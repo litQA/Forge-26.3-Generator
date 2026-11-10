@@ -34,6 +34,9 @@
 <#include "../triggers.java.ftl">
 
 package ${package}.item;
+import net.minecraft.world.item.ItemStackTemplate;
+import net.minecraftforge.eventbus.api.listener.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraft.resources.Identifier;
 
 <@javacompress>
@@ -116,17 +119,9 @@ public class ${name}Item extends Item {
 				.enchantable(${data.enchantability})
 				</#if>
 				<#if data.stayInGridWhenCrafting && (!data.recipeRemainder?? || data.recipeRemainder.isEmpty()) && data.damageCount != 0>
-				.setNoCombineRepair()
 				</#if>
 		);
 	}
-
-	<#if data.hasCustomEatResultItem()>
-	@SubscribeEvent public static void modifyItemComponents(ModifyDefaultComponentsEvent event) {
-		event.modify(${JavaModName}Items.${REGISTRYNAME}.get(),
-				(builder, _, _) -> builder.set(DataComponents.USE_REMAINDER, new UseRemainder(new ItemStackTemplate(${mappedMCItemToItem(data.eatResultItem)}))));
-	}
-	</#if>
 
 	<#if data.isPiglinCurrency>
 	@Override public boolean isPiglinCurrency(ItemStack stack) {
@@ -142,11 +137,11 @@ public class ${name}Item extends Item {
 
 	<#if data.stayInGridWhenCrafting>
 		<#if data.recipeRemainder?? && !data.recipeRemainder.isEmpty()>
-			@Override public ItemStackTemplate getCraftingRemainder(ItemInstance itemInstance) {
+			@Override public ItemStackTemplate getCraftingRemainder(ItemStack itemInstance) {
 				return new ItemStackTemplate(${mappedMCItemToItem(data.recipeRemainder)});
 			}
 		<#elseif data.damageOnCrafting && data.damageCount != 0>
-			@Override public ItemStackTemplate getCraftingRemainder(ItemInstance itemInstance) {
+			@Override public ItemStackTemplate getCraftingRemainder(ItemStack itemInstance) {
 				ItemStack retval = new ItemStack(this);
 				retval.setDamageValue(itemInstance.getOrDefault(DataComponents.DAMAGE, 0) + 1);
 				if(retval.getDamageValue() >= retval.getMaxDamage()) {
@@ -155,7 +150,7 @@ public class ${name}Item extends Item {
 				return ItemStackTemplate.fromNonEmptyStack(retval);
 			}
 		<#else>
-			@Override public ItemStackTemplate getCraftingRemainder(ItemInstance itemInstance) {
+			@Override public ItemStackTemplate getCraftingRemainder(ItemStack itemInstance) {
 				return new ItemStackTemplate(this);
 			}
 		</#if>

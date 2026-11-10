@@ -2,6 +2,15 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.102.103-beta
+
+### Fixes
+
+- Added explicit Forge `Mod`/`SubscribeEvent`/`Dist` imports to trigger and element templates.
+- Added explicit procedure event imports for `TickEvent`, `BlockEvent`, `LivingDamageEvent`, `LivingDeathEvent`, `ShieldBlockEvent` and player events.
+- Replaced the NeoForge `ICancellableEvent` cancel snippet with Forge `Cancellable`.
+- Adapted item crafting-remainder generation to Forge `ItemStack`/`ItemStackTemplate`; removed the removed `setNoCombineRepair` API.
+
 ## 2026.3-1.0.101.102-beta
 
 ### Fixes

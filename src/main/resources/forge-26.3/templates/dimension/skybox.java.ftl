@@ -31,6 +31,9 @@
 <#-- @formatter:off -->
 
 package ${package}.client;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.eventbus.api.listener.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraft.resources.Identifier;
 import net.minecraftforge.api.distmarker.Dist;
 
