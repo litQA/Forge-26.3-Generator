@@ -33,7 +33,7 @@
 
 package ${package}.potion;
 import net.minecraftforge.client.extensions.common.IClientMobEffectExtensions;
-import net.minecraftforge.client.event.RegisterClientExtensionsEvent;
+
 import net.minecraftforge.eventbus.api.listener.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraft.resources.Identifier;
@@ -137,8 +137,8 @@ public class ${name}MobEffect extends <#if data.isInstant>Instantaneous</#if>Mob
 	</#if>
 
 	<#if data.hasCustomRenderer()>
-	@SubscribeEvent public static void registerMobEffectExtensions(RegisterClientExtensionsEvent event) {
-		event.registerMobEffect(new IClientMobEffectExtensions() {
+	@Override public void initializeClient(java.util.function.Consumer<IClientMobEffectExtensions> consumer) {
+		consumer.accept(new IClientMobEffectExtensions() {
 			<#if !data.renderStatusInInventory>
 			@Override public boolean isVisibleInInventory(MobEffectInstance effect) {
 				return false;
@@ -154,7 +154,7 @@ public class ${name}MobEffect extends <#if data.isInstant>Instantaneous</#if>Mob
 				return false;
 			}
 			</#if>
-		}, ${JavaModName}MobEffects.${REGISTRYNAME}.get());
+		});
 	}
 	</#if>
 

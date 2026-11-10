@@ -34,6 +34,10 @@
 <#include "triggers.java.ftl">
 
 package ${package}.item;
+import net.minecraft.world.item.ItemStackTemplate;
+import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.common.ToolAction;
+import net.minecraftforge.common.ToolActions;
 import net.minecraftforge.eventbus.api.listener.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraft.resources.Identifier;
@@ -121,7 +125,6 @@ public class ${name}Item extends <#if data.toolType == "Shears" || data.toolType
 			.enchantable(${data.enchantability})
 			</#if>
 			<#if data.stayInGridWhenCrafting && data.usageCount != 0>
-			.setNoCombineRepair()
 			</#if>
 			<#if (data.attributeModifiers?size gt 0) && data.toolType != "MultiTool">
 			.attributes(<@itemAttributeModifiers (data.toolType != "Shears" && data.toolType != "Shield")/>)
@@ -168,8 +171,8 @@ public class ${name}Item extends <#if data.toolType == "Shears" || data.toolType
 			</#if>
 		}
 
-		@Override public boolean canPerformAction(ItemInstance stack, ItemAbility toolAction) {
-			return toolAction == ItemAbilities.SHOVEL_DOUSE || toolAction == ItemAbilities.SWORD_SWEEP;
+		@Override public boolean canPerformAction(ItemStack stack, ToolAction toolAction) {
+			return toolAction == ToolActions.SWORD_SWEEP;
 		}
 
 		@Override public float getDestroySpeed(ItemStack itemstack, BlockState blockstate) {
@@ -240,7 +243,6 @@ public class ${name}Item extends Item {
 			.enchantable(${data.enchantability})
 			</#if>
 			<#if data.stayInGridWhenCrafting && data.usageCount != 0>
-			.setNoCombineRepair()
 			</#if>
 		);
 	}
@@ -278,7 +280,6 @@ public class ${name}Item extends FishingRodItem {
 			.enchantable(${data.enchantability})
 			</#if>
 			<#if data.stayInGridWhenCrafting && data.usageCount != 0>
-			.setNoCombineRepair()
 			</#if>
 			<#if data.attributeModifiers?size gt 0>
 			.attributes(<@itemAttributeModifiers/>)
@@ -334,7 +335,7 @@ public class ${name}Item extends FishingRodItem {
 <#macro commonMethods>
 	<#if data.stayInGridWhenCrafting>
 		<#if data.damageOnCrafting && data.usageCount != 0>
-			@Override public ItemStackTemplate getCraftingRemainder(ItemInstance itemInstance) {
+			@Override public ItemStackTemplate getCraftingRemainder(ItemStack itemInstance) {
 				ItemStack retval = new ItemStack(this);
 				retval.setDamageValue(itemInstance.getOrDefault(DataComponents.DAMAGE, 0) + 1);
 				if(retval.getDamageValue() >= retval.getMaxDamage()) {
@@ -343,7 +344,7 @@ public class ${name}Item extends FishingRodItem {
 				return ItemStackTemplate.fromNonEmptyStack(retval);
 			}
 		<#else>
-			@Override public ItemStackTemplate getCraftingRemainder(ItemInstance itemInstance) {
+			@Override public ItemStackTemplate getCraftingRemainder(ItemStack itemInstance) {
 				return new ItemStackTemplate(this);
 			}
 		</#if>

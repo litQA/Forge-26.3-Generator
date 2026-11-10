@@ -1,11 +1,19 @@
+import net.minecraft.world.level.Level;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
+import net.minecraftforge.items.IItemHandler;
+
+private static IItemHandler getBlockItemHandler(LevelAccessor world, BlockPos pos) {
+	return world instanceof Level level && level.getBlockEntity(pos) instanceof ICapabilityProvider provider
+			? provider.getCapability(ForgeCapabilities.ITEM_HANDLER, null).orElse(null)
+			: null;
+}
 private static int insertInBlockInventory(LevelAccessor world, BlockPos pos, int slotId, int amount, ItemStack itemstack, boolean simulate) {
-	if (world instanceof ILevelExtension ext) {
-		ResourceHandler<ItemResource> itemHandler = ext.getCapability(Capabilities.Item.BLOCK, pos, null);
-		if (itemHandler != null && slotId >= 0 && slotId < itemHandler.size()) {
-			ItemStack inserted = itemstack.copy();
-			inserted.setCount(amount);
-			return ItemUtil.insertItemReturnRemaining(itemHandler, slotId, inserted, simulate, null).getCount();
-		}
+	IItemHandler itemHandler = getBlockItemHandler(world, pos);
+	if (itemHandler != null && slotId >= 0 && slotId < itemHandler.getSlots()) {
+		ItemStack inserted = itemstack.copy();
+		inserted.setCount(amount);
+		return itemHandler.insertItem(slotId, inserted, simulate).getCount();
 	}
 	return itemstack.getCount();
 }

@@ -1,19 +1,16 @@
+import net.minecraft.world.level.Level;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
+import net.minecraftforge.items.IItemHandler;
+
+private static IItemHandler getBlockItemHandler(LevelAccessor world, BlockPos pos) {
+	return world instanceof Level level && level.getBlockEntity(pos) instanceof ICapabilityProvider provider
+			? provider.getCapability(ForgeCapabilities.ITEM_HANDLER, null).orElse(null)
+			: null;
+}
 private static ItemStack extractFromBlockInventory(LevelAccessor world, BlockPos pos, int slotId, int amount, boolean simulate) {
-	if (world instanceof ILevelExtension ext) {
-		ResourceHandler<ItemResource> itemHandler = ext.getCapability(Capabilities.Item.BLOCK, pos, null);
-		if (itemHandler != null && slotId >= 0 && slotId < itemHandler.size()) {
-			ItemResource extractedResource = itemHandler.getResource(slotId);
-			ItemStack extractedStack = ItemStack.EMPTY;
-			if (extractedResource.isEmpty() || amount < 0)
-				return extractedStack;
-			try (var tx = Transaction.openRoot()) {
-				int extracted = itemHandler.extract(slotId, extractedResource, amount, tx);
-				extractedStack = extractedResource.toStack(extracted);
-				if (!simulate)
-					tx.commit();
-			}
-			return extractedStack;
-		}
-	}
+	IItemHandler itemHandler = getBlockItemHandler(world, pos);
+	if (itemHandler != null && slotId >= 0 && slotId < itemHandler.getSlots())
+		return itemHandler.extractItem(slotId, amount, simulate);
 	return ItemStack.EMPTY;
 }

@@ -2,6 +2,18 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.104.105-beta
+
+### Fixes
+
+- Fixed Forge 26.3 block `getCloneItemStack`/`onDestroyedByPlayer` signatures.
+- Fixed `SavedDataType` with the required `DataFixTypes` argument.
+- Ported block-inventory procedure helpers from NeoForge resource handlers to Forge `IItemHandler`/`ForgeCapabilities`.
+- Fixed custom mob-effect holder conversion and `MobEffect.initializeClient`.
+- Fixed `ModList.get().isLoaded(...)` to `ModList.isLoaded(...)`.
+- Fixed tool `canPerformAction` and removed removed `setNoCombineRepair` calls.
+- Added `FakePlayerFactory` import to command generation.
+
 ## 2026.3-1.0.103.104-beta
 
 ### Fixes

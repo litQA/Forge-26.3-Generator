@@ -7,7 +7,7 @@ final feature matrix.
 
 | Area | Status | Notes |
 | --- | --- | --- |
-| Generator plugin metadata | Supported | `plugin.json` version `2026.3-1.0.103.104-beta` |
+| Generator plugin metadata | Supported | `plugin.json` version `2026.3-1.0.104.105-beta` |
 | Forge workspace base | Supported | ForgeGradle 7, Gradle 9.8.0, Java 25 |
 | `mods.toml` | Supported | Forge `loaderVersion="[66,)"`, Forge/Minecraft dependencies |
 | Basic block | Supported | Basic cube geometry, registration and special information tooltips |

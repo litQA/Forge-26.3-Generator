@@ -69,7 +69,7 @@ import net.minecraftforge.registries.RegistryObject;
 	private static void expireEffects(Entity entity, MobEffectInstance effectInstance) {
 		<@javacompress>
 		<#list effects_that_expire as effect>
-		if (effectInstance.is(${effect.getModElement().getRegistryNameUpper()})) {
+		if (effectInstance.is(${effect.getModElement().getRegistryNameUpper()}.getHolder().orElseThrow())) {
 			<@procedureCode effect.onExpired, {
 				"x": "entity.getX()",
 				"y": "entity.getY()",
