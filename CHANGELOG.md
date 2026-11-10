@@ -2,6 +2,19 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.100.101-beta
+
+### Fixes
+
+- Added `subversion: 1` so switching to this generator forces workspace base regeneration.
+- Unified `build.gradle`/`settings.gradle` into `workspacebase` only, matching the Fabric 26.3 generator pattern; removed duplicate workspace base templates from `base_templates`.
+- Kept workspacebase gradle files inside `<#noparse>` so Groovy `${...}` interpolations are emitted unchanged.
+
+### Analysis
+
+- Groovy `${...}` and FreeMarker `${...}` are inherently the same syntax, so the collision is real when a static build file is processed as a template.
+- `<#noparse>` is appropriate here because the Forge 26.3 build file does not need generator-context interpolation. If generator variables are later needed, those individual Groovy expressions should be rewritten as concatenation instead of removing noparse.
+
 ## 2026.3-1.0.99.100-beta
 
 ### Fixes

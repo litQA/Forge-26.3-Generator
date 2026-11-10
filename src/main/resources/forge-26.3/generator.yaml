@@ -1,6 +1,7 @@
 name: Forge for @minecraft (@buildfileversion)
 status: dev
 buildfileversion: 66.1.5
+subversion: 1 # force project base regeneration when the generator changes
 
 import:
   - datapack-26.3.x
@@ -65,12 +66,6 @@ vanilla_block_textures_dir: "assets/minecraft/textures/block"
 vanilla_item_textures_dir: "assets/minecraft/textures/item"
 
 base_templates:
-  - template: workspace/build.gradle.ftl
-    writer: file
-    name: "@WORKSPACEROOT/build.gradle"
-  - template: workspace/settings.gradle.ftl
-    writer: file
-    name: "@WORKSPACEROOT/settings.gradle"
   - template: modbase/mod.java.ftl
     name: "@SRCROOT/@BASEPACKAGEPATH/@JavaModName.java"
   - template: modbase/mods.toml.ftl
