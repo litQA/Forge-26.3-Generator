@@ -1,6 +1,6 @@
 name: Forge for @minecraft (@buildfileversion)
 status: dev
-buildfileversion: 66.1.5
+buildfileversion: 66.1.8
 subversion: 1 # force project base regeneration when the generator changes
 
 import:

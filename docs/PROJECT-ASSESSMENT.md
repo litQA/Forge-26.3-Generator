@@ -1,6 +1,8 @@
 # Forge 26.3 Generator 项目评估
 
-> 评估对象：基于 MCreator 官方 NeoForge 26.3 生成器，交付一个面向 Minecraft Forge 26.3 / Forge 66.1.5、目标 MCreator EAP `2026.3.44621` 的独立生成器。
+> 评估对象：基于 MCreator 官方 NeoForge 26.3 生成器，交付一个面向 Minecraft Forge 26.3、目标 MCreator EAP `2026.3.44621` 的独立生成器。
+>
+> 版本说明：本评估最初以 Forge `66.1.5` 参考 MDK 为基线；当前生效的生成器构建目标已提升到 Forge `66.1.8`。文中保留的 `66.1.5` 证据路径仅代表评估时的参考文件。
 >
 > 评估结论：**技术可行，但工作量属于“加载器整体移植”，不是简单替换包名。** 现有生成器约 947 个资源文件，其中约 100 个文件直接涉及加载器 API；65 个全局触发器中有 57 个可以直接映射、8 个需要适配、0 个在事件层面完全不可实现。最大风险集中在 Forge 26.3 的新事件总线、网络、Capability/资源处理器、玩家变量持久化，以及本机 Gradle/ForgeGradle 工具链。
 >
@@ -28,7 +30,7 @@
 
 ### 1.1 范围
 
-- 目标平台：Minecraft 26.3 + Forge `26.3-66.1.5`。
+- 评估基线平台：Minecraft 26.3 + Forge `26.3-66.1.5`；当前生成器目标：Forge `26.3-66.1.8`。
 - 目标 MCreator：EAP `2026.3.44621`（`EAP2026344621`）。
 - 目标产物：`generator-forge-26.3.zip`，生成器目录 `forge-26.3`，插件 ID `generator-forge-26.3`。
 - 覆盖范围：NeoForge 26.3 生成器当前提供的全部元素、流程、触发器、AI 任务、命令参数、变量、映射与工作区基础文件。
@@ -58,8 +60,8 @@
 | Forge 26.3 源码 | `caches/reference/MinecraftForge-26.3/` | GitHub `MinecraftForge/MinecraftForge` 分支 `26.3` | 事件、注册、网络、Capability、客户端扩展的精确签名 |
 | NeoForge 26.3 源码 | `caches/reference/NeoForge-26.3.x/` | GitHub `neoforged/NeoForge` 分支 `26.3.x` | 与官方生成器实际调用的 API 对照 |
 | MCreator generator validator pattern | `src/validator/java/` | 插件自带的静态校验器 | 可复用的 build/validator/package/CHANGELOG/版本单源脚手架 |
-| Forge Config API Port | `../Forge_Config_API_Port/` | 多版本 Forge/NeoForge 模板 | Forge 26.3 `configs.java.ftl` 的现成写法，以及 Gradle 补丁先例 |
-| Gradle 9.8.0 | `reference_resources/gradle-9.8.0-bin.zip` | 本地发行包 | 生成工作区 wrapper 的本地分发源 |
+| Forge Config API Port | `<workspace-root>/reference_resources/Forge_Config_API_Port/` | 多版本 Forge/NeoForge 模板 | Forge 26.3 `configs.java.ftl` 的现成写法，以及 Gradle 补丁先例 |
+| Gradle 9.8.0 | `<workspace-root>/reference_resources/gradle-9.8.0-bin.zip` | 可选离线发行包 | 仅在公共地址下载失败时由包装脚本动态解析使用 |
 
 ---
 
@@ -74,7 +76,7 @@ Forge 26.3 的官方 MDK 使用：
 - ForgeGradle `net.minecraftforge.gradle` 版本 `[7.0.17,8)`；
 - Gradle 9.x（MDK 默认 9.7.1，本项目按要求统一 9.8.0）；
 - Java 25 toolchain；
-- 依赖坐标 `net.minecraftforge:forge:26.3-66.1.5`；
+- 依赖坐标 `net.minecraftforge:forge:26.3-66.1.5`（评估基线；当前生成器目标为 `66.1.8`）；
 - 官方映射 `official-26.3`，生成代码直接使用 Mojang 名称（`net.minecraft.*` / `net.minecraftforge.*`），不再出现 SRG 名称。
 
 生成工作区的 `build.gradle` 需要从 NeoForge 的 `net.neoforged.moddev` 改为：
@@ -101,7 +103,7 @@ repositories {
 }
 
 dependencies {
-    implementation minecraft.dependency('net.minecraftforge:forge:26.3-66.1.5')
+    implementation minecraft.dependency('net.minecraftforge:forge:26.3-66.1.8')
 }
 ```
 
@@ -418,7 +420,7 @@ plugin-branch-2026.3/
 ```yaml
 name: Forge for @minecraft (@buildfileversion)
 status: dev
-buildfileversion: 66.1.5
+buildfileversion: 66.1.8
 
 import:
   - datapack-26.3.x
@@ -630,7 +632,7 @@ import:
 
 ### 9.1 最高优先级的三个 spike
 
-1. **构建链 spike**：ForgeGradle 7 + Gradle 9.8 + Java 25 + Forge 66.1.5，生成一个最小 Forge 模组并 `build` 成功。当前本机 AT 处理失败，必须先解决或确认在用户环境可复现。
+1. **构建链 spike**：ForgeGradle 7 + Gradle 9.8 + Java 25 + Forge 66.1.8，生成一个最小 Forge 模组并 `build` 成功。当前本机 AT 处理失败，必须先解决或确认在用户环境可复现。
 2. **注册/事件 spike**：一个方块 + 一个物品 + 一个创造标签 + 一个 `player_right_click_block` 触发器，验证 `setId`、`RegistryObject`、`@Mod.EventBusSubscriber`、`Bus.MOD`。
 3. **网络/变量 spike**：一个 `SimpleChannel` 消息从服务端发到客户端，验证 `PlayerVariablesSyncMessage` 的替代路径；这是后续 GUI/变量的基础。
 
@@ -653,7 +655,7 @@ import:
 - 生成器插件自身：`gradlew build` → `BUILD SUCCESSFUL`；
 - 生成的最小测试工作区：`gradlew build` → `BUILD SUCCESSFUL`，`javac` 0 错误；
 - 生成的全量测试工作区：至少覆盖每个 Phase 的代表元素；
-- 离线/本地缓存：`GRADLE_USER_HOME` 指向 `<项目根>/caches/gradle`，wrapper 指向本地 `gradle-9.8.0-bin.zip`。
+- 离线/本地缓存：`GRADLE_USER_HOME` 指向 `<workspace-root>/caches/gradle`，wrapper 默认使用 Gradle 公共发行地址；本地发行包仅作为显式离线回退。
 
 ### 10.3 运行时验收
 
@@ -706,11 +708,13 @@ import:
 $env:GRADLE_USER_HOME = "<项目根>\caches\gradle"
 ```
 
-生成工作区的 `gradle-wrapper.properties` 使用：
+生成工作区的 `gradle-wrapper.properties` 默认使用公共地址：
 
 ```properties
-distributionUrl=file\:///B:/QA/Documents/App/Mods/DSH/Forge_Generator_26.3/reference_resources/gradle-9.8.0-bin.zip
+distributionUrl=https\://services.gradle.org/distributions/gradle-9.8.0-bin.zip
 ```
+
+包装脚本不包含本地回退逻辑，也不会把本地路径写入静态配置文件。离线环境必须预先填充 `<workspace-root>/caches/gradle` 或显式设置 `GRADLE_USER_HOME`。
 
 ### 11.2 本机实际阻塞（必须记录）
 
@@ -719,8 +723,7 @@ distributionUrl=file\:///B:/QA/Documents/App/Mods/DSH/Forge_Generator_26.3/refer
 1. **JBR 25 的 `Files.isWritable` 恒为 false**  
    `MCreatorEAP2026344621/jdk` 下运行 `Files.isWritable` 对任意目录返回 false，标准 Gradle 9.8 因此报：
    `Configuring project with invalid directory ... does not exist, can't be written to or is not a directory`。  
-   `../Forge_Config_API_Port/caches/gradle-patched-9.8.0/` 中存在可用的补丁发行版；用它执行最小 `hello` 任务成功。  
-   **处置**：开发验证使用补丁 Gradle；生成器交付仍按规范指向本地 `gradle-9.8.0-bin.zip`。如果 MCreator 自带 Gradle 同步在用户环境也使用 JBR，需要确认 MCreator 是否已内置同类补丁。
+   spike 工作区的补丁 Gradle 9.8 发行版中存在可用的补丁版本；用它执行最小 `hello` 任务成功。     **处置**：开发验证使用独立 spike 工作区中的补丁 Gradle；生成器交付默认使用公共 Gradle 地址。如果 MCreator 自带 Gradle 同步在用户环境也使用 JBR，需要确认 MCreator 是否已内置同类补丁。
 
 2. **ForgeGradle 的 AT 处理失败**  
    使用补丁 Gradle 解析 Forge 66.1.5 时，MCMaven 的 `modifyAccess` 任务报：
@@ -790,7 +793,7 @@ Phase 0 的版本号从 `2026.3-1.0.1.2-beta` 开始（补丁号 +1、构建序�
 | NeoForge 生成器规模 | `reference_resources/generator-26.3.x/neoforge-26.3/` |
 | Fabric 转换先例 | `reference_resources/Fabric-Generator-MCreator-26.3-2026.3-2.9-beta/src/main/resources/fabric-26.3/generator.yaml` |
 | 插件/校验器脚手架 | `build.gradle`、`src/validator/` |
-| 补丁 Gradle | `../Forge_Config_API_Port/caches/gradle-patched-9.8.0/` |
+| 补丁 Gradle | 独立 spike 工作区中的补丁 Gradle 9.8 发行版（不属于插件依赖） |
 
 ## 附录 B：建议的 Phase 0 成功标准
 

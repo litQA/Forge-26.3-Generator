@@ -8,8 +8,8 @@ MCreator generator plugin for Minecraft Forge 26.3.
 | --- | --- |
 | Plugin id | `generator-forge-26.3` |
 | Generator id | `forge-26.3` |
-| Plugin version | `2026.3-1.0.110.111-beta` |
-| Minecraft / Forge | `26.3` / `66.1.5` |
+| Plugin version | `2026.3-1.0.111.114-beta` |
+| Minecraft / Forge | `26.3` / `66.1.8` |
 | Gradle for generated mods | Gradle 9.8.0 + ForgeGradle 7 |
 | Java for Gradle / MCreator | 25 |
 | License | CC BY-NC 4.0 |
@@ -44,10 +44,16 @@ The detailed support matrix is in [docs/SUPPORT-MATRIX.md](docs/SUPPORT-MATRIX.m
 
 ```bat
 cd plugin-branch-2026.3
-set JAVA_HOME=<MCreator bundled JDK 25>
-set GRADLE_USER_HOME=<project-root>\caches\gradle
+set JAVA_HOME=<JDK 25 home>
+set WORKSPACE_ROOT=<workspace root>
 gradlew.bat --no-daemon clean build
 ```
+
+`WORKSPACE_ROOT` is optional when the plugin directory is directly below the
+workspace root. The wrapper otherwise resolves the root from the plugin location.
+The wrapper uses the public Gradle distribution URL by default and stores all
+Gradle caches under `<workspace-root>/caches/gradle` unless `GRADLE_USER_HOME` is
+already defined.
 
 Expected output:
 
@@ -62,16 +68,19 @@ The plugin archive is written to:
 build/dist/generator-forge-26.3.zip
 ```
 
-The Gradle wrapper is pinned to the local
-`reference_resources/gradle-9.8.0-bin.zip` distribution. All Gradle caches stay under
-`<project-root>/caches/gradle`.
+The Gradle wrapper uses
+`https://services.gradle.org/distributions/gradle-9.8.0-bin.zip` by default.
+No local path is stored in the wrapper and it does not select a local archive
+automatically. Offline builds must pre-populate `<workspace-root>/caches/gradle`
+or set `GRADLE_USER_HOME`; all Gradle caches then stay under that workspace
+directory.
 
 ## Install
 
 1. Close MCreator.
 2. Copy `build/dist/generator-forge-26.3.zip` to the MCreator `plugins` folder.
 3. Start MCreator.
-4. Create a workspace with generator `Forge for 26.3 (66.1.5)`.
+4. Create a workspace with generator `Forge for 26.3 (66.1.8)`.
 
 ## Layout
 

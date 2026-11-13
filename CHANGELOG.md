@@ -2,6 +2,26 @@
 
 All notable changes to the Forge 26.3 generator are recorded in this file.
 
+## 2026.3-1.0.111.114-beta
+
+### Changes
+
+- Raised the Forge build target from `66.1.5` to `66.1.8` in the generator metadata, workspace base and generated workspace template.
+- Changed the plugin and generated-workspace Gradle wrappers to the public Gradle distribution URL.
+- Added dynamic workspace-root resolution to the wrapper scripts and redirected Gradle caches to `<workspace-root>/caches/gradle`.
+- Normalized active documentation to the new Forge target and removed machine-specific path examples.
+
+### Fixes
+
+- Removed hardcoded local Gradle distribution URLs from the plugin wrapper and the generated workspace template.
+- Fixed Windows wrapper cache redirection by resolving `GRADLE_USER_HOME` before `setlocal`, which otherwise discarded the assignment.
+- Removed stale local references from the project assessment documentation.
+
+### Known Limitations
+
+- Workspaces generated before this release keep their previously copied wrapper files until MCreator regenerates the workspace.
+- The wrapper does not select a local distribution automatically. Offline builds must pre-populate `<workspace-root>/caches/gradle` or set `GRADLE_USER_HOME`.
+
 ## 2026.3-1.0.110.111-beta
 
 ### Fixes

@@ -23,6 +23,10 @@
 @rem
 @rem ##########################################################################
 
+@rem Resolve caches before setlocal; endlocal would discard later assignments.
+if not defined WORKSPACE_ROOT for %%i in ("%~dp0.") do set "WORKSPACE_ROOT=%%~fi"
+if not defined GRADLE_USER_HOME set "GRADLE_USER_HOME=%WORKSPACE_ROOT%\caches\gradle"
+
 @rem Set local scope for the variables, and ensure extensions are enabled
 setlocal EnableExtensions
 

@@ -88,9 +88,15 @@ APP_BASE_NAME=${0##*/}
 # Discard cd standard output in case $CDPATH is set (https://github.com/gradle/gradle/issues/25036)
 APP_HOME=$( cd -P "${APP_HOME:-./}" > /dev/null && printf '%s\n' "$PWD" ) || exit
 
-# Keep all Gradle caches inside this project unless the caller overrides them.
+# Resolve the workspace root from the environment or the plugin parent directory.
+if [ -z "${WORKSPACE_ROOT:-}" ]; then
+    WORKSPACE_ROOT=$( cd -P "$APP_HOME/.." > /dev/null && printf '%s\n' "$PWD" ) || exit
+    export WORKSPACE_ROOT
+fi
+
+# Keep all Gradle caches in the workspace unless the caller overrides them.
 if [ -z "${GRADLE_USER_HOME:-}" ]; then
-    GRADLE_USER_HOME="$APP_HOME/caches/gradle"
+    GRADLE_USER_HOME="$WORKSPACE_ROOT/caches/gradle"
     export GRADLE_USER_HOME
 fi
 
